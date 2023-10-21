@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import personas.Testigo;
+import entidades.Testigo;
 
 public class Dao_testigos {
 

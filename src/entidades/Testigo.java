@@ -1,4 +1,4 @@
-package personas;
+package entidades;
 
 public class Testigo {
 
