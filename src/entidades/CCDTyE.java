@@ -46,9 +46,7 @@ public class CCDTyE {
 
     public void setFechaCierre(LocalDate fechaCierre) {
         this.fechaCierre = fechaCierre;
-    }
-	
-	
+    }	
 	
 	
 

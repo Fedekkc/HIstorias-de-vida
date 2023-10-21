@@ -13,6 +13,14 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Fuerzas`(
     `Nombre` VARCHAR(45)
 );
 
+CREATE TABLE IF NOT EXISTS `CCDTyE`.`Represores`(
+    `ID_Represor` INT NOT NULL AUTO_INCREMENT,
+    `ID_Fuerza` INT NOT NULL,
+    `Nombre` VARCHAR(45),
+    PRIMARY KEY(`ID_Represor`),
+    FOREIGN KEY(`ID_Fuerza`) REFERENCES `Fuerzas`(`ID_Fuerza`)
+);  
+
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`CCDTyE_Fuerzas`(
     `CCDTyE_id` INT,
     `Fuerzas_id` INT,
@@ -45,8 +53,17 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_Identificados`(
     `Ultima_vez_visto` DATETIME,
     `Biografia_personal` TEXT NOT NULL,
     `Ruta_material_audiovisual` VARCHAR(255),
+    `Tiempo_en_cautiverio` INT,
+    `Sobrevivio` BOOLEAN,   
     PRIMARY KEY (`ID_Persona`),
     FOREIGN KEY (`ID_Persona`) REFERENCES Personas(`ID_Persona`)
+);
+
+CREATE TABLE IF NOT EXISTS `CCDTyE`.`CCDTyE_Personas`(
+    `ID_CCDTyE` INT NOT NULL PRIMARY KEY,
+    `ID_Persona` INT NOT NULL PRIMARY KEY,
+    FOREIGN KEY(`ID_CCDTyE`) REFERENCES `CCDTyE`(`ID_CCDTyE`),
+    FOREIGN KEY(`ID_Persona`) REFERENCES `Personas`(`ID_Persona`)
 );
 
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_No_Identificados`(
