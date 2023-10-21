@@ -1,4 +1,4 @@
-package estructuraTP;
+package app;
 
 import dao_ccdtye.Dao_CCDTyE;
 
