@@ -39,9 +39,7 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Testigos`(
 
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`Personas`(
 	`ID_Persona` INT NOT NULL AUTO_INCREMENT,
-    `ID_CCDTyE` INT,
     `ID_Testigo` INT,
-    FOREIGN KEY(`ID_CCDTyE`) REFERENCES CCDTyE(`ID_CCDTyE`),
     PRIMARY KEY (`ID_Persona`)
 );
 
@@ -60,11 +58,13 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_Identificados`(
 );
 
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`CCDTyE_Personas`(
-    `ID_CCDTyE` INT NOT NULL PRIMARY KEY,
-    `ID_Persona` INT NOT NULL PRIMARY KEY,
+    `ID_CCDTyE` INT NOT NULL,
+    `ID_Persona` INT NOT NULL,
+    PRIMARY KEY (`ID_CCDTyE`, `ID_Persona`),
     FOREIGN KEY(`ID_CCDTyE`) REFERENCES `CCDTyE`(`ID_CCDTyE`),
     FOREIGN KEY(`ID_Persona`) REFERENCES `Personas`(`ID_Persona`)
 );
+
 
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_No_Identificados`(
 	`ID_Persona` INT NOT NULL,
@@ -74,7 +74,5 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_No_Identificados`(
 	FOREIGN KEY (`ID_Persona`) REFERENCES Personas(`ID_Persona`)
 );
 
-
-
   
-  
+INSERT INTO `Fuerzas` (`Nombre`) VALUES ('Policia'), ('Ejercito'), ('Gendarmeria');
