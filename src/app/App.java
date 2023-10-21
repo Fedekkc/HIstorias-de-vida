@@ -15,7 +15,7 @@ public class App {
 
             mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            
+            // Hola
             mainWindow.setVisible(true);
         });
     }
