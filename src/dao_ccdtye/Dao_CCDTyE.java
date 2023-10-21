@@ -41,7 +41,8 @@ public class Dao_CCDTyE {
                 String ubicacion = resultSet.getString("Ubicacion");
                 LocalDate fechaPuestaEnMarcha = resultSet.getDate("Fecha_puesta_en_marcha").toLocalDate();
                 LocalDate fechaCierre = resultSet.getDate("Fecha_de_cierre").toLocalDate();
-                ccdTyE = new CCDTyE(nombre, ubicacion, fechaPuestaEnMarcha, fechaCierre);
+                int ID = resultSet.getInt("ID_CCDTyE");
+                ccdTyE = new CCDTyE(ID, nombre, ubicacion, fechaPuestaEnMarcha, fechaCierre);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,7 +86,8 @@ public class Dao_CCDTyE {
                 String ubicacion = resultSet.getString("Ubicacion");
                 LocalDate fechaPuestaEnMarcha = resultSet.getDate("Fecha_puesta_en_marcha").toLocalDate();
                 LocalDate fechaCierre = resultSet.getDate("Fecha_de_cierre").toLocalDate();
-                CCDTyE ccdTyE = new CCDTyE(nombre, ubicacion, fechaPuestaEnMarcha, fechaCierre);
+                int ID = resultSet.getInt("ID_CCDTyE");
+                CCDTyE ccdTyE = new CCDTyE(ID,nombre, ubicacion, fechaPuestaEnMarcha, fechaCierre);
                 System.out.println(nombre);
                 listaCCDTyE.add(ccdTyE);
             }

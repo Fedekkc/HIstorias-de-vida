@@ -3,17 +3,26 @@ package entidades;
 import java.time.LocalDate;
 
 public class CCDTyE {
-	
+	int ID;
 	String nombre;
 	String ubicacion;
 	LocalDate fechaPuestaEnMarcha = null;
 	LocalDate fechaCierre = null;
 	
-    public CCDTyE(String nombre, String ubicacion, LocalDate fechaPuestaEnMarcha, LocalDate fechaCierre) {
+    public CCDTyE(int ID, String nombre, String ubicacion, LocalDate fechaPuestaEnMarcha, LocalDate fechaCierre) {
         this.nombre = nombre;
         this.ubicacion = ubicacion;
         this.fechaPuestaEnMarcha = fechaPuestaEnMarcha;
         this.fechaCierre = fechaCierre;
+        this.ID = ID;
+    }
+    
+    public int getID() {
+    	return ID; 
+    }
+    
+    public void setID(int ID) {
+    	this.ID = ID;
     }
     
     public String getNombre() {
