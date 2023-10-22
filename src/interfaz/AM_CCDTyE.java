@@ -174,9 +174,9 @@ public class AM_CCDTyE extends JFrame {
 		 list.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseClicked(MouseEvent e) {
-	                String selected = list.getSelectedValue();
+	                CCDTyE selected = list.getSelectedValue();
 	                if (selected != null) {
-	                    lblNewLabel.setText(selected);
+	                    lblNewLabel.setText(selected.getNombre());
 	                }
 	            }
 	        });
@@ -187,12 +187,19 @@ public class AM_CCDTyE extends JFrame {
 	                CCDTyE selected = list.getSelectedValue();
 	                if (selected != null) {
 	                    // Aquí puedes acceder al objeto completo "selected"
-	                    lblNewLabel.setText("ID: " + selected.getID() +
+	                	lblNewLabel_1.setText("ID: " + selected.getID());
+	                	lblNewLabel_1_1.setText("Nombre: " + selected.getNombre());
+	            		lblNewLabel_1_1_1.setText("Ubicacion: " + selected.getUbicacion());
+	            		lblNewLabel_1_1_1_1.setText("Fecha de puesta en marcha: " + selected.getFechaPuestaEnMarcha());
+	            		lblNewLabel_1_1_1_1_2.setText("Fuerzas a cargo: " + selected.getFuerzasAlMando());
+
+
+	                    /*lblNewLabel.setText("ID: " + selected.getID() +
 	                        " | Nombre: " + selected.getNombre() +
 	                        " | Ubicación: " + selected.getUbicacion() +
 	                        " | Fecha de puesta en marcha: " + selected.getFechaPuestaEnMarcha() +
 	                        " | Fecha de cierre: " + selected.getFechaCierre() +
-	                        " | Fuerzas a cargo: " + selected.getFuerzasACargo());
+	                        " | Fuerzas a cargo: " + selected.getFuerzasAlMando());*/
 	                }
 	            }
 	        });
