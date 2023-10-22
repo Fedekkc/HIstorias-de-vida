@@ -1,13 +1,16 @@
 package entidades;
 
+import java.util.ArrayList;
 import java.time.LocalDate;
 
 public class CCDTyE {
-	int ID;
-	String nombre;
-	String ubicacion;
-	LocalDate fechaPuestaEnMarcha = null;
-	LocalDate fechaCierre = null;
+	private int ID;
+	private String nombre;
+	private String ubicacion;
+	private LocalDate fechaPuestaEnMarcha = null;
+	private LocalDate fechaCierre = null;
+	private ArrayList<Fuerza> fuerzas = new ArrayList<Fuerza>();
+	
 	
     public CCDTyE(int ID, String nombre, String ubicacion, LocalDate fechaPuestaEnMarcha, LocalDate fechaCierre) {
         this.nombre = nombre;
@@ -55,7 +58,15 @@ public class CCDTyE {
 
     public void setFechaCierre(LocalDate fechaCierre) {
         this.fechaCierre = fechaCierre;
-    }	
+    }
+
+	public ArrayList<Fuerza> getFuerzas() {
+		return fuerzas;
+	}
+
+	public void setFuerzas(ArrayList<Fuerza> fuerzas) {
+		this.fuerzas = fuerzas;
+	}	
 	
 	
 

@@ -33,8 +33,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Panel;
-import javax.swing.JList;
-import javax.swing.DefaultListCellRenderer;
 
 public class AM_CCDTyE extends JFrame {
 
@@ -69,26 +67,17 @@ public class AM_CCDTyE extends JFrame {
 
 		setContentPane(contentPane);
 		
-        DefaultListModel<CCDTyE> listModel = new DefaultListModel<>();
-        ArrayList<CCDTyE> centros = new ArrayList<CCDTyE>();
-        Dao_CCDTyE dao = new Dao_CCDTyE();
-        centros = dao.getAllCCDTyE();
-        for (CCDTyE ccdTyE : centros) {
-            listModel.addElement(ccdTyE);
-        }
+		DefaultListModel<String> listModel = new DefaultListModel<>();
+		ArrayList<CCDTyE> centros = new ArrayList<CCDTyE>();
+		Dao_CCDTyE dao = new Dao_CCDTyE();
+		centros = dao.getAllCCDTyE();
+		for (CCDTyE ccdTyE : centros) {
+			String elemento = "ID: " + String.valueOf(ccdTyE.getID()) + " | " +  ccdTyE.getNombre();
+			
+			listModel.addElement(elemento);			
+		}
 		contentPane.setLayout(null);
-        JList<CCDTyE> list = new JList<>(listModel);
-        list.setCellRenderer(new DefaultListCellRenderer() {
-            @Override
-            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                if (value instanceof CCDTyE) {
-                    CCDTyE ccdTyE = (CCDTyE) value;
-                    setText(ccdTyE.getNombre());
-                }
-                return this;
-            }
-        });
+		JList<String> list = new JList<>(listModel);
 		list.setBounds(21, 38, 187, 451);
 		list.setBackground(new Color(50, 49, 78));
 		contentPane.add(list);
@@ -96,7 +85,7 @@ public class AM_CCDTyE extends JFrame {
 		list.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		list.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		list.setLayoutOrientation(JList.VERTICAL_WRAP);
-		list.setForeground(new Color(217, 217, 217));
+		list.setForeground(new Color(140, 47, 131));
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(254, 38, 580, 451);
@@ -107,13 +96,11 @@ public class AM_CCDTyE extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Modificar");
-		btnNewButton.setBackground(new Color(0, 0, 26));
-		btnNewButton.setForeground(new Color(217, 217, 217));
 		btnNewButton.setBounds(413, 417, 89, 23);
 		panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Añadir");
-		btnNewButton_1.setForeground(new Color(217, 217, 217));
+		btnNewButton_1.setForeground(new Color(0, 0, 26));
 		btnNewButton_1.setBackground(new Color(0, 0, 26));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -184,15 +171,9 @@ public class AM_CCDTyE extends JFrame {
 	        list.addListSelectionListener(new ListSelectionListener() {
 	            @Override
 	            public void valueChanged(ListSelectionEvent e) {
-	                CCDTyE selected = list.getSelectedValue();
+	                String selected = list.getSelectedValue();
 	                if (selected != null) {
-	                    // Aquí puedes acceder al objeto completo "selected"
-	                    lblNewLabel.setText("ID: " + selected.getID() +
-	                        " | Nombre: " + selected.getNombre() +
-	                        " | Ubicación: " + selected.getUbicacion() +
-	                        " | Fecha de puesta en marcha: " + selected.getFechaPuestaEnMarcha() +
-	                        " | Fecha de cierre: " + selected.getFechaCierre() +
-	                        " | Fuerzas a cargo: " + selected.getFuerzasACargo());
+	                    lblNewLabel.setText(selected);
 	                }
 	            }
 	        });
