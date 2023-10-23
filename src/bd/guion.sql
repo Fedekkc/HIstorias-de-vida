@@ -75,4 +75,3 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_No_Identificados`(
 );
 
   
-INSERT INTO `Fuerzas` (`Nombre`) VALUES ('Policia'), ('Ejercito'), ('Gendarmeria');
