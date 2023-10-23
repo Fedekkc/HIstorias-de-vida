@@ -62,7 +62,7 @@ public class AM_CCDTyE extends JFrame {
 	 */
 	public AM_CCDTyE() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 873, 555);
+		setBounds(100, 100, 880, 560);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(138, 138, 169));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -78,6 +78,7 @@ public class AM_CCDTyE extends JFrame {
         }
 		contentPane.setLayout(null);
         JList<CCDTyE> list = new JList<>(listModel);
+        list.setFont(new Font("M PLUS 1p", Font.BOLD, 12));
         list.setCellRenderer(new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -128,34 +129,40 @@ public class AM_CCDTyE extends JFrame {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("ID: ");
+		JLabel lblNewLabel_1 = new JLabel("● ID: ");
+		lblNewLabel_1.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
 		lblNewLabel_1.setForeground(new Color(217, 217, 217));
-		lblNewLabel_1.setBounds(45, 37, 495, 14);
+		lblNewLabel_1.setBounds(10, 11, 495, 14);
 		panel_1.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Nombre: ");
+		JLabel lblNewLabel_1_1 = new JLabel("● Nombre: ");
+		lblNewLabel_1_1.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
 		lblNewLabel_1_1.setForeground(new Color(217, 217, 217));
-		lblNewLabel_1_1.setBounds(45, 78, 495, 14);
+		lblNewLabel_1_1.setBounds(10, 51, 495, 14);
 		panel_1.add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Ubicacion: ");
+		JLabel lblNewLabel_1_1_1 = new JLabel("● Ubicacion: ");
+		lblNewLabel_1_1_1.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
 		lblNewLabel_1_1_1.setForeground(new Color(217, 217, 217));
-		lblNewLabel_1_1_1.setBounds(45, 103, 495, 14);
+		lblNewLabel_1_1_1.setBounds(10, 101, 495, 14);
 		panel_1.add(lblNewLabel_1_1_1);
 		
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("Fecha de puesta en marcha:");
+		JLabel lblNewLabel_1_1_1_1 = new JLabel("● Fecha de puesta en marcha:");
+		lblNewLabel_1_1_1_1.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
 		lblNewLabel_1_1_1_1.setForeground(new Color(217, 217, 217));
-		lblNewLabel_1_1_1_1.setBounds(45, 148, 495, 14);
+		lblNewLabel_1_1_1_1.setBounds(10, 151, 495, 14);
 		panel_1.add(lblNewLabel_1_1_1_1);
 		
-		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Fecha de cierre:");
+		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("● Fecha de cierre:");
+		lblNewLabel_1_1_1_1_1.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
 		lblNewLabel_1_1_1_1_1.setForeground(new Color(217, 217, 217));
-		lblNewLabel_1_1_1_1_1.setBounds(45, 202, 495, 14);
+		lblNewLabel_1_1_1_1_1.setBounds(10, 201, 495, 14);
 		panel_1.add(lblNewLabel_1_1_1_1_1);
 		
-		JLabel lblNewLabel_1_1_1_1_2 = new JLabel("Fuerzas a cargo:");
+		JLabel lblNewLabel_1_1_1_1_2 = new JLabel("● Fuerzas a cargo:");
+		lblNewLabel_1_1_1_1_2.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
 		lblNewLabel_1_1_1_1_2.setForeground(new Color(217, 217, 217));
-		lblNewLabel_1_1_1_1_2.setBounds(45, 251, 495, 14);
+		lblNewLabel_1_1_1_1_2.setBounds(10, 251, 495, 14);
 		panel_1.add(lblNewLabel_1_1_1_1_2);
 		
 		Panel panel_2 = new Panel();
@@ -165,11 +172,11 @@ public class AM_CCDTyE extends JFrame {
 		panel_2.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(10, 11, 530, 20);
+		lblNewLabel.setBounds(10, 0, 530, 41);
 		panel_2.add(lblNewLabel);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("Unispace", Font.BOLD, 16));
+		lblNewLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 16));
 		
 		 list.addMouseListener(new MouseAdapter() {
 	            @Override
@@ -186,20 +193,13 @@ public class AM_CCDTyE extends JFrame {
 	            public void valueChanged(ListSelectionEvent e) {
 	                CCDTyE selected = list.getSelectedValue();
 	                if (selected != null) {
-	                    // Aquí puedes acceder al objeto completo "selected"
-	                	lblNewLabel_1.setText("ID: " + selected.getID());
-	                	lblNewLabel_1_1.setText("Nombre: " + selected.getNombre());
-	            		lblNewLabel_1_1_1.setText("Ubicacion: " + selected.getUbicacion());
-	            		lblNewLabel_1_1_1_1.setText("Fecha de puesta en marcha: " + selected.getFechaPuestaEnMarcha());
-	            		lblNewLabel_1_1_1_1_2.setText("Fuerzas a cargo: " + selected.getFuerzasAlMando());
+	                    
+	                	lblNewLabel_1.setText("● ID: " + selected.getID());
+	                	lblNewLabel_1_1.setText("● Nombre: " + selected.getNombre());
+	            		lblNewLabel_1_1_1.setText("● Ubicacion: " + selected.getUbicacion());
+	            		lblNewLabel_1_1_1_1.setText("● Fecha de puesta en marcha: " + selected.getFechaPuestaEnMarcha());
+	            		lblNewLabel_1_1_1_1_2.setText("● Fuerzas a cargo: " + selected.getFuerzasAlMando());
 
-
-	                    /*lblNewLabel.setText("ID: " + selected.getID() +
-	                        " | Nombre: " + selected.getNombre() +
-	                        " | Ubicación: " + selected.getUbicacion() +
-	                        " | Fecha de puesta en marcha: " + selected.getFechaPuestaEnMarcha() +
-	                        " | Fecha de cierre: " + selected.getFechaCierre() +
-	                        " | Fuerzas a cargo: " + selected.getFuerzasAlMando());*/
 	                }
 	            }
 	        });
