@@ -95,8 +95,6 @@ public class AM_CCDTyE extends JFrame {
 		contentPane.add(list);
 		list.setAlignmentY(Component.TOP_ALIGNMENT);
 		list.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		list.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		list.setLayoutOrientation(JList.VERTICAL_WRAP);
 		list.setForeground(new Color(217, 217, 217));
 		
 		JPanel panel = new JPanel();
