@@ -49,14 +49,14 @@ public class MainWindow extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Centros de detencion");
-		/*btnNewButton.addActionListener(new ActionListener() {
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
             	ViewCCDTyE AM = new ViewCCDTyE();
             	AM.setVisible(true);
             	
 			}
 			
-		});*/
+		});
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());

@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -23,6 +25,8 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JScrollPane;
 import java.awt.Dimension;
+import javax.swing.JFormattedTextField;
+
 
 
 
@@ -105,6 +109,24 @@ public class add_CCDTyE extends JPanel {
 		
 		JButton btnGuardar = new JButton("Guardar\r\n");
 		btnGuardar.setBounds(80, 299, 89, 23);
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Dao_CCDTyE Dao = new Dao_CCDTyE();
+				CCDTyE ccdtye = new CCDTyE();
+				
+				ccdtye.setNombre();
+				ccdtye.setUbicacion();
+				//ccdtye.setFechaPuestaEnMarcha(null);
+				//ccdtye.setFechaCierre(null);
+				
+				
+				
+				
+				
+				Dao.addCCDTyE(ccdtye);
+			
+			}});
+		
 		panel.add(btnGuardar);
 		
 		JButton btnCancelar = new JButton("Cancelar\r\n");
@@ -115,6 +137,10 @@ public class add_CCDTyE extends JPanel {
 		cboxFuerzasACargo.setToolTipText("Fuerzas a cargo");
 		cboxFuerzasACargo.setBounds(10, 223, 459, 22);
 		panel.add(cboxFuerzasACargo);
+		
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField.setBounds(10, 196, 188, 20);
+		panel.add(formattedTextField);
 		Dao_Fuerzas Dao = new Dao_Fuerzas();
         ArrayList<String> nombresFuerzas = Dao.getAllFuerzas(); // Supongamos que tienes un método getAllFuerzasNames() que devuelve los nombres de todas las fuerzas
         for (String nombre : nombresFuerzas) {

@@ -90,13 +90,17 @@ public class ViewCCDTyE extends JPanel {
 		btnNewButton_1.setBackground(new Color(138, 135, 169));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btnNewButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-						marco.setContentPane(new add_CCDTyE());
-						marco.validate();
-					}
-				});
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new AM_CCDTyE());
+				marco.validate();
+			}
+		});
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new add_CCDTyE());
+				marco.validate();
 			}
 		});
 		btnNewButton_1.setBounds(266, 419, 76, 32);

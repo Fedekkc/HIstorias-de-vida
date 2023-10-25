@@ -1,73 +1,34 @@
 package interfaz;
 
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import java.sql.PreparedStatement;
-import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-
-import java.awt.FlowLayout;
 import java.util.ArrayList;
 
-import javax.swing.JComboBox;
-import javax.swing.JScrollPane;
-import entidades.CCDTyE;
-import dao_ccdtye.Dao_CCDTyE;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.ComponentOrientation;
-import java.awt.Component;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import java.awt.GridLayout;
-import java.awt.Dimension;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Panel;
-import javax.swing.JList;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class AM_CCDTyE extends JFrame {
+import dao_ccdtye.Dao_CCDTyE;
+import entidades.CCDTyE;
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AM_CCDTyE frame = new AM_CCDTyE();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+public class AM_CCDTyE extends JPanel {
 
 	/**
-	 * Create the frame.
+	 * Create the panel.
 	 */
 	public AM_CCDTyE() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 880, 560);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(138, 138, 169));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
 		
         DefaultListModel<CCDTyE> listModel = new DefaultListModel<>();
         ArrayList<CCDTyE> centros = new ArrayList<CCDTyE>();
@@ -76,7 +37,7 @@ public class AM_CCDTyE extends JFrame {
         for (CCDTyE ccdTyE : centros) {
             listModel.addElement(ccdTyE);
         }
-		contentPane.setLayout(null);
+		setLayout(null);
         JList<CCDTyE> list = new JList<>(listModel);
         list.setFont(new Font("M PLUS 1p", Font.BOLD, 12));
         list.setCellRenderer(new DefaultListCellRenderer() {
@@ -92,7 +53,7 @@ public class AM_CCDTyE extends JFrame {
         });
 		list.setBounds(21, 38, 187, 451);
 		list.setBackground(new Color(50, 49, 78));
-		contentPane.add(list);
+		add(list);
 		list.setAlignmentY(Component.TOP_ALIGNMENT);
 		list.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		list.setForeground(new Color(217, 217, 217));
@@ -101,7 +62,7 @@ public class AM_CCDTyE extends JFrame {
 		panel.setBounds(254, 38, 580, 451);
 		panel.setBackground(new Color(50, 49, 78));
 		panel.setForeground(new Color(50, 49, 78));
-		contentPane.add(panel);
+		add(panel);
 		panel.setLayout(null);
 		panel.setLayout(null);
 		
@@ -204,4 +165,5 @@ public class AM_CCDTyE extends JFrame {
 	        
 		
 	}
+
 }
