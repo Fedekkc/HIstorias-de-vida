@@ -178,7 +178,7 @@ public class AM_CCDTyE extends JFrame {
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 16));
 		
-		 list.addMouseListener(new MouseAdapter() {
+		list.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseClicked(MouseEvent e) {
 	                CCDTyE selected = list.getSelectedValue();
@@ -188,7 +188,7 @@ public class AM_CCDTyE extends JFrame {
 	            }
 	        });
 
-	        list.addListSelectionListener(new ListSelectionListener() {
+	    list.addListSelectionListener(new ListSelectionListener() {
 	            @Override
 	            public void valueChanged(ListSelectionEvent e) {
 	                CCDTyE selected = list.getSelectedValue();

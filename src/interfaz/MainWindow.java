@@ -21,6 +21,7 @@ public class MainWindow extends JFrame {
 				try {
 					MainWindow frame = new MainWindow();
 					frame.setVisible(true);
+					frame.setContentPane(new add_CCDTyE());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
