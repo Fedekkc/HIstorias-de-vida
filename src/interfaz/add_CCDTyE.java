@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JList;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.ComponentOrientation;
+import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -14,6 +17,7 @@ import entidades.CCDTyE;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JScrollPane;
 
@@ -39,11 +43,27 @@ public class add_CCDTyE extends JPanel {
         for (CCDTyE ccdTyE : centros) {
             listModel.addElement(ccdTyE);
         }
-		JList list = new JList();
-		list.setLayoutOrientation(JList.VERTICAL_WRAP);
+        JList<CCDTyE> list = new JList<>(listModel);
+        list.setFont(new Font("M PLUS 1p", Font.BOLD, 12));
+        list.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (value instanceof CCDTyE) {
+                    CCDTyE ccdTyE = (CCDTyE) value;
+                    setText(ccdTyE.getNombre());
+                }
+                return this;
+            }
+        });
+		list.setBounds(21, 38, 187, 451);
 		list.setBackground(new Color(50, 49, 78));
-		list.setBounds(26, 11, 152, 538);
-		add(list);
+		//contentPane.add(list);
+		list.setAlignmentY(Component.TOP_ALIGNMENT);
+		list.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		list.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		list.setLayoutOrientation(JList.VERTICAL_WRAP);
+		list.setForeground(new Color(217, 217, 217));
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(50, 49, 78));
