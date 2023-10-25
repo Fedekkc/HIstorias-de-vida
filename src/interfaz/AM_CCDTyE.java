@@ -111,7 +111,7 @@ public class AM_CCDTyE extends JFrame {
 		btnNewButton.setBounds(413, 417, 89, 23);
 		panel.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Añadir");
+		JButton btnNewButton_1 = new JButton("Confirmar");
 		btnNewButton_1.setForeground(new Color(217, 217, 217));
 		btnNewButton_1.setBackground(new Color(0, 0, 26));
 		btnNewButton_1.addActionListener(new ActionListener() {

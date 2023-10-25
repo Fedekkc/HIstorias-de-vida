@@ -9,6 +9,8 @@ import java.awt.List;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
@@ -17,6 +19,7 @@ import javax.swing.JList;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import dao_ccdtye.Dao_CCDTyE;
 import entidades.CCDTyE;
@@ -87,6 +90,13 @@ public class ViewCCDTyE extends JPanel {
 		btnNewButton_1.setBackground(new Color(138, 135, 169));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+						marco.setContentPane(new add_CCDTyE());
+						marco.validate();
+					}
+				});
 			}
 		});
 		btnNewButton_1.setBounds(266, 419, 76, 32);
@@ -118,11 +128,13 @@ public class ViewCCDTyE extends JPanel {
                 CCDTyE selected = list.getSelectedValue();
                 if (selected != null) {
                     
-                	AM_CCDTyE AM = new AM_CCDTyE();
-
-                	
-                	AM.setVisible(true);
-                	ViewCCDTyE.this.setVisible(false);
+            		btnNewButton.addActionListener(new ActionListener() {
+            			public void actionPerformed(ActionEvent e) {
+            				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+            				marco.setContentPane(new AM_CCDTyE());
+            				marco.validate();
+            			}
+            		});
                 	
                 	
                 }

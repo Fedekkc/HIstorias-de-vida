@@ -1,6 +1,7 @@
 package interfaz;
 
 import javax.swing.JPanel;
+
 import javax.swing.JScrollBar;
 import javax.swing.JList;
 import java.awt.Color;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.JTextField;
 
 import dao_ccdtye.Dao_CCDTyE;
+import dao_fuerzas.Dao_Fuerzas;
 import entidades.CCDTyE;
 
 import javax.swing.JButton;
@@ -20,6 +22,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JScrollPane;
+import java.awt.Dimension;
+
+
 
 public class add_CCDTyE extends JPanel {
 
@@ -33,6 +38,7 @@ public class add_CCDTyE extends JPanel {
 	 * Create the panel.
 	 */
 	public add_CCDTyE() {
+		setMinimumSize(new Dimension(880, 560));
 		setBackground(new Color(138, 135, 169));
 		setLayout(null);
 		
@@ -67,7 +73,7 @@ public class add_CCDTyE extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(50, 49, 78));
-		panel.setBounds(300, 100, 479, 349);
+		panel.setBounds(222, 96, 479, 349);
 		add(panel);
 		panel.setLayout(null);
 		
@@ -109,6 +115,11 @@ public class add_CCDTyE extends JPanel {
 		cboxFuerzasACargo.setToolTipText("Fuerzas a cargo");
 		cboxFuerzasACargo.setBounds(10, 223, 459, 22);
 		panel.add(cboxFuerzasACargo);
+		Dao_Fuerzas Dao = new Dao_Fuerzas();
+        ArrayList<String> nombresFuerzas = Dao.getAllFuerzas(); // Supongamos que tienes un método getAllFuerzasNames() que devuelve los nombres de todas las fuerzas
+        for (String nombre : nombresFuerzas) {
+            cboxFuerzasACargo.addItem(nombre);
+        }
 
 	}
 }
