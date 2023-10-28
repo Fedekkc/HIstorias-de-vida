@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import entidades.CCDTyE;
+import entidades.Fuerza;
 
 public class Dao_CCDTyE {
     private final String url = "jdbc:mysql://localhost:3306/CCDTyE";
@@ -41,8 +42,15 @@ public class Dao_CCDTyE {
                 String ubicacion = resultSet.getString("Ubicacion");
                 LocalDate fechaPuestaEnMarcha = resultSet.getDate("Fecha_puesta_en_marcha").toLocalDate();
                 LocalDate fechaCierre = resultSet.getDate("Fecha_de_cierre").toLocalDate();
+                ArrayList<Fuerza> fuerzas = new ArrayList<>();
                 int ID = resultSet.getInt("ID_CCDTyE");
-                ccdTyE = new CCDTyE(ID, nombre, ubicacion, fechaPuestaEnMarcha, fechaCierre);
+                ccdTyE = new CCDTyE();
+                ccdTyE.setNombre(nombre);
+                ccdTyE.setUbicacion(ubicacion);
+                ccdTyE.setFechaPuestaEnMarcha(fechaPuestaEnMarcha);
+                ccdTyE.setFechaCierre(fechaCierre);
+                ccdTyE.setFuerzasAlMando(fuerzas);
+                ccdTyE.setID(ID);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -86,9 +94,16 @@ public class Dao_CCDTyE {
                 String ubicacion = resultSet.getString("Ubicacion");
                 LocalDate fechaPuestaEnMarcha = resultSet.getDate("Fecha_puesta_en_marcha").toLocalDate();
                 LocalDate fechaCierre = resultSet.getDate("Fecha_de_cierre").toLocalDate();
+                ArrayList<Fuerza> fuerzas = new ArrayList<>();
                 int ID = resultSet.getInt("ID_CCDTyE");
-                CCDTyE ccdTyE = new CCDTyE(ID,nombre, ubicacion, fechaPuestaEnMarcha, fechaCierre);
-                System.out.println(nombre);
+                CCDTyE ccdTyE = new CCDTyE();
+                ccdTyE.setNombre(nombre);
+                ccdTyE.setUbicacion(ubicacion);
+                ccdTyE.setFechaPuestaEnMarcha(fechaPuestaEnMarcha);
+                ccdTyE.setFechaCierre(fechaCierre);
+                ccdTyE.setFuerzasAlMando(fuerzas);
+                ccdTyE.setID(ID);
+                
                 listaCCDTyE.add(ccdTyE);
             }
         } catch (SQLException e) {

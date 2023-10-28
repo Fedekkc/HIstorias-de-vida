@@ -114,8 +114,8 @@ public class add_CCDTyE extends JPanel {
 				Dao_CCDTyE Dao = new Dao_CCDTyE();
 				CCDTyE ccdtye = new CCDTyE();
 				
-				ccdtye.setNombre();
-				ccdtye.setUbicacion();
+				ccdtye.setNombre(txtNombre.getText());
+				ccdtye.setUbicacion(txtUbicacion.getText());
 				//ccdtye.setFechaPuestaEnMarcha(null);
 				//ccdtye.setFechaCierre(null);
 				

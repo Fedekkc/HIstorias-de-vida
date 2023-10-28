@@ -16,12 +16,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import dao_ccdtye.Dao_CCDTyE;
 import entidades.CCDTyE;
+import java.awt.Dimension;
 
 public class AM_CCDTyE extends JPanel {
 
@@ -29,6 +31,8 @@ public class AM_CCDTyE extends JPanel {
 	 * Create the panel.
 	 */
 	public AM_CCDTyE() {
+		setBackground(new Color(138, 135, 169));
+		setMinimumSize(new Dimension(880, 560));
 		
         DefaultListModel<CCDTyE> listModel = new DefaultListModel<>();
         ArrayList<CCDTyE> centros = new ArrayList<CCDTyE>();
@@ -58,6 +62,8 @@ public class AM_CCDTyE extends JPanel {
 		list.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		list.setForeground(new Color(217, 217, 217));
 		
+		
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(254, 38, 580, 451);
 		panel.setBackground(new Color(50, 49, 78));
@@ -65,6 +71,10 @@ public class AM_CCDTyE extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		panel.setLayout(null);
+		
+        JScrollPane scrollPane = new JScrollPane(list);
+        scrollPane.setBounds(21, 38, 187, 451);
+        add(scrollPane);
 		
 		JButton btnNewButton = new JButton("Modificar");
 		btnNewButton.setBackground(new Color(0, 0, 26));
@@ -165,5 +175,4 @@ public class AM_CCDTyE extends JPanel {
 	        
 		
 	}
-
 }

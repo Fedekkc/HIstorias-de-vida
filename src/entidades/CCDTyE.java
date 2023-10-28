@@ -4,20 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CCDTyE {
-	int ID;
-	String nombre;
-	String ubicacion;
-	LocalDate fechaPuestaEnMarcha = null;
-	LocalDate fechaCierre = null;
+	private int ID;
+	private String nombre;
+	private String ubicacion;
+	private LocalDate fechaPuestaEnMarcha = null;
+	private LocalDate fechaCierre = null;
 	private ArrayList<Fuerza> fuerzasAlMando = new ArrayList<Fuerza>();
 	
-    public CCDTyE(int ID, String nombre, String ubicacion, LocalDate fechaPuestaEnMarcha, LocalDate fechaCierre) {
-        this.nombre = nombre;
-        this.ubicacion = ubicacion;
-        this.fechaPuestaEnMarcha = fechaPuestaEnMarcha;
-        this.fechaCierre = fechaCierre;
-        this.ID = ID;
-    }
+
     
     public int getID() {
     	return ID; 
