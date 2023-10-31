@@ -3,6 +3,7 @@ package interfaz;
 import javax.swing.JPanel;
 
 
+
 import javax.swing.JScrollBar;
 import javax.swing.JList;
 import java.awt.Color;
@@ -11,6 +12,10 @@ import java.awt.ComponentOrientation;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -151,10 +156,22 @@ public class add_CCDTyE extends JPanel {
 				Dao_CCDTyE Dao = new Dao_CCDTyE();
 				CCDTyE ccdtye = new CCDTyE();
 				
+				
 				ccdtye.setNombre(txtNombre.getText());
 				ccdtye.setUbicacion(txtUbicacion.getText());
-				//ccdtye.setFechaPuestaEnMarcha(null);
-				//ccdtye.setFechaCierre(null);
+
+				
+				Date date = dateChooser.getDate();
+				Instant instant = date.toInstant();
+				ZoneId zone = ZoneId.systemDefault();
+				LocalDate localDate = instant.atZone(zone).toLocalDate();
+				ccdtye.setFechaCierre(localDate);
+				
+				date = dateChooser_1.getDate();
+				instant = date.toInstant();
+				zone = ZoneId.systemDefault();
+				localDate = instant.atZone(zone).toLocalDate();
+				ccdtye.setFechaPuestaEnMarcha(localDate);
 				
 				Dao.addCCDTyE(ccdtye);
 			
