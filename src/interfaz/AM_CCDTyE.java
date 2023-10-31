@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -83,6 +84,15 @@ public class AM_CCDTyE extends JPanel {
 		btnNewButton.setForeground(new Color(217, 217, 217));
 		btnNewButton.setBounds(413, 417, 89, 23);
 		panel.add(btnNewButton);
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				A_Testigo dialog = new A_Testigo();
+				dialog.setVisible(true);
+				
+			}
+			
+		} );
 		
 		JButton btnNewButton_1 = new JButton("Confirmar");
 		btnNewButton_1.setForeground(new Color(217, 217, 217));
