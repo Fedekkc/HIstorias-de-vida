@@ -69,7 +69,7 @@ public class Dao_testigos {
             e.printStackTrace();
         }
     }
-
+// aaaaaaaaaaaaaaaaa
     public void updateTestigo(Testigo testigo) {
         int filasAfectadas = 0;
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
