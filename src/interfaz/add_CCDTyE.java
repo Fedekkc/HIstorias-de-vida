@@ -125,10 +125,6 @@ public class add_CCDTyE extends JPanel {
 		cboxFuerzasACargo.setBounds(10, 223, 459, 22);
 		panel.add(cboxFuerzasACargo);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBounds(10, 196, 188, 20);
-		panel.add(formattedTextField);
-		
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setBounds(10, 159, 188, 26);
 		panel.add(dateChooser);
