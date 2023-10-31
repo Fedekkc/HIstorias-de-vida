@@ -27,7 +27,9 @@ import javax.swing.DefaultListModel;
 import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import javax.swing.JFormattedTextField;
-import org.jdatepicker.JDatePicker;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JLabel;
+
 
 
 
@@ -37,8 +39,6 @@ public class add_CCDTyE extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtNombre;
 	private JTextField txtUbicacion;
-	private JTextField txtFechaDeInicio;
-	private JTextField txtFechaDeSuspension;
 
 	/**
 	 * Create the panel.
@@ -97,18 +97,6 @@ public class add_CCDTyE extends JPanel {
 		txtUbicacion.setBounds(10, 89, 459, 26);
 		panel.add(txtUbicacion);
 		
-		txtFechaDeInicio = new JTextField();
-		txtFechaDeInicio.setText("Fecha de inicio");
-		txtFechaDeInicio.setColumns(10);
-		txtFechaDeInicio.setBounds(10, 159, 188, 26);
-		panel.add(txtFechaDeInicio);
-		
-		txtFechaDeSuspension = new JTextField();
-		txtFechaDeSuspension.setText("Fecha de Suspension");
-		txtFechaDeSuspension.setColumns(10);
-		txtFechaDeSuspension.setBounds(281, 159, 188, 26);
-		panel.add(txtFechaDeSuspension);
-		
 		JButton btnGuardar = new JButton("Guardar\r\n");
 		btnGuardar.setBounds(80, 299, 89, 23);
 		btnGuardar.addActionListener(new ActionListener() {
@@ -143,6 +131,22 @@ public class add_CCDTyE extends JPanel {
 		JFormattedTextField formattedTextField = new JFormattedTextField();
 		formattedTextField.setBounds(10, 196, 188, 20);
 		panel.add(formattedTextField);
+		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(10, 159, 188, 26);
+		panel.add(dateChooser);
+		
+		JLabel lblNewLabel = new JLabel("Fecha de puesta en Marcha");
+		lblNewLabel.setBounds(10, 139, 146, 14);
+		panel.add(lblNewLabel);
+		
+		JLabel lblFechaDeSuspensin = new JLabel("Fecha de suspensión");
+		lblFechaDeSuspensin.setBounds(282, 139, 146, 14);
+		panel.add(lblFechaDeSuspensin);
+		
+		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1.setBounds(281, 159, 188, 26);
+		panel.add(dateChooser_1);
 		Dao_Fuerzas Dao = new Dao_Fuerzas();
         ArrayList<String> nombresFuerzas = Dao.getAllFuerzas(); // Supongamos que tienes un método getAllFuerzasNames() que devuelve los nombres de todas las fuerzas
         for (String nombre : nombresFuerzas) {
