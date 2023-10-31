@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import dao_ccdtye.Dao_CCDTyE;
 import dao_fuerzas.Dao_Fuerzas;
@@ -27,7 +28,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import javax.swing.JFormattedTextField;
-import org.jdatepicker.JDatePicker;
+//import org.jdatepicker.JDatePicker;
+import javax.swing.JFrame;
 
 
 
@@ -121,10 +123,6 @@ public class add_CCDTyE extends JPanel {
 				//ccdtye.setFechaPuestaEnMarcha(null);
 				//ccdtye.setFechaCierre(null);
 				
-				
-				
-				
-				
 				Dao.addCCDTyE(ccdtye);
 			
 			}});
@@ -133,6 +131,13 @@ public class add_CCDTyE extends JPanel {
 		
 		JButton btnCancelar = new JButton("Cancelar\r\n");
 		btnCancelar.setBounds(300, 299, 89, 23);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new ViewCCDTyE());
+				marco.validate();
+			}});
+		
 		panel.add(btnCancelar);
 		
 		JComboBox cboxFuerzasACargo = new JComboBox();
