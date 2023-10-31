@@ -105,19 +105,7 @@ public class add_CCDTyE extends JPanel {
 		
 		JButton btnGuardar = new JButton("Guardar\r\n");
 		btnGuardar.setBounds(80, 299, 89, 23);
-		btnGuardar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Dao_CCDTyE Dao = new Dao_CCDTyE();
-				CCDTyE ccdtye = new CCDTyE();
-				
-				ccdtye.setNombre(txtNombre.getText());
-				ccdtye.setUbicacion(txtUbicacion.getText());
-				//ccdtye.setFechaPuestaEnMarcha(null);
-				//ccdtye.setFechaCierre(null);
-				
-				Dao.addCCDTyE(ccdtye);
-			
-			}});
+
 		
 		panel.add(btnGuardar);
 		
@@ -161,6 +149,20 @@ public class add_CCDTyE extends JPanel {
         for (String nombre : nombresFuerzas) {
             cboxFuerzasACargo.addItem(nombre);
         }
+        
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Dao_CCDTyE Dao = new Dao_CCDTyE();
+				CCDTyE ccdtye = new CCDTyE();
+				
+				ccdtye.setNombre(txtNombre.getText());
+				ccdtye.setUbicacion(txtUbicacion.getText());
+				//ccdtye.setFechaPuestaEnMarcha(null);
+				//ccdtye.setFechaCierre(null);
+				
+				Dao.addCCDTyE(ccdtye);
+			
+			}});
 
 	}
 }

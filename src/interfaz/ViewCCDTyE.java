@@ -24,6 +24,7 @@ import javax.swing.SwingUtilities;
 import dao_ccdtye.Dao_CCDTyE;
 import entidades.CCDTyE;
 import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
 
 public class ViewCCDTyE extends JPanel {
 
@@ -52,6 +53,7 @@ public class ViewCCDTyE extends JPanel {
         }
 		
         JList<CCDTyE> list = new JList<>(listModel);
+        list.setBorder(new LineBorder(new Color(138, 135, 169), 4, true));
 		
 		list.setBackground(new Color(217, 217, 217));
 		list.setBounds(266, 105, 185, 293);
