@@ -173,6 +173,9 @@ public class add_CCDTyE extends JPanel {
 				localDate = instant.atZone(zone).toLocalDate();
 				ccdtye.setFechaPuestaEnMarcha(localDate);
 				
+				
+				
+				
 				Dao.addCCDTyE(ccdtye);
 			
 			}});
