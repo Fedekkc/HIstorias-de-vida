@@ -40,6 +40,7 @@ import javax.swing.JLabel;
 
 //import org.jdatepicker.JDatePicker;
 import javax.swing.JFrame;
+import javax.swing.JCheckBox;
 
 
 
@@ -125,11 +126,6 @@ public class add_CCDTyE extends JPanel {
 		
 		panel.add(btnCancelar);
 		
-		JComboBox cboxFuerzasACargo = new JComboBox();
-		cboxFuerzasACargo.setToolTipText("Fuerzas a cargo");
-		cboxFuerzasACargo.setBounds(10, 223, 459, 22);
-		panel.add(cboxFuerzasACargo);
-		
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setBounds(10, 159, 188, 26);
 		panel.add(dateChooser);
@@ -145,11 +141,18 @@ public class add_CCDTyE extends JPanel {
 		JDateChooser dateChooser_1 = new JDateChooser();
 		dateChooser_1.setBounds(281, 159, 188, 26);
 		panel.add(dateChooser_1);
-		Dao_Fuerzas Dao = new Dao_Fuerzas();
-        ArrayList<String> nombresFuerzas = Dao.getAllFuerzas(); // Supongamos que tienes un método getAllFuerzasNames() que devuelve los nombres de todas las fuerzas
-        for (String nombre : nombresFuerzas) {
-            cboxFuerzasACargo.addItem(nombre);
-        }
+		
+		JCheckBox chckbxPolicia = new JCheckBox("Policía");
+		chckbxPolicia.setBounds(190, 206, 97, 23);
+		panel.add(chckbxPolicia);
+		
+		JCheckBox chckbxGendarmeria = new JCheckBox("Gendarmeria");
+		chckbxGendarmeria.setBounds(190, 234, 97, 23);
+		panel.add(chckbxGendarmeria);
+		
+		JCheckBox chckbxEjercito = new JCheckBox("Ejercito");
+		chckbxEjercito.setBounds(190, 260, 97, 23);
+		panel.add(chckbxEjercito);
         
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
