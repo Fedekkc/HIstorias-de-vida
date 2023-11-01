@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Dao_Fuerzas {
     private final String url = "jdbc:mysql://localhost:3306/CCDTyE";
     private final String usuario = "root";
-    private final String contrasenia = "root";
+    private final String contrasenia = "admin";
 	
 	
     public ArrayList<String> getAllFuerzas() {
@@ -21,10 +21,28 @@ public class Dao_Fuerzas {
             e.printStackTrace();
         }
         
-        
-
         return fuerzas;
     }
 	
-	
+    
+    
+    public int getFuerzaID(String Nombre) {
+    	int ID = 0;
+    	try(Connection conn = DriverManager.getConnection(url,usuario,contrasenia)) {
+    		String q = "SELECT ID_Fuerza FROM Fuerzas WHERE Nombre = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(q);
+            preparedStatement.setString(1, Nombre);
+            ResultSet rs = preparedStatement.executeQuery();
+            
+            while (rs.next()) {
+                ID = rs.getInt("ID_Fuerza");
+            }
+    	} catch(SQLException e) {
+    		e.printStackTrace();
+    	}
+    	
+    	return ID;
+    	
+    }
+    
 }

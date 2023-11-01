@@ -12,6 +12,7 @@ import java.awt.ComponentOrientation;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Console;
 import java.util.Date;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ import javax.swing.SwingUtilities;
 import dao_ccdtye.Dao_CCDTyE;
 import dao_fuerzas.Dao_Fuerzas;
 import entidades.CCDTyE;
+import entidades.Fuerza;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -158,6 +160,7 @@ public class add_CCDTyE extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Dao_CCDTyE Dao = new Dao_CCDTyE();
 				CCDTyE ccdtye = new CCDTyE();
+				ArrayList<Integer> fuerzasACargo = new ArrayList<Integer>();
 				
 				
 				ccdtye.setNombre(txtNombre.getText());
@@ -169,17 +172,39 @@ public class add_CCDTyE extends JPanel {
 				ZoneId zone = ZoneId.systemDefault();
 				LocalDate localDate = instant.atZone(zone).toLocalDate();
 				ccdtye.setFechaCierre(localDate);
+				Dao_Fuerzas daoFuerzas = new Dao_Fuerzas();
+				if (chckbxPolicia.isSelected()) 
+				{
+					String name = chckbxPolicia.getText();
+					int ID_Policia = daoFuerzas.getFuerzaID(name);
+					fuerzasACargo.add(ID_Policia);
+				}
+				
+				if (chckbxEjercito.isSelected()) 
+				{
+					String name = chckbxEjercito.getText();
+					int ID_Ejercito = daoFuerzas.getFuerzaID(name);
+					fuerzasACargo.add(ID_Ejercito);
+				}
+				if (chckbxGendarmeria.isSelected()) 
+				{
+					String name = chckbxGendarmeria.getText();
+					int ID_Gendarmeria = daoFuerzas.getFuerzaID(name);
+					fuerzasACargo.add(ID_Gendarmeria);
+				}
+				ccdtye.setFuerzasAlMando(fuerzasACargo);
+				System.out.println(fuerzasACargo);
+				//ccdtye.setFuerzasAlMando(fuerzasACargo);
 				
 				date = dateChooser_1.getDate();
 				instant = date.toInstant();
 				zone = ZoneId.systemDefault();
 				localDate = instant.atZone(zone).toLocalDate();
+				
 				ccdtye.setFechaPuestaEnMarcha(localDate);
 				
-				
-				
-				
 				Dao.addCCDTyE(ccdtye);
+				//Dao.addFuerzas(ccdtye);
 			
 			}});
 

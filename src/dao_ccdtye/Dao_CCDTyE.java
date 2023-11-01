@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -14,17 +15,34 @@ import entidades.Fuerza;
 public class Dao_CCDTyE {
     private final String url = "jdbc:mysql://localhost:3306/CCDTyE";
     private final String usuario = "root";
-    private final String contrasenia = "root";
+    private final String contrasenia = "admin";
 
     public void addCCDTyE(CCDTyE ccdTyE) {
+    	ArrayList<Integer> fuerzaAlMando = ccdTyE.getFuerzasAlMando();
+
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
             String query = "INSERT INTO CCDTyE (Nombre, Ubicacion, Fecha_puesta_en_marcha, Fecha_de_cierre) VALUES (?, ?, ?, ?)";
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, ccdTyE.getNombre());
             preparedStatement.setString(2, ccdTyE.getUbicacion());
             preparedStatement.setObject(3, ccdTyE.getFechaPuestaEnMarcha());
             preparedStatement.setObject(4, ccdTyE.getFechaCierre());
-            preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate( );
+            
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            int last_inserted_id = 0;
+            if(rs.next())
+            {
+				last_inserted_id = rs.getInt(1);
+            }
+
+            for (int i = 0; i <= fuerzaAlMando.size() - 1; i++) {
+        		String query2 = "INSERT INTO CCDTyE_Fuerzas (CCDTyE_id, Fuerzas_id) VALUES (?, ?)";
+                PreparedStatement preparedStatement2 = conn.prepareStatement(query2);
+                preparedStatement2.setInt(1, last_inserted_id);
+                preparedStatement2.setInt(2, fuerzaAlMando.get(i));
+                preparedStatement2.executeUpdate();
+        	}
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -42,7 +60,7 @@ public class Dao_CCDTyE {
                 String ubicacion = resultSet.getString("Ubicacion");
                 LocalDate fechaPuestaEnMarcha = resultSet.getDate("Fecha_puesta_en_marcha").toLocalDate();
                 LocalDate fechaCierre = resultSet.getDate("Fecha_de_cierre").toLocalDate();
-                ArrayList<Fuerza> fuerzas = new ArrayList<>();
+                ArrayList<Integer> fuerzas = new ArrayList<>();
                 int ID = resultSet.getInt("ID_CCDTyE");
                 ccdTyE = new CCDTyE();
                 ccdTyE.setNombre(nombre);
@@ -94,7 +112,7 @@ public class Dao_CCDTyE {
                 String ubicacion = resultSet.getString("Ubicacion");
                 LocalDate fechaPuestaEnMarcha = resultSet.getDate("Fecha_puesta_en_marcha").toLocalDate();
                 LocalDate fechaCierre = resultSet.getDate("Fecha_de_cierre").toLocalDate();
-                ArrayList<Fuerza> fuerzas = new ArrayList<>();
+                ArrayList<Integer> fuerzas = new ArrayList<>();
                 int ID = resultSet.getInt("ID_CCDTyE");
                 CCDTyE ccdTyE = new CCDTyE();
                 ccdTyE.setNombre(nombre);
@@ -111,4 +129,21 @@ public class Dao_CCDTyE {
         }
         return listaCCDTyE;
     }
+    
+    /*public void addFuerzas(CCDTyE ccdTyE) {
+    	
+    	ArrayList<Integer> fuerzaAlMando = ccdTyE.getFuerzasAlMando();
+        try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
+        	for (int i = 0; i <= fuerzaAlMando.size() - 1; i++) {
+        		String query = "INSERT INTO CCDTyE_Fuerzas (CCDTyE_id, Fuerzas_id) VALUES (?, ?)";
+                PreparedStatement preparedStatement = conn.prepareStatement(query);
+                preparedStatement.setInt(1, ccdTyE.getID());
+                preparedStatement.setInt(2, fuerzaAlMando.get(i));
+                preparedStatement.executeUpdate();
+        	}
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }*/
 }

@@ -9,7 +9,7 @@ public class CCDTyE {
 	private String ubicacion;
 	private LocalDate fechaPuestaEnMarcha = null;
 	private LocalDate fechaCierre = null;
-	private ArrayList<Fuerza> fuerzasAlMando = new ArrayList<Fuerza>();
+	private ArrayList<Integer> fuerzasAlMando = new ArrayList<Integer>();
 	
 
     
@@ -53,11 +53,11 @@ public class CCDTyE {
         this.fechaCierre = fechaCierre;
     }
 
-	public ArrayList<Fuerza> getFuerzasAlMando() {
+	public ArrayList<Integer> getFuerzasAlMando() {
 		return fuerzasAlMando;
 	}
 
-	public void setFuerzasAlMando(ArrayList<Fuerza> fuerzasAlMando) {
+	public void setFuerzasAlMando(ArrayList<Integer> fuerzasAlMando) {
 		this.fuerzasAlMando = fuerzasAlMando;
 	}	
 	
