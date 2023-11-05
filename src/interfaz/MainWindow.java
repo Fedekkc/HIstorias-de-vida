@@ -76,6 +76,13 @@ public class MainWindow extends JFrame {
 		JButton btnNewButton_1 = new JButton("Personas");
 		btnNewButton_1.setIcon(new ImageIcon(MainWindow.class.getResource("/assets/personas_pic.png")));
 		btnNewButton_1.setBounds(456, 37, 380, 450);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new add_Detenido_Identificado());
+				marco.validate();
+			}
+		});
 		contentPane.add(btnNewButton_1);
 		
 		
