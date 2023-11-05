@@ -206,6 +206,10 @@ public class add_CCDTyE extends JPanel {
 				
 				Dao.addCCDTyE(ccdtye);
 				//Dao.addFuerzas(ccdtye);
+				
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new ViewCCDTyE());
+				marco.validate();
 			
 			}});
 
