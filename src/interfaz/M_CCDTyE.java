@@ -29,6 +29,7 @@ import entidades.Fuerza;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -46,16 +47,21 @@ import javax.swing.JCheckBox;
 
 
 
-public class M_CCDTyE extends JPanel {
-
+public class M_CCDTyE extends JDialog {
+    /**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField txtNombre;
-	private JTextField txtUbicacion;
+    private JTextField txtUbicacion;
+    private CCDTyE ccdTyE; // Variable para almacenar el CCDTyE seleccionado
+
 
 	/**
 	 * Create the panel.
 	 */
-	public M_CCDTyE() {
+	public M_CCDTyE(CCDTyE ccdtye) {
+		this.ccdTyE = ccdtye;
 		setMinimumSize(new Dimension(880, 560));
 		setBackground(new Color(138, 135, 169));
 		setLayout(null);
@@ -96,13 +102,13 @@ public class M_CCDTyE extends JPanel {
 		panel.setLayout(null);
 		
 		txtNombre = new JTextField();
-		txtNombre.setText("\r\n");
+		txtNombre.setText(ccdtye.getNombre());
 		txtNombre.setToolTipText("Nombre");
 		txtNombre.setBounds(10, 30, 459, 26);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
 		
-		txtUbicacion = new JTextField();
+		txtUbicacion = new JTextField(ccdtye.getUbicacion());
 		txtUbicacion.setToolTipText("Ubicacion");
 		txtUbicacion.setColumns(10);
 		txtUbicacion.setBounds(10, 89, 459, 26);
@@ -117,15 +123,18 @@ public class M_CCDTyE extends JPanel {
 		JButton btnCancelar = new JButton("Cancelar\r\n");
 		btnCancelar.setBounds(300, 299, 89, 23);
 		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new ViewCCDTyE());
-				marco.validate();
-			}});
+		    public void actionPerformed(ActionEvent e) {
+		        JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor((Component) e.getSource());
+		        dialog.dispose();
+		    }
+		});
 		
 		panel.add(btnCancelar);
 		
 		JDateChooser dateChooser = new JDateChooser();
+		LocalDate localDate = ccdtye.getFechaPuestaEnMarcha();
+		Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		dateChooser.setDate(date);
 		dateChooser.setBounds(10, 159, 188, 26);
 		panel.add(dateChooser);
 		
@@ -141,20 +150,43 @@ public class M_CCDTyE extends JPanel {
 		panel.add(lblFechaDeSuspensin);
 		
 		JDateChooser dateChooser_1 = new JDateChooser();
+		localDate = ccdtye.getFechaCierre();
+		date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		dateChooser_1.setDate(date);
 		dateChooser_1.setBounds(281, 159, 188, 26);
 		panel.add(dateChooser_1);
 		
-		JCheckBox chckbxPolicia = new JCheckBox("Policía");
+
+		
+		
+		
+		JCheckBox chckbxPolicia = new JCheckBox("Policía"); // 1
 		chckbxPolicia.setBounds(192, 219, 97, 23);
+		
 		panel.add(chckbxPolicia);
 		
-		JCheckBox chckbxGendarmeria = new JCheckBox("Gendarmeria");
+		JCheckBox chckbxEjercito = new JCheckBox("Ejercito"); // 2
+		chckbxEjercito.setBounds(192, 273, 97, 23);
+		panel.add(chckbxEjercito);
+		
+		JCheckBox chckbxGendarmeria = new JCheckBox("Gendarmeria"); // 3
 		chckbxGendarmeria.setBounds(192, 247, 97, 23);
 		panel.add(chckbxGendarmeria);
 		
-		JCheckBox chckbxEjercito = new JCheckBox("Ejercito");
-		chckbxEjercito.setBounds(192, 273, 97, 23);
-		panel.add(chckbxEjercito);
+		ArrayList<Integer> fuerzas = new ArrayList<>(); 
+		
+		fuerzas = ccdtye.getFuerzasAlMando();
+		
+		for (int fuerza : fuerzas) {
+		    if (fuerza == 1) {
+		        chckbxPolicia.setSelected(true);
+		    } else if (fuerza == 2) {
+		        chckbxEjercito.setSelected(true);
+		    } else if (fuerza == 3) {
+		        chckbxGendarmeria.setSelected(true);
+		    }
+		}
+
 		
 		JLabel lblUbicacin = new JLabel("Ubicación");
 		lblUbicacin.setForeground(Color.WHITE);
@@ -174,7 +206,7 @@ public class M_CCDTyE extends JPanel {
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Dao_CCDTyE Dao = new Dao_CCDTyE();
-				CCDTyE ccdtye = new CCDTyE();
+				
 				ArrayList<Integer> fuerzasACargo = new ArrayList<Integer>();
 				
 				

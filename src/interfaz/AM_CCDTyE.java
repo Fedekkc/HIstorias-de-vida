@@ -27,6 +27,7 @@ import javax.swing.event.ListSelectionListener;
 import dao_ccdtye.Dao_CCDTyE;
 import dao_fuerzas.Dao_Fuerzas;
 import entidades.CCDTyE;
+import interfaz.M_CCDTyE;
 import java.awt.Dimension;
 
 public class AM_CCDTyE extends JPanel {
@@ -86,14 +87,7 @@ public class AM_CCDTyE extends JPanel {
 		btnNewButton.setBounds(413, 417, 89, 23);
 		panel.add(btnNewButton);
 		
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				A_Testigo dialog = new A_Testigo();
-				dialog.setVisible(true);
-				
-			}
-			
-		} );
+
 		
 		JButton btnNewButton_1 = new JButton("Confirmar");
 		btnNewButton_1.setForeground(new Color(217, 217, 217));
@@ -101,7 +95,7 @@ public class AM_CCDTyE extends JPanel {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new M_CCDTyE());
+				marco.setContentPane(new ViewCCDTyE());
 				marco.validate();
 			}
 		});
@@ -176,8 +170,17 @@ public class AM_CCDTyE extends JPanel {
 		list.addListSelectionListener(new ListSelectionListener() {
 		    @Override
 		    public void valueChanged(ListSelectionEvent e) {
-		        CCDTyE selected = list.getSelectedValue();
+				CCDTyE selected = list.getSelectedValue();
+				
 		        if (selected != null) {
+		    		btnNewButton.addActionListener(new ActionListener() {
+		    			public void actionPerformed(ActionEvent e) {
+		    				M_CCDTyE dialog = new M_CCDTyE(selected);
+		    				dialog.setVisible(true);
+		    				
+		    			}
+		    			
+		    		} );
 		            lblNewLabel_1.setText("● ID: " + selected.getID());
 		            lblNewLabel_1_1.setText("● Nombre: " + selected.getNombre());
 		            lblNewLabel_1_1_1.setText("● Ubicacion: " + selected.getUbicacion());
@@ -203,6 +206,8 @@ public class AM_CCDTyE extends JPanel {
 		        }
 		    }
 		});
+		
+
 	        
 		
 	}
