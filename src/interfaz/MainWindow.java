@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import interfaz.ViewCCDTyE;
 import javax.swing.JMenuBar;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class MainWindow extends JFrame {
 
@@ -40,16 +42,19 @@ public class MainWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public MainWindow() {
+		setBackground(new Color(138, 135, 169));
 		setMinimumSize(new Dimension(880, 560));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 863, 563);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(138, 135, 169));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Centros de detencion");
+		btnNewButton.setIcon(new ImageIcon(MainWindow.class.getResource("/assets/ccdtye_pic.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
             	ViewCCDTyE AM = new ViewCCDTyE();
@@ -65,16 +70,13 @@ public class MainWindow extends JFrame {
 				marco.validate();
 			}
 		});
-		btnNewButton.setBounds(161, 147, 179, 91);
+		btnNewButton.setBounds(31, 37, 380, 450);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Personas");
-		btnNewButton_1.setBounds(540, 134, 148, 117);
+		btnNewButton_1.setIcon(new ImageIcon(MainWindow.class.getResource("/assets/personas_pic.png")));
+		btnNewButton_1.setBounds(456, 37, 380, 450);
 		contentPane.add(btnNewButton_1);
-		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 101, 22);
-		contentPane.add(menuBar);
 		
 		
 

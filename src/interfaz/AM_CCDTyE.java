@@ -99,7 +99,7 @@ public class AM_CCDTyE extends JPanel {
 		
 
 		
-		JButton btnNewButton_1 = new JButton("Confirmar");
+		JButton btnNewButton_1 = new JButton("Atrás");
 		btnNewButton_1.setForeground(new Color(217, 217, 217));
 		btnNewButton_1.setBackground(new Color(0, 0, 26));
 		btnNewButton_1.addActionListener(new ActionListener() {
