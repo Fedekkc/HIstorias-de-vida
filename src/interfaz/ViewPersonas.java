@@ -108,23 +108,14 @@ public class ViewPersonas extends JPanel {
 		btnNewButton_1.setBounds(266, 419, 76, 32);
 		panel.add(btnNewButton_1);
 		
-		JLabel lblNewLabel = new JLabel("CENTROS CLANDESTINOS DE DETENCIÓN");
+		JLabel lblNewLabel = new JLabel("DETENIDOS IDENTIFICADOS");
 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("M PLUS 1p", Font.PLAIN, 11));
-		lblNewLabel.setBounds(253, 11, 220, 32);
+		lblNewLabel.setBounds(290, 62, 220, 32);
 		panel.add(lblNewLabel);
-		
-		JLabel lblTorturaYExterminio = new JLabel("TORTURA Y EXTERMINIO");
-		lblTorturaYExterminio.setVerticalAlignment(SwingConstants.TOP);
-		lblTorturaYExterminio.setHorizontalTextPosition(SwingConstants.LEFT);
-		lblTorturaYExterminio.setHorizontalAlignment(SwingConstants.LEFT);
-		lblTorturaYExterminio.setForeground(Color.WHITE);
-		lblTorturaYExterminio.setFont(new Font("M PLUS 1p", Font.PLAIN, 11));
-		lblTorturaYExterminio.setBounds(290, 32, 220, 32);
-		panel.add(lblTorturaYExterminio);
 		
 		
 		
