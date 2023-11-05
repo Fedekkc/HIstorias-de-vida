@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import interfaz.ViewCCDTyE;
+import javax.swing.JMenuBar;
 
 public class MainWindow extends JFrame {
 
@@ -71,8 +72,11 @@ public class MainWindow extends JFrame {
 		btnNewButton_1.setBounds(540, 134, 148, 117);
 		contentPane.add(btnNewButton_1);
 		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 101, 22);
+		contentPane.add(menuBar);
+		
 		
 
 	}
-
 }
