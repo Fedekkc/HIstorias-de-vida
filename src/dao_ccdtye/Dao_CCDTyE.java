@@ -15,7 +15,7 @@ import entidades.Fuerza;
 public class Dao_CCDTyE {
     private final String url = "jdbc:mysql://localhost:3306/CCDTyE";
     private final String usuario = "root";
-    private final String contrasenia = "admin";
+    private final String contrasenia = "root";
 
     public void addCCDTyE(CCDTyE ccdTyE) {
     	ArrayList<Integer> fuerzaAlMando = ccdTyE.getFuerzasAlMando();
@@ -62,6 +62,16 @@ public class Dao_CCDTyE {
                 LocalDate fechaCierre = resultSet.getDate("Fecha_de_cierre").toLocalDate();
                 ArrayList<Integer> fuerzas = new ArrayList<>();
                 int ID = resultSet.getInt("ID_CCDTyE");
+
+                // Obteniendo las fuerzas al mando
+                String queryFuerzas = "SELECT Fuerzas_id FROM CCDTyE_Fuerzas WHERE CCDTyE_id = ?";
+                PreparedStatement preparedStatementFuerzas = conn.prepareStatement(queryFuerzas);
+                preparedStatementFuerzas.setInt(1, id);
+                ResultSet rsFuerzas = preparedStatementFuerzas.executeQuery();
+                while (rsFuerzas.next()) {
+                    fuerzas.add(rsFuerzas.getInt("Fuerzas_id"));
+                }
+
                 ccdTyE = new CCDTyE();
                 ccdTyE.setNombre(nombre);
                 ccdTyE.setUbicacion(ubicacion);
@@ -84,7 +94,22 @@ public class Dao_CCDTyE {
             preparedStatement.setString(2, ccdTyE.getUbicacion());
             preparedStatement.setObject(3, ccdTyE.getFechaPuestaEnMarcha());
             preparedStatement.setObject(4, ccdTyE.getFechaCierre());
+            preparedStatement.setInt(5, ccdTyE.getID());
             preparedStatement.executeUpdate();
+
+            // Actualizar la tabla CCDTyE_Fuerzas
+            String deleteFuerzasQuery = "DELETE FROM CCDTyE_Fuerzas WHERE CCDTyE_id = ?";
+            PreparedStatement deleteStatement = conn.prepareStatement(deleteFuerzasQuery);
+            deleteStatement.setInt(1, ccdTyE.getID());
+            deleteStatement.executeUpdate();
+
+            for (int fuerza : ccdTyE.getFuerzasAlMando()) {
+                String insertFuerzasQuery = "INSERT INTO CCDTyE_Fuerzas (CCDTyE_id, Fuerzas_id) VALUES (?, ?)";
+                PreparedStatement insertStatement = conn.prepareStatement(insertFuerzasQuery);
+                insertStatement.setInt(1, ccdTyE.getID());
+                insertStatement.setInt(2, fuerza);
+                insertStatement.executeUpdate();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,6 +117,13 @@ public class Dao_CCDTyE {
 
     public void deleteCCDTyE(int id) {
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
+            // Eliminar las referencias en CCDTyE_Fuerzas
+            String deleteFuerzasQuery = "DELETE FROM CCDTyE_Fuerzas WHERE CCDTyE_id = ?";
+            PreparedStatement deleteStatement = conn.prepareStatement(deleteFuerzasQuery);
+            deleteStatement.setInt(1, id);
+            deleteStatement.executeUpdate();
+
+            // Eliminar la entrada correspondiente en CCDTyE
             String query = "DELETE FROM CCDTyE WHERE ID_CCDTyE = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setInt(1, id);
@@ -100,7 +132,7 @@ public class Dao_CCDTyE {
             e.printStackTrace();
         }
     }
-    
+
     public ArrayList<CCDTyE> getAllCCDTyE() {
         ArrayList<CCDTyE> listaCCDTyE = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
@@ -114,6 +146,16 @@ public class Dao_CCDTyE {
                 LocalDate fechaCierre = resultSet.getDate("Fecha_de_cierre").toLocalDate();
                 ArrayList<Integer> fuerzas = new ArrayList<>();
                 int ID = resultSet.getInt("ID_CCDTyE");
+
+                // Obteniendo las fuerzas al mando
+                String queryFuerzas = "SELECT Fuerzas_id FROM CCDTyE_Fuerzas WHERE CCDTyE_id = ?";
+                PreparedStatement preparedStatementFuerzas = conn.prepareStatement(queryFuerzas);
+                preparedStatementFuerzas.setInt(1, ID);
+                ResultSet rsFuerzas = preparedStatementFuerzas.executeQuery();
+                while (rsFuerzas.next()) {
+                    fuerzas.add(rsFuerzas.getInt("Fuerzas_id"));
+                }
+
                 CCDTyE ccdTyE = new CCDTyE();
                 ccdTyE.setNombre(nombre);
                 ccdTyE.setUbicacion(ubicacion);
@@ -121,7 +163,7 @@ public class Dao_CCDTyE {
                 ccdTyE.setFechaCierre(fechaCierre);
                 ccdTyE.setFuerzasAlMando(fuerzas);
                 ccdTyE.setID(ID);
-                
+
                 listaCCDTyE.add(ccdTyE);
             }
         } catch (SQLException e) {
@@ -129,21 +171,4 @@ public class Dao_CCDTyE {
         }
         return listaCCDTyE;
     }
-    
-    /*public void addFuerzas(CCDTyE ccdTyE) {
-    	
-    	ArrayList<Integer> fuerzaAlMando = ccdTyE.getFuerzasAlMando();
-        try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
-        	for (int i = 0; i <= fuerzaAlMando.size() - 1; i++) {
-        		String query = "INSERT INTO CCDTyE_Fuerzas (CCDTyE_id, Fuerzas_id) VALUES (?, ?)";
-                PreparedStatement preparedStatement = conn.prepareStatement(query);
-                preparedStatement.setInt(1, ccdTyE.getID());
-                preparedStatement.setInt(2, fuerzaAlMando.get(i));
-                preparedStatement.executeUpdate();
-        	}
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }*/
 }

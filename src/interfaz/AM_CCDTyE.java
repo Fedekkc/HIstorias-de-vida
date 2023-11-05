@@ -25,6 +25,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import dao_ccdtye.Dao_CCDTyE;
+import dao_fuerzas.Dao_Fuerzas;
 import entidades.CCDTyE;
 import java.awt.Dimension;
 
@@ -100,7 +101,7 @@ public class AM_CCDTyE extends JPanel {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new ViewCCDTyE());
+				marco.setContentPane(new M_CCDTyE());
 				marco.validate();
 			}
 		});
@@ -172,21 +173,36 @@ public class AM_CCDTyE extends JPanel {
 	            }
 	        });
 
-	    list.addListSelectionListener(new ListSelectionListener() {
-	            @Override
-	            public void valueChanged(ListSelectionEvent e) {
-	                CCDTyE selected = list.getSelectedValue();
-	                if (selected != null) {
-	                    
-	                	lblNewLabel_1.setText("● ID: " + selected.getID());
-	                	lblNewLabel_1_1.setText("● Nombre: " + selected.getNombre());
-	            		lblNewLabel_1_1_1.setText("● Ubicacion: " + selected.getUbicacion());
-	            		lblNewLabel_1_1_1_1.setText("● Fecha de puesta en marcha: " + selected.getFechaPuestaEnMarcha());
-	            		lblNewLabel_1_1_1_1_2.setText("● Fuerzas a cargo: " + selected.getFuerzasAlMando());
+		list.addListSelectionListener(new ListSelectionListener() {
+		    @Override
+		    public void valueChanged(ListSelectionEvent e) {
+		        CCDTyE selected = list.getSelectedValue();
+		        if (selected != null) {
+		            lblNewLabel_1.setText("● ID: " + selected.getID());
+		            lblNewLabel_1_1.setText("● Nombre: " + selected.getNombre());
+		            lblNewLabel_1_1_1.setText("● Ubicacion: " + selected.getUbicacion());
+		            lblNewLabel_1_1_1_1.setText("● Fecha de puesta en marcha: " + selected.getFechaPuestaEnMarcha());
+		            lblNewLabel_1_1_1_1_1.setText("● Fecha de cierre: " + selected.getFechaCierre());
 
-	                }
-	            }
-	        });
+		            // Obtener nombres de las fuerzas al mando
+		            ArrayList<Integer> fuerzasIDs = selected.getFuerzasAlMando();
+		            System.out.println("IDs: " + fuerzasIDs.toString());
+		            StringBuilder fuerzasNombres = new StringBuilder();
+		            Dao_Fuerzas dao = new Dao_Fuerzas();
+		            for (int fuerzaID : fuerzasIDs) {
+		                String nombreFuerza = dao.getFuerzaNombre(fuerzaID);
+		                System.out.println(nombreFuerza);
+		                fuerzasNombres.append(nombreFuerza).append(", ");
+		            }
+
+		            if (fuerzasNombres.length() > 0) {
+		                // Eliminar la coma y el espacio adicionales al final
+		                fuerzasNombres.setLength(fuerzasNombres.length() - 2);
+		            }
+		            lblNewLabel_1_1_1_1_2.setText("● Fuerzas a cargo: " + fuerzasNombres.toString());
+		        }
+		    }
+		});
 	        
 		
 	}

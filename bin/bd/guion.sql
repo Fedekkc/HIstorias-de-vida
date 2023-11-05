@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`CCDTyE` (
   PRIMARY KEY (`ID_CCDTyE`));
 
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`Fuerzas`(
-    `ID_Fuerza` INT NOT NULL PRIMARY KEY,
+    `ID_Fuerza` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `Nombre` VARCHAR(45)
 );
 
@@ -73,5 +73,7 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_No_Identificados`(
     PRIMARY KEY(`ID_Persona`),
 	FOREIGN KEY (`ID_Persona`) REFERENCES Personas(`ID_Persona`)
 );
+
+INSERT INTO `Fuerzas`(`Nombre`) VALUES ('Policia'),('Ejercito'),('Gendarmeria')
 
   

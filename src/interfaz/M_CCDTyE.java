@@ -46,9 +46,7 @@ import javax.swing.JCheckBox;
 
 
 
-
-
-public class add_CCDTyE extends JPanel {
+public class M_CCDTyE extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField txtNombre;
@@ -57,7 +55,7 @@ public class add_CCDTyE extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public add_CCDTyE() {
+	public M_CCDTyE() {
 		setMinimumSize(new Dimension(880, 560));
 		setBackground(new Color(138, 135, 169));
 		setLayout(null);
@@ -98,14 +96,13 @@ public class add_CCDTyE extends JPanel {
 		panel.setLayout(null);
 		
 		txtNombre = new JTextField();
-		txtNombre.setText("Nombre");
+		txtNombre.setText("\r\n");
 		txtNombre.setToolTipText("Nombre");
 		txtNombre.setBounds(10, 30, 459, 26);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		txtUbicacion = new JTextField();
-		txtUbicacion.setText("Ubicacion");
 		txtUbicacion.setToolTipText("Ubicacion");
 		txtUbicacion.setColumns(10);
 		txtUbicacion.setBounds(10, 89, 459, 26);
@@ -133,10 +130,13 @@ public class add_CCDTyE extends JPanel {
 		panel.add(dateChooser);
 		
 		JLabel lblNewLabel = new JLabel("Fecha de puesta en Marcha");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setBounds(10, 139, 146, 14);
 		panel.add(lblNewLabel);
 		
 		JLabel lblFechaDeSuspensin = new JLabel("Fecha de suspensión");
+		lblFechaDeSuspensin.setForeground(new Color(255, 255, 255));
+		lblFechaDeSuspensin.setBackground(new Color(240, 240, 240));
 		lblFechaDeSuspensin.setBounds(282, 139, 146, 14);
 		panel.add(lblFechaDeSuspensin);
 		
@@ -145,16 +145,31 @@ public class add_CCDTyE extends JPanel {
 		panel.add(dateChooser_1);
 		
 		JCheckBox chckbxPolicia = new JCheckBox("Policía");
-		chckbxPolicia.setBounds(190, 206, 97, 23);
+		chckbxPolicia.setBounds(192, 219, 97, 23);
 		panel.add(chckbxPolicia);
 		
 		JCheckBox chckbxGendarmeria = new JCheckBox("Gendarmeria");
-		chckbxGendarmeria.setBounds(190, 234, 97, 23);
+		chckbxGendarmeria.setBounds(192, 247, 97, 23);
 		panel.add(chckbxGendarmeria);
 		
 		JCheckBox chckbxEjercito = new JCheckBox("Ejercito");
-		chckbxEjercito.setBounds(190, 260, 97, 23);
+		chckbxEjercito.setBounds(192, 273, 97, 23);
 		panel.add(chckbxEjercito);
+		
+		JLabel lblUbicacin = new JLabel("Ubicación");
+		lblUbicacin.setForeground(Color.WHITE);
+		lblUbicacin.setBounds(10, 67, 146, 14);
+		panel.add(lblUbicacin);
+		
+		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setForeground(Color.WHITE);
+		lblNombre.setBounds(10, 11, 146, 14);
+		panel.add(lblNombre);
+		
+		JLabel lblFuerzasAlMando = new JLabel("Fuerzas al mando");
+		lblFuerzasAlMando.setForeground(Color.WHITE);
+		lblFuerzasAlMando.setBounds(192, 198, 146, 14);
+		panel.add(lblFuerzasAlMando);
         
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
