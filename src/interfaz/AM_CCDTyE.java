@@ -29,8 +29,10 @@ import dao_fuerzas.Dao_Fuerzas;
 import entidades.CCDTyE;
 import interfaz.M_CCDTyE;
 import java.awt.Dimension;
+import javax.swing.JTextField;
 
 public class AM_CCDTyE extends JPanel {
+	private JTextField textField;
 
 	/**
 	 * Create the panel.
@@ -60,8 +62,8 @@ public class AM_CCDTyE extends JPanel {
                 return this;
             }
         });
-		list.setBounds(21, 38, 187, 451);
-		list.setBackground(new Color(50, 49, 78));
+		list.setBounds(1, 37, 185, 413);
+		list.setBackground(new Color(0, 0, 26));
 		add(list);
 		list.setAlignmentY(Component.TOP_ALIGNMENT);
 		list.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -76,10 +78,16 @@ public class AM_CCDTyE extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		panel.setLayout(null);
+        
+        Panel panel_3 = new Panel();
+        panel_3.setBackground(new Color(50, 49, 78));
+        panel_3.setBounds(10, 38, 238, 451);
+        add(panel_3);
+        panel_3.setLayout(null);
 		
         JScrollPane scrollPane = new JScrollPane(list);
-        scrollPane.setBounds(21, 38, 187, 451);
-        add(scrollPane);
+        scrollPane.setBounds(10, 67, 218, 339);
+        panel_3.add(scrollPane);
 		
 		JButton btnNewButton = new JButton("Modificar");
 		btnNewButton.setBackground(new Color(0, 0, 26));
@@ -157,6 +165,17 @@ public class AM_CCDTyE extends JPanel {
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 16));
 		
+		JButton refreshButton = new JButton("Actualizar");
+		refreshButton.setBounds(76, 417, 79, 23);
+		panel_3.add(refreshButton);
+		
+		textField = new JTextField();
+		textField.setForeground(new Color(255, 255, 255));
+		textField.setBackground(new Color(0, 0, 26));
+		textField.setBounds(10, 25, 218, 31);
+		panel_3.add(textField);
+		textField.setColumns(10);
+		
 		list.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseClicked(MouseEvent e) {
@@ -167,7 +186,10 @@ public class AM_CCDTyE extends JPanel {
 	            }
 	        });
 
+		
+		
 		final CCDTyE[] selected = {null}; // Declarar como final
+		
 
 		list.addListSelectionListener(new ListSelectionListener() {
 		    @Override
@@ -206,6 +228,22 @@ public class AM_CCDTyE extends JPanel {
 		        if (selected[0] != null) {
 		            M_CCDTyE dialog = new M_CCDTyE(selected[0]);
 		            dialog.setVisible(true);
+		        }
+		    }
+		});
+		refreshButton.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        int selectedIndex = list.getSelectedIndex(); // Obtener el índice seleccionado antes de la actualización
+
+		        listModel.clear(); // Limpiar el modelo de lista existente
+		        ArrayList<CCDTyE> updatedCentros = dao.getAllCCDTyE(); // Obtener los datos actualizados
+		        for (CCDTyE ccdTyE : updatedCentros) {
+		            listModel.addElement(ccdTyE); // Agregar los elementos actualizados al modelo de lista
+		        }
+
+		        // Seleccionar el índice anterior si existe
+		        if (selectedIndex >= 0 && selectedIndex < listModel.getSize()) {
+		            list.setSelectedIndex(selectedIndex);
 		        }
 		    }
 		});
