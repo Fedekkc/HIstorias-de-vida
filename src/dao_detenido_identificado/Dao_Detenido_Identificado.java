@@ -26,26 +26,27 @@ public class Dao_Detenido_Identificado {
                 String DNI = resultSet.getString("DNI");
                 String lugarDeSecuestro = resultSet.getString("Lugar_de_secuestro");
                 LocalDate ultimaVezVisto = resultSet.getDate("Ultima_vez_visto").toLocalDate();
+                String biografiaPersonal = resultSet.getString("Biografia_personal");
+                String rutaMaterialAudiovisual = resultSet.getString("Ruta_material_audiovisual");
+                int tiempoEnCautiverio = resultSet.getInt("Tiempo_en_cautiverio");
+                boolean sobrevivio = resultSet.getBoolean("Sobrevivio");
                 
-                int ID = resultSet.getInt("ID_CCDTyE");
 
-                // Obteniendo las fuerzas al mando
-                String queryFuerzas = "SELECT Fuerzas_id FROM CCDTyE_Fuerzas WHERE CCDTyE_id = ?";
-                PreparedStatement preparedStatementFuerzas = conn.prepareStatement(queryFuerzas);
-                preparedStatementFuerzas.setInt(1, ID);
-                ResultSet rsFuerzas = preparedStatementFuerzas.executeQuery();
-                while (rsFuerzas.next()) {
-                    fuerzas.add(rsFuerzas.getInt("Fuerzas_id"));
-                }
+                
+                DetenidoIdentificado detenido = new DetenidoIdentificado();
+                detenido.setNombre(nombre);
+                detenido.setDNI(DNI);
+                detenido.setLugarSecuestro(lugarDeSecuestro);
+                detenido.setUltVezVisto(ultimaVezVisto);
+                detenido.setBiografiaPersonal(biografiaPersonal);
+                detenido.setRutaMaterialAudiovisual(rutaMaterialAudiovisual);
+                detenido.setTiempoEnCautiverio(tiempoEnCautiverio);
 
-                DetenidoIdentificado ccdTyE = new DetenidoIdentificado();
-                DetenidoIdentificado.setNombre(nombre);
-
-                listaCCDTyE.add(ccdTyE);
+                listaDetenidoIdentificado.add(detenido);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return listaCCDTyE;
+        return listaDetenidoIdentificado;
     }
 }

@@ -9,19 +9,9 @@ public class DetenidoIdentificado {
     private LocalDate ultVezVisto;
     private String biografiaPersonal;
     private String rutaMaterialAudiovisual;
-    private String tiempoEnCautiverio;
-    private String sobrevivio;
+    private int tiempoEnCautiverio;
+    private boolean sobrevivio;
 
-    public DetenidoIdentificado(String nombre, String DNI, String lugarSecuestro, LocalDate ultVezVisto, String biografiaPersonal, String rutaMaterialAudiovisual, String tiempoEnCautiverio, String sobrevivio) {
-        this.nombre = nombre;
-        this.DNI = DNI;
-        this.lugarSecuestro = lugarSecuestro;
-        this.ultVezVisto = ultVezVisto;
-        this.biografiaPersonal = biografiaPersonal;
-        this.rutaMaterialAudiovisual = rutaMaterialAudiovisual;
-        this.tiempoEnCautiverio = tiempoEnCautiverio;
-        this.sobrevivio = sobrevivio;
-    }
 
     public String getNombre() {
         return nombre;
@@ -71,19 +61,19 @@ public class DetenidoIdentificado {
         this.rutaMaterialAudiovisual = rutaMaterialAudiovisual;
     }
 
-    public String getTiempoEnCautiverio() {
+    public int getTiempoEnCautiverio() {
         return tiempoEnCautiverio;
     }
 
-    public void setTiempoEnCautiverio(String tiempoEnCautiverio) {
+    public void setTiempoEnCautiverio(int tiempoEnCautiverio) {
         this.tiempoEnCautiverio = tiempoEnCautiverio;
     }
 
-    public String getSobrevivio() {
+    public boolean getSobrevivio() {
         return sobrevivio;
     }
 
-    public void setSobrevivio(String sobrevivio) {
+    public void setSobrevivio(boolean sobrevivio) {
         this.sobrevivio = sobrevivio;
     }
 }
