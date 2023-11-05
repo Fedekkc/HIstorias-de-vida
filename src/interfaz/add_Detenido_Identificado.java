@@ -108,6 +108,10 @@ public class add_Detenido_Identificado extends JPanel {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(109, 257, 89, 23);
 		panel.add(btnCancelar);
+		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(10, 218, 188, 20);
+		panel.add(dateChooser);
 
 	}
 }

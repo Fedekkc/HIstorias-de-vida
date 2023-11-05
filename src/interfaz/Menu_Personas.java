@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import dao_detenido_identificado.Dao_Detenido_Identificado;
 import dao_detenido_identificado.Dao_Detenido_No_Identificado;
@@ -22,6 +23,10 @@ import entidades.DetenidoNoIdentificado;
 
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Menu_Personas extends JPanel {
 
@@ -54,13 +59,22 @@ public class Menu_Personas extends JPanel {
 		
 
 		
-		JButton addButton = new JButton("Añadir");
-		addButton.setBounds(40, 397, 89, 23);
-		panel.add(addButton);
+		JButton addIdentificadoButton = new JButton("Añadir");
+		addIdentificadoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new add_Detenido_Identificado());
+				marco.validate();
+				
+			}
+		});
+		addIdentificadoButton.setBounds(40, 397, 89, 23);
+		panel.add(addIdentificadoButton);
 		
-		JButton viewButton = new JButton("Ver");
-		viewButton.setBounds(175, 397, 89, 23);
-		panel.add(viewButton);
+		JButton viewIdentificadoButton = new JButton("Ver");
+		viewIdentificadoButton.setBounds(175, 397, 89, 23);
+		panel.add(viewIdentificadoButton);
 		
 		Panel panel_1 = new Panel();
 		panel_1.setLayout(null);
@@ -75,13 +89,13 @@ public class Menu_Personas extends JPanel {
 		lblNoIdentificados.setBounds(10, 11, 280, 36);
 		panel_1.add(lblNoIdentificados);
 		
-		JButton addButton_1 = new JButton("Añadir");
-		addButton_1.setBounds(39, 392, 89, 23);
-		panel_1.add(addButton_1);
+		JButton addNoIdentificadoButton = new JButton("Añadir");
+		addNoIdentificadoButton.setBounds(39, 392, 89, 23);
+		panel_1.add(addNoIdentificadoButton);
 		
-		JButton viewButton_1 = new JButton("Ver");
-		viewButton_1.setBounds(184, 392, 89, 23);
-		panel_1.add(viewButton_1);
+		JButton viewNoIdentificadoButton = new JButton("Ver");
+		viewNoIdentificadoButton.setBounds(184, 392, 89, 23);
+		panel_1.add(viewNoIdentificadoButton);
 		
 		
 
