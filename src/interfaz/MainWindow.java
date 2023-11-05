@@ -71,6 +71,13 @@ public class MainWindow extends JFrame {
 		JButton btnNewButton_1 = new JButton("Personas");
 		btnNewButton_1.setBounds(540, 134, 148, 117);
 		contentPane.add(btnNewButton_1);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new ViewPersonas());
+				marco.validate();
+			}
+		});
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 101, 22);
