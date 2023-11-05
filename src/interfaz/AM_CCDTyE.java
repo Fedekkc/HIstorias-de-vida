@@ -1,6 +1,9 @@
 package interfaz;
 
 import java.awt.Color;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Panel;
@@ -32,23 +35,22 @@ import java.awt.Dimension;
 import javax.swing.JTextField;
 
 public class AM_CCDTyE extends JPanel {
-	private JTextField textField;
+    private JTextField searchField;
+    private DefaultListModel<CCDTyE> listModel;
+    private Dao_CCDTyE dao;
 
-	/**
-	 * Create the panel.
-	 */
-	public AM_CCDTyE() {
-		setBackground(new Color(138, 135, 169));
-		setMinimumSize(new Dimension(880, 560));
-		
-        DefaultListModel<CCDTyE> listModel = new DefaultListModel<>();
-        ArrayList<CCDTyE> centros = new ArrayList<CCDTyE>();
-        Dao_CCDTyE dao = new Dao_CCDTyE();
-        centros = dao.getAllCCDTyE();
+    public AM_CCDTyE() {
+        setBackground(new Color(138, 135, 169));
+        setMinimumSize(new Dimension(880, 560));
+
+        listModel = new DefaultListModel<>(); // Inicializa listModel
+        dao = new Dao_CCDTyE();
+        ArrayList<CCDTyE> centros = dao.getAllCCDTyE();
         for (CCDTyE ccdTyE : centros) {
             listModel.addElement(ccdTyE);
         }
-		setLayout(null);
+
+        setLayout(null);
         JList<CCDTyE> list = new JList<>(listModel);
         list.setFont(new Font("M PLUS 1p", Font.BOLD, 12));
         list.setCellRenderer(new DefaultListCellRenderer() {
@@ -107,7 +109,7 @@ public class AM_CCDTyE extends JPanel {
 				marco.validate();
 			}
 		});
-		btnNewButton_1.setBounds(111, 417, 89, 23);
+		btnNewButton_1.setBounds(111, 417, 98, 23);
 		panel.add(btnNewButton_1);
 		
 		Panel panel_1 = new Panel();
@@ -166,15 +168,17 @@ public class AM_CCDTyE extends JPanel {
 		lblNewLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 16));
 		
 		JButton refreshButton = new JButton("Actualizar");
-		refreshButton.setBounds(76, 417, 79, 23);
+		refreshButton.setForeground(new Color(217, 217, 217));
+		refreshButton.setBackground(new Color(0, 0, 26));
+		refreshButton.setBounds(76, 417, 93, 23);
 		panel_3.add(refreshButton);
 		
-		textField = new JTextField();
-		textField.setForeground(new Color(255, 255, 255));
-		textField.setBackground(new Color(0, 0, 26));
-		textField.setBounds(10, 25, 218, 31);
-		panel_3.add(textField);
-		textField.setColumns(10);
+		searchField = new JTextField();
+		searchField.setForeground(new Color(217, 217, 217));
+		searchField.setBackground(new Color(0, 0, 26));
+		searchField.setBounds(10, 11, 218, 45);
+		panel_3.add(searchField);
+		searchField.setColumns(10);
 		
 		list.addMouseListener(new MouseAdapter() {
 	            @Override
@@ -248,7 +252,38 @@ public class AM_CCDTyE extends JPanel {
 		    }
 		});
 
+		searchField.getDocument().addDocumentListener(new DocumentListener() {
+		    @Override
+		    public void insertUpdate(DocumentEvent e) {
+		    	filterList();
+		    }
+
+		    @Override
+		    public void removeUpdate(DocumentEvent e) {
+		    	filterList();
+		    }
+
+		    @Override
+		    public void changedUpdate(DocumentEvent e) {
+		    	filterList();
+		    }
+		});
+
 	        
 		
 	}
+    private void filterList() {
+        String searchTerm = searchField.getText().toLowerCase(); // Obtener el término de búsqueda en minúsculas
+        listModel.clear(); // Limpiar el modelo de lista existente
+        ArrayList<CCDTyE> updatedCentros = dao.getAllCCDTyE(); // Obtener los datos actualizados
+
+        // Filtrar los elementos basados en el término de búsqueda
+        for (CCDTyE ccdTyE : updatedCentros) {
+            if (ccdTyE.getNombre().toLowerCase().contains(searchTerm)) {
+                listModel.addElement(ccdTyE); // Agregar los elementos coincidentes al modelo de lista
+            }
+        }
+    }
+	
+
 }
