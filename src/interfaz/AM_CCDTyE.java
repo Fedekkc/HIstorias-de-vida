@@ -167,28 +167,22 @@ public class AM_CCDTyE extends JPanel {
 	            }
 	        });
 
+		final CCDTyE[] selected = {null}; // Declarar como final
+
 		list.addListSelectionListener(new ListSelectionListener() {
 		    @Override
 		    public void valueChanged(ListSelectionEvent e) {
-				CCDTyE selected = list.getSelectedValue();
-				
-		        if (selected != null) {
-		    		btnNewButton.addActionListener(new ActionListener() {
-		    			public void actionPerformed(ActionEvent e) {
-		    				M_CCDTyE dialog = new M_CCDTyE(selected);
-		    				dialog.setVisible(true);
-		    				
-		    			}
-		    			
-		    		} );
-		            lblNewLabel_1.setText("● ID: " + selected.getID());
-		            lblNewLabel_1_1.setText("● Nombre: " + selected.getNombre());
-		            lblNewLabel_1_1_1.setText("● Ubicacion: " + selected.getUbicacion());
-		            lblNewLabel_1_1_1_1.setText("● Fecha de puesta en marcha: " + selected.getFechaPuestaEnMarcha());
-		            lblNewLabel_1_1_1_1_1.setText("● Fecha de cierre: " + selected.getFechaCierre());
+		        selected[0] = list.getSelectedValue(); // Asignar el valor al objeto selected
+
+		        if (selected[0] != null) {
+		            lblNewLabel_1.setText("● ID: " + selected[0].getID());
+		            lblNewLabel_1_1.setText("● Nombre: " + selected[0].getNombre());
+		            lblNewLabel_1_1_1.setText("● Ubicacion: " + selected[0].getUbicacion());
+		            lblNewLabel_1_1_1_1.setText("● Fecha de puesta en marcha: " + selected[0].getFechaPuestaEnMarcha());
+		            lblNewLabel_1_1_1_1_1.setText("● Fecha de cierre: " + selected[0].getFechaCierre());
 
 		            // Obtener nombres de las fuerzas al mando
-		            ArrayList<Integer> fuerzasIDs = selected.getFuerzasAlMando();
+		            ArrayList<Integer> fuerzasIDs = selected[0].getFuerzasAlMando();
 		            System.out.println("IDs: " + fuerzasIDs.toString());
 		            StringBuilder fuerzasNombres = new StringBuilder();
 		            Dao_Fuerzas dao = new Dao_Fuerzas();
@@ -206,7 +200,15 @@ public class AM_CCDTyE extends JPanel {
 		        }
 		    }
 		});
-		
+
+		btnNewButton.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        if (selected[0] != null) {
+		            M_CCDTyE dialog = new M_CCDTyE(selected[0]);
+		            dialog.setVisible(true);
+		        }
+		    }
+		});
 
 	        
 		
