@@ -157,6 +157,10 @@ public class AM_CCDTyE extends JPanel {
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 16));
 		
+		JButton refreshButton = new JButton("Actualizar");
+		refreshButton.setBounds(119, 496, 89, 23);
+		add(refreshButton);
+		
 		list.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseClicked(MouseEvent e) {
@@ -167,7 +171,10 @@ public class AM_CCDTyE extends JPanel {
 	            }
 	        });
 
+		
+		
 		final CCDTyE[] selected = {null}; // Declarar como final
+		
 
 		list.addListSelectionListener(new ListSelectionListener() {
 		    @Override
@@ -206,6 +213,22 @@ public class AM_CCDTyE extends JPanel {
 		        if (selected[0] != null) {
 		            M_CCDTyE dialog = new M_CCDTyE(selected[0]);
 		            dialog.setVisible(true);
+		        }
+		    }
+		});
+		refreshButton.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        int selectedIndex = list.getSelectedIndex(); // Obtener el índice seleccionado antes de la actualización
+
+		        listModel.clear(); // Limpiar el modelo de lista existente
+		        ArrayList<CCDTyE> updatedCentros = dao.getAllCCDTyE(); // Obtener los datos actualizados
+		        for (CCDTyE ccdTyE : updatedCentros) {
+		            listModel.addElement(ccdTyE); // Agregar los elementos actualizados al modelo de lista
+		        }
+
+		        // Seleccionar el índice anterior si existe
+		        if (selectedIndex >= 0 && selectedIndex < listModel.getSize()) {
+		            list.setSelectedIndex(selectedIndex);
 		        }
 		    }
 		});

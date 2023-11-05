@@ -17,6 +17,22 @@ public class Dao_CCDTyE {
     private final String usuario = "root";
     private final String contrasenia = "root";
 
+    public int getCCDTyEID(String nombre) {
+        int id = -1;
+        try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
+            String query = "SELECT ID_CCDTyE FROM CCDTyE WHERE Nombre = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, nombre);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getInt("ID_CCDTyE");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+    
     public void addCCDTyE(CCDTyE ccdTyE) {
     	ArrayList<Integer> fuerzaAlMando = ccdTyE.getFuerzasAlMando();
 

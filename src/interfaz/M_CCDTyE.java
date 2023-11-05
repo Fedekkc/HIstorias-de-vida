@@ -61,10 +61,11 @@ public class M_CCDTyE extends JDialog {
 	 * Create the panel.
 	 */
 	public M_CCDTyE(CCDTyE ccdtye) {
+		getContentPane().setBackground(new Color(138, 135, 169));
 		this.ccdTyE = ccdtye;
 		setMinimumSize(new Dimension(880, 560));
 		setBackground(new Color(138, 135, 169));
-		setLayout(null);
+		getContentPane().setLayout(null);
 		
 		DefaultListModel<CCDTyE> listModel = new DefaultListModel<>();
         ArrayList<CCDTyE> centros = new ArrayList<CCDTyE>();
@@ -97,8 +98,8 @@ public class M_CCDTyE extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(50, 49, 78));
-		panel.setBounds(222, 96, 479, 349);
-		add(panel);
+		panel.setBounds(192, 58, 479, 349);
+		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		txtNombre = new JTextField();
@@ -202,10 +203,16 @@ public class M_CCDTyE extends JDialog {
 		lblFuerzasAlMando.setForeground(Color.WHITE);
 		lblFuerzasAlMando.setBounds(192, 198, 146, 14);
 		panel.add(lblFuerzasAlMando);
-        
+		
+		JButton deleteButton = new JButton("Eliminar");
+		deleteButton.setForeground(new Color(255, 255, 255));
+		deleteButton.setBackground(new Color(50, 49, 78));
+		deleteButton.setBounds(376, 453, 111, 37);
+		getContentPane().add(deleteButton);
+		Dao_CCDTyE Dao = new Dao_CCDTyE();
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Dao_CCDTyE Dao = new Dao_CCDTyE();
+
 				
 				ArrayList<Integer> fuerzasACargo = new ArrayList<Integer>();
 				
@@ -251,10 +258,26 @@ public class M_CCDTyE extends JDialog {
 				
 				ccdtye.setFechaPuestaEnMarcha(localDate);
 				
-				Dao.addCCDTyE(ccdtye);
-				//Dao.addFuerzas(ccdtye);
+				Dao.updateCCDTyE(ccdtye);
+
 			
 			}});
 
+		
+		deleteButton.addActionListener( new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int id = Dao.getCCDTyEID(ccdtye.getNombre());
+				Dao.deleteCCDTyE(id);
+				
+				M_CCDTyE.this.dispose(); // Oculta el diálogo actual
+
+				
+				
+				
+			}
+			
+			
+			
+		});
 	}
 }
