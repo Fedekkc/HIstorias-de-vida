@@ -3,12 +3,23 @@ package interfaz;
 import javax.swing.JPanel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import java.awt.Dimension;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Panel;
+import java.util.ArrayList;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import dao_detenido_identificado.Dao_Detenido_Identificado;
+import dao_detenido_identificado.Dao_Detenido_No_Identificado;
+import entidades.CCDTyE;
+import entidades.DetenidoIdentificado;
+import entidades.DetenidoNoIdentificado;
+
 import java.awt.Font;
 import javax.swing.JButton;
 
@@ -20,6 +31,9 @@ public class Menu_Personas extends JPanel {
 	 * Create the panel.
 	 */
 	public Menu_Personas() {
+		Dao_Detenido_No_Identificado dao_No_Identificado = new Dao_Detenido_No_Identificado();
+		Dao_Detenido_Identificado dao_Identificado = new Dao_Detenido_Identificado();
+		
 		setBackground(new Color(138, 135, 169));
 		setForeground(new Color(138, 135, 169));
 		setMinimumSize(new Dimension(880, 560));
@@ -70,24 +84,58 @@ public class Menu_Personas extends JPanel {
 		panel_1.add(viewButton_1);
 		
 		
-		
 
-
-		// Dentro del constructor Menu_Personas, reemplaza los JScrollBar con JList y JScrollPane
-
-		// Ejemplo para identificados
-		DefaultListModel<String> identificadosListModel = new DefaultListModel<>();
-		JList<String> identificadosList = new JList<>(identificadosListModel);
+		DefaultListModel<DetenidoIdentificado> identificadosListModel = new DefaultListModel<>();
+		JList<DetenidoIdentificado> identificadosList = new JList<>(identificadosListModel);
 		JScrollPane identificadosScrollPane = new JScrollPane(identificadosList);
 		identificadosScrollPane.setBounds(53, 68, 197, 305);
 		panel.add(identificadosScrollPane);
+		
+		
+		for (DetenidoIdentificado persona : dao_Identificado.getAllDetenidos_Identificados()) {
+			identificadosListModel.addElement(persona);
+			
+		}
+		
+        identificadosList.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (value instanceof DetenidoNoIdentificado) {
+                    DetenidoNoIdentificado detenidoNoIdentificado = (DetenidoNoIdentificado) value;
+                    setText(detenidoNoIdentificado.getApodo());
+                }
+                return this;
+            }
+        });
 
-		// Ejemplo para no identificados
-		DefaultListModel<String> noIdentificadosListModel = new DefaultListModel<>();
-		JList<String> noIdentificadosList = new JList<>(noIdentificadosListModel);
+
+
+		
+		
+		DefaultListModel<DetenidoNoIdentificado> noIdentificadosListModel = new DefaultListModel<>();
+		JList<DetenidoNoIdentificado> noIdentificadosList = new JList<>(noIdentificadosListModel);
 		JScrollPane noIdentificadosScrollPane = new JScrollPane(noIdentificadosList);
 		noIdentificadosScrollPane.setBounds(53, 68, 197, 305);
 		panel_1.add(noIdentificadosScrollPane);
+		
+		
+		for (DetenidoNoIdentificado persona : dao_No_Identificado.getAllDetenidoNoIdentificado()) {
+			noIdentificadosListModel.addElement(persona);
+			
+		}
+		
+        noIdentificadosList.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (value instanceof DetenidoNoIdentificado) {
+                    DetenidoNoIdentificado detenidoNoIdentificado = (DetenidoNoIdentificado) value;
+                    setText(detenidoNoIdentificado.getApodo());
+                }
+                return this;
+            }
+        });
 
 		// Asegúrate de ajustar y personalizar la lógica según tus necesidades específicas.
 

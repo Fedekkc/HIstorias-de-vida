@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import entidades.DetenidoNoIdentificado;
 
@@ -14,6 +15,29 @@ public class Dao_Detenido_No_Identificado {
     private final String usuario = "root";
     private final String contrasenia = "root";
 
+    
+    
+    public ArrayList<DetenidoNoIdentificado> getAllDetenidoNoIdentificado() {
+        ArrayList<DetenidoNoIdentificado> detenidosNoIdentificados = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
+            System.out.println("[+] Obteniendo todos los detenidos no identificados de la Base de Datos");
+            String query = "SELECT * FROM `Detenidos_No_Identificados`";
+            PreparedStatement pStmt = conn.prepareStatement(query);
+            ResultSet rs = pStmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("ID_Persona");
+                String apodo = rs.getString("Apodo");
+                String descripcion = rs.getString("Descripcion_significativa");
+                DetenidoNoIdentificado detenidoNoIdentificado = new DetenidoNoIdentificado(id, apodo, descripcion);
+                detenidosNoIdentificados.add(detenidoNoIdentificado);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return detenidosNoIdentificados;
+    }
+    
+    
     public void addDetenidoNoIdentificado(DetenidoNoIdentificado detenidoNoIdentificado) {
         int filasAfectadas = 0;
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {

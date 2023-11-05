@@ -74,6 +74,8 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_No_Identificados`(
 	FOREIGN KEY (`ID_Persona`) REFERENCES Personas(`ID_Persona`)
 );
 
+
+
 CREATE TABLE IF NOT EXISTS `Lugares_de_secuestro`(`ID_Lugar`INT NOT NULL AUTO_INCREMENT PRIMARY KEY, `Nombre` VARCHAR(60));
 
 INSERT INTO `Lugares_de_secuestro`(`Nombre`) VALUES ('Casa'),('Calle'),('Trabajo'),('Escuela');
