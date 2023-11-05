@@ -1,13 +1,15 @@
 package interfaz;
 
 import javax.swing.JPanel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.DefaultListModel;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Panel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import javax.swing.JScrollBar;
 import javax.swing.JButton;
 
 public class Menu_Personas extends JPanel {
@@ -36,9 +38,7 @@ public class Menu_Personas extends JPanel {
 		lblNewLabel.setBounds(10, 11, 280, 36);
 		panel.add(lblNewLabel);
 		
-		JScrollBar identificadosScrollBar = new JScrollBar();
-		identificadosScrollBar.setBounds(53, 68, 197, 305);
-		panel.add(identificadosScrollBar);
+
 		
 		JButton addButton = new JButton("Añadir");
 		addButton.setBounds(40, 397, 89, 23);
@@ -69,9 +69,28 @@ public class Menu_Personas extends JPanel {
 		viewButton_1.setBounds(184, 392, 89, 23);
 		panel_1.add(viewButton_1);
 		
-		JScrollBar noIdentificadosScrollBar = new JScrollBar();
-		noIdentificadosScrollBar.setBounds(53, 68, 197, 305);
-		panel_1.add(noIdentificadosScrollBar);
+		
+		
+
+
+		// Dentro del constructor Menu_Personas, reemplaza los JScrollBar con JList y JScrollPane
+
+		// Ejemplo para identificados
+		DefaultListModel<String> identificadosListModel = new DefaultListModel<>();
+		JList<String> identificadosList = new JList<>(identificadosListModel);
+		JScrollPane identificadosScrollPane = new JScrollPane(identificadosList);
+		identificadosScrollPane.setBounds(53, 68, 197, 305);
+		panel.add(identificadosScrollPane);
+
+		// Ejemplo para no identificados
+		DefaultListModel<String> noIdentificadosListModel = new DefaultListModel<>();
+		JList<String> noIdentificadosList = new JList<>(noIdentificadosListModel);
+		JScrollPane noIdentificadosScrollPane = new JScrollPane(noIdentificadosList);
+		noIdentificadosScrollPane.setBounds(53, 68, 197, 305);
+		panel_1.add(noIdentificadosScrollPane);
+
+		// Asegúrate de ajustar y personalizar la lógica según tus necesidades específicas.
+
 
 	}
 }

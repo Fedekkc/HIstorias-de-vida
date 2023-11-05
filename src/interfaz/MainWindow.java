@@ -79,7 +79,7 @@ public class MainWindow extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new add_Detenido_Identificado());
+				marco.setContentPane(new Menu_Personas());
 				marco.validate();
 			}
 		});
