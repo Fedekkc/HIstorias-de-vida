@@ -102,34 +102,47 @@ public class Dao_CCDTyE {
         return ccdTyE;
     }
 
+ // ...
+
     public void updateCCDTyE(CCDTyE ccdTyE) {
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
-            String query = "UPDATE CCDTyE SET Nombre = ?, Ubicacion = ?, Fecha_puesta_en_marcha = ?, Fecha_de_cierre = ? WHERE ID_CCDTyE = ?";
+            String query = "UPDATE CCDTyE SET Ubicacion = ?, Fecha_puesta_en_marcha = ?, Fecha_de_cierre = ? WHERE Nombre = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, ccdTyE.getNombre());
-            preparedStatement.setString(2, ccdTyE.getUbicacion());
-            preparedStatement.setObject(3, ccdTyE.getFechaPuestaEnMarcha());
-            preparedStatement.setObject(4, ccdTyE.getFechaCierre());
-            preparedStatement.setInt(5, ccdTyE.getID());
+            preparedStatement.setString(1, ccdTyE.getUbicacion());
+            preparedStatement.setObject(2, ccdTyE.getFechaPuestaEnMarcha());
+            preparedStatement.setObject(3, ccdTyE.getFechaCierre());
+            preparedStatement.setString(4, ccdTyE.getNombre());
             preparedStatement.executeUpdate();
 
             // Actualizar la tabla CCDTyE_Fuerzas
-            String deleteFuerzasQuery = "DELETE FROM CCDTyE_Fuerzas WHERE CCDTyE_id = ?";
-            PreparedStatement deleteStatement = conn.prepareStatement(deleteFuerzasQuery);
-            deleteStatement.setInt(1, ccdTyE.getID());
-            deleteStatement.executeUpdate();
+            // Primero eliminar las entradas anteriores relacionadas con el nombre de CCDTyE
+            String getIDQuery = "SELECT ID_CCDTyE FROM CCDTyE WHERE Nombre = ?";
+            PreparedStatement idStatement = conn.prepareStatement(getIDQuery);
+            idStatement.setString(1, ccdTyE.getNombre());
+            ResultSet rs = idStatement.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("ID_CCDTyE");
+                String deleteFuerzasQuery = "DELETE FROM CCDTyE_Fuerzas WHERE CCDTyE_id = ?";
+                PreparedStatement deleteStatement = conn.prepareStatement(deleteFuerzasQuery);
+                deleteStatement.setInt(1, id);
+                deleteStatement.executeUpdate();
 
-            for (int fuerza : ccdTyE.getFuerzasAlMando()) {
-                String insertFuerzasQuery = "INSERT INTO CCDTyE_Fuerzas (CCDTyE_id, Fuerzas_id) VALUES (?, ?)";
-                PreparedStatement insertStatement = conn.prepareStatement(insertFuerzasQuery);
-                insertStatement.setInt(1, ccdTyE.getID());
-                insertStatement.setInt(2, fuerza);
-                insertStatement.executeUpdate();
+                // Luego insertar las nuevas entradas relacionadas con el nombre de CCDTyE
+                for (int fuerza : ccdTyE.getFuerzasAlMando()) {
+                    String insertFuerzasQuery = "INSERT INTO CCDTyE_Fuerzas (CCDTyE_id, Fuerzas_id) VALUES (?, ?)";
+                    PreparedStatement insertStatement = conn.prepareStatement(insertFuerzasQuery);
+                    insertStatement.setInt(1, id);
+                    insertStatement.setInt(2, fuerza);
+                    insertStatement.executeUpdate();
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+    // ...
+
 
     public void deleteCCDTyE(int id) {
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
