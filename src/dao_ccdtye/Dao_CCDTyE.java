@@ -43,7 +43,7 @@ public class Dao_CCDTyE {
             preparedStatement.setString(2, ccdTyE.getUbicacion());
             preparedStatement.setObject(3, ccdTyE.getFechaPuestaEnMarcha());
             preparedStatement.setObject(4, ccdTyE.getFechaCierre());
-            preparedStatement.executeUpdate( );
+            preparedStatement.executeUpdate();
             
             ResultSet rs = preparedStatement.getGeneratedKeys();
             int last_inserted_id = 0;
