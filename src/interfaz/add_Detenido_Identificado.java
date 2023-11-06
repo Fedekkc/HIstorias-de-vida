@@ -45,8 +45,8 @@ import javax.swing.JFrame;
 import javax.swing.JCheckBox;
 import javax.swing.JTextPane;
 
-
-
+import dao_detenido_identificado.Dao_Detenido_Identificado;
+import entidades.DetenidoIdentificado;
 
 
 public class add_Detenido_Identificado extends JPanel {
@@ -101,17 +101,41 @@ public class add_Detenido_Identificado extends JPanel {
 		chckbxSeEncuentraAparecido.setBounds(10, 188, 188, 23);
 		panel.add(chckbxSeEncuentraAparecido);
 		
-		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.setBounds(10, 257, 89, 23);
-		panel.add(btnGuardar);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(109, 257, 89, 23);
-		panel.add(btnCancelar);
-		
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setBounds(10, 218, 188, 20);
 		panel.add(dateChooser);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(109, 257, 89, 23);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new Menu_Personas());
+				marco.validate();
+			}
+		});
+		panel.add(btnCancelar);
 
+		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setBounds(10, 257, 89, 23);
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Dao_Detenido_Identificado Dao = new Dao_Detenido_Identificado();
+				DetenidoIdentificado detenido = new DetenidoIdentificado();
+				
+				
+				detenido.setNombre(txtNombre.getText());
+				detenido.setDNI(txtDNI.getText());
+
+				
+				Dao.addDetenidoIdentificado(detenido);
+				//Dao.addFuerzas(ccdtye);
+				
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new ViewCCDTyE());
+				marco.validate();
+			
+			}});
+		panel.add(btnGuardar);
 	}
 }
