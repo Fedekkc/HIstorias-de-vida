@@ -84,6 +84,7 @@ public class add_Detenido_Identificado extends JPanel {
 		txtDNI.setColumns(10);
 		
 		JTextPane txtBiografiaPersonal = new JTextPane();
+		txtBiografiaPersonal.setMaximumSize(new Dimension(20, 20));
 		txtBiografiaPersonal.setBounds(208, 50, 261, 230);
 		panel.add(txtBiografiaPersonal);
 		
@@ -126,7 +127,8 @@ public class add_Detenido_Identificado extends JPanel {
 				
 				detenido.setNombre(txtNombre.getText());
 				detenido.setDNI(txtDNI.getText());
-
+				detenido.setBiografiaPersonal(txtBiografiaPersonal.getText());
+				//detenido.set
 				
 				Dao.addDetenidoIdentificado(detenido);
 				//Dao.addFuerzas(ccdtye);

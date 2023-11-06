@@ -118,11 +118,7 @@ public class AM_CCDTyE extends JPanel {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("● ID: ");
-		lblNewLabel_1.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
-		lblNewLabel_1.setForeground(new Color(217, 217, 217));
-		lblNewLabel_1.setBounds(10, 11, 495, 14);
-		panel_1.add(lblNewLabel_1);
+
 		
 		JLabel lblNewLabel_1_1 = new JLabel("● Nombre: ");
 		lblNewLabel_1_1.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
@@ -170,25 +166,28 @@ public class AM_CCDTyE extends JPanel {
 		JButton refreshButton = new JButton("Actualizar");
 		refreshButton.setForeground(new Color(217, 217, 217));
 		refreshButton.setBackground(new Color(0, 0, 26));
-		refreshButton.setBounds(76, 417, 93, 23);
+		refreshButton.setBounds(135, 417, 93, 23);
 		panel_3.add(refreshButton);
 		
 		searchField = new JTextField();
 		searchField.setForeground(new Color(217, 217, 217));
 		searchField.setBackground(new Color(0, 0, 26));
-		searchField.setBounds(10, 11, 218, 45);
+		searchField.setBounds(10, 24, 218, 32);
 		panel_3.add(searchField);
 		searchField.setColumns(10);
 		
-		list.addMouseListener(new MouseAdapter() {
-	            @Override
-	            public void mouseClicked(MouseEvent e) {
-	                CCDTyE selected = list.getSelectedValue();
-	                if (selected != null) {
-	                    lblNewLabel.setText(selected.getNombre());
-	                }
-	            }
-	        });
+		JButton addButton = new JButton("Añadir");
+		addButton.setForeground(new Color(217, 217, 217));
+		addButton.setBackground(new Color(0, 0, 26));
+		addButton.setBounds(10, 417, 93, 23);
+		panel_3.add(addButton);
+		
+		JLabel lblNewLabel_1 = new JLabel("Buscar");
+		lblNewLabel_1.setForeground(new Color(217, 217, 217));
+		lblNewLabel_1.setBounds(10, 11, 46, 14);
+		panel_3.add(lblNewLabel_1);
+		
+
 
 		
 		
@@ -200,8 +199,12 @@ public class AM_CCDTyE extends JPanel {
 		    public void valueChanged(ListSelectionEvent e) {
 		        selected[0] = list.getSelectedValue(); // Asignar el valor al objeto selected
 
-		        if (selected[0] != null) {
-		            lblNewLabel_1.setText("● ID: " + selected[0].getID());
+	
+		        	
+	                
+	                if (selected[0] != null) {
+	                    lblNewLabel.setText(selected[0].getNombre());
+	                		        	
 		            lblNewLabel_1_1.setText("● Nombre: " + selected[0].getNombre());
 		            lblNewLabel_1_1_1.setText("● Ubicacion: " + selected[0].getUbicacion());
 		            lblNewLabel_1_1_1_1.setText("● Fecha de puesta en marcha: " + selected[0].getFechaPuestaEnMarcha());
@@ -223,7 +226,8 @@ public class AM_CCDTyE extends JPanel {
 		                fuerzasNombres.setLength(fuerzasNombres.length() - 2);
 		            }
 		            lblNewLabel_1_1_1_1_2.setText("● Fuerzas a cargo: " + fuerzasNombres.toString());
-		        }
+	                }
+		        
 		    }
 		});
 
@@ -238,12 +242,14 @@ public class AM_CCDTyE extends JPanel {
 		refreshButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        int selectedIndex = list.getSelectedIndex(); // Obtener el índice seleccionado antes de la actualización
-
 		        listModel.clear(); // Limpiar el modelo de lista existente
 		        ArrayList<CCDTyE> updatedCentros = dao.getAllCCDTyE(); // Obtener los datos actualizados
+		        System.out.println("PRUEBA");
 		        for (CCDTyE ccdTyE : updatedCentros) {
+		        	
 		            listModel.addElement(ccdTyE); // Agregar los elementos actualizados al modelo de lista
 		        }
+		        
 
 		        // Seleccionar el índice anterior si existe
 		        if (selectedIndex >= 0 && selectedIndex < listModel.getSize()) {
@@ -270,8 +276,23 @@ public class AM_CCDTyE extends JPanel {
 		});
 
 	        
+		addButton.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e)
+			{
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new add_CCDTyE());
+				marco.validate();
+			}
+			
+			
+		});
+		
 		
 	}
+    
+    
+    
+    
     private void filterList() {
         String searchTerm = searchField.getText().toLowerCase(); // Obtener el término de búsqueda en minúsculas
         listModel.clear(); // Limpiar el modelo de lista existente
@@ -284,6 +305,4 @@ public class AM_CCDTyE extends JPanel {
             }
         }
     }
-	
-
 }

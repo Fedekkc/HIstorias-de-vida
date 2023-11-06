@@ -103,7 +103,12 @@ public class M_CCDTyE extends JDialog {
 		panel.setLayout(null);
 		
 		txtNombre = new JTextField();
-		txtNombre.setText(ccdtye.getNombre());
+		if (ccdtye != null) {
+		    txtNombre.setText(ccdtye.getNombre());
+		    // ... otros usos de ccdtye
+		} else {
+		    // manejar la situación cuando ccdtye es nulo
+		}
 		txtNombre.setToolTipText("Nombre");
 		txtNombre.setBounds(10, 30, 459, 26);
 		panel.add(txtNombre);
@@ -116,13 +121,13 @@ public class M_CCDTyE extends JDialog {
 		panel.add(txtUbicacion);
 		
 		JButton btnGuardar = new JButton("Guardar\r\n");
-		btnGuardar.setBounds(80, 299, 89, 23);
+		btnGuardar.setBounds(302, 299, 89, 23);
 
 		
 		panel.add(btnGuardar);
 		
 		JButton btnCancelar = new JButton("Cancelar\r\n");
-		btnCancelar.setBounds(300, 299, 89, 23);
+		btnCancelar.setBounds(89, 299, 89, 23);
 		btnCancelar.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor((Component) e.getSource());
@@ -210,6 +215,7 @@ public class M_CCDTyE extends JDialog {
 		deleteButton.setBounds(376, 453, 111, 37);
 		getContentPane().add(deleteButton);
 		Dao_CCDTyE Dao = new Dao_CCDTyE();
+		int id = Dao.getCCDTyEID(ccdtye.getNombre());
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -248,7 +254,7 @@ public class M_CCDTyE extends JDialog {
 				}
 				ccdtye.setFuerzasAlMando(fuerzasACargo);
 				fuerzasACargo = ccdtye.getFuerzasAlMando();
-				System.out.println(fuerzasACargo);
+				System.out.println(ccdtye.getNombre());
 				//ccdtye.setFuerzasAlMando(fuerzasACargo);
 				
 				date = dateChooser_1.getDate();
@@ -258,8 +264,10 @@ public class M_CCDTyE extends JDialog {
 				
 				ccdtye.setFechaPuestaEnMarcha(localDate);
 				
-				Dao.updateCCDTyE(ccdtye);
-
+				
+				Dao.updateCCDTyE(id,ccdtye);
+				System.out.println(id);
+				System.out.println("HOLAAAAA");
 			
 			}});
 
@@ -267,11 +275,9 @@ public class M_CCDTyE extends JDialog {
 		deleteButton.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int id = Dao.getCCDTyEID(ccdtye.getNombre());
-				Dao.deleteCCDTyE(id);
 				
-				M_CCDTyE.this.dispose(); // Oculta el diálogo actual
-
-				
+				Dao.deleteCCDTyE(id);				
+				M_CCDTyE.this.dispose(); // Oculta el diálogo actual				
 				
 				
 			}

@@ -13,7 +13,7 @@ public class Dao_Detenido_No_Identificado {
 
     private final String url = "jdbc:mysql://localhost:3306/CCDTyE";
     private final String usuario = "root";
-    private final String contrasenia = "root";
+    private final String contrasenia = "admin";
 
     
     
@@ -55,7 +55,8 @@ public class Dao_Detenido_No_Identificado {
             e.printStackTrace();
         }
     }
-
+    
+    
     public DetenidoNoIdentificado getDetenidoNoIdentificado(int idPersona) {
         DetenidoNoIdentificado detenidoNoIdentificado = null;
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {

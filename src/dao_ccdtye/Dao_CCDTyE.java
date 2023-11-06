@@ -15,7 +15,7 @@ import entidades.Fuerza;
 public class Dao_CCDTyE {
     private final String url = "jdbc:mysql://localhost:3306/CCDTyE";
     private final String usuario = "root";
-    private final String contrasenia = "root";
+    private final String contrasenia = "admin";
 
     public int getCCDTyEID(String nombre) {
         int id = -1;
@@ -79,7 +79,7 @@ public class Dao_CCDTyE {
                 ArrayList<Integer> fuerzas = new ArrayList<>();
                 int ID = resultSet.getInt("ID_CCDTyE");
 
-                // Obteniendo las fuerzas al mando
+                
                 String queryFuerzas = "SELECT Fuerzas_id FROM CCDTyE_Fuerzas WHERE CCDTyE_id = ?";
                 PreparedStatement preparedStatementFuerzas = conn.prepareStatement(queryFuerzas);
                 preparedStatementFuerzas.setInt(1, id);
@@ -104,42 +104,36 @@ public class Dao_CCDTyE {
 
  // ...
 
-    public void updateCCDTyE(CCDTyE ccdTyE) {
+    public void updateCCDTyE(int ID,CCDTyE ccdTyE) {
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
-            String query = "UPDATE CCDTyE SET Ubicacion = ?, Fecha_puesta_en_marcha = ?, Fecha_de_cierre = ? WHERE Nombre = ?";
+            String query = "UPDATE CCDTyE SET `Ubicacion` = ?, `Fecha_puesta_en_marcha` = ?, `Fecha_de_cierre` = ?, `Nombre` = ? WHERE `ID_CCDTyE` = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, ccdTyE.getUbicacion());
             preparedStatement.setObject(2, ccdTyE.getFechaPuestaEnMarcha());
             preparedStatement.setObject(3, ccdTyE.getFechaCierre());
             preparedStatement.setString(4, ccdTyE.getNombre());
+            preparedStatement.setInt(5, ID);
             preparedStatement.executeUpdate();
 
-            // Actualizar la tabla CCDTyE_Fuerzas
-            // Primero eliminar las entradas anteriores relacionadas con el nombre de CCDTyE
-            String getIDQuery = "SELECT ID_CCDTyE FROM CCDTyE WHERE Nombre = ?";
-            PreparedStatement idStatement = conn.prepareStatement(getIDQuery);
-            idStatement.setString(1, ccdTyE.getNombre());
-            ResultSet rs = idStatement.executeQuery();
-            if (rs.next()) {
-                int id = rs.getInt("ID_CCDTyE");
-                String deleteFuerzasQuery = "DELETE FROM CCDTyE_Fuerzas WHERE CCDTyE_id = ?";
-                PreparedStatement deleteStatement = conn.prepareStatement(deleteFuerzasQuery);
-                deleteStatement.setInt(1, id);
-                deleteStatement.executeUpdate();
 
-                // Luego insertar las nuevas entradas relacionadas con el nombre de CCDTyE
-                for (int fuerza : ccdTyE.getFuerzasAlMando()) {
-                    String insertFuerzasQuery = "INSERT INTO CCDTyE_Fuerzas (CCDTyE_id, Fuerzas_id) VALUES (?, ?)";
-                    PreparedStatement insertStatement = conn.prepareStatement(insertFuerzasQuery);
-                    insertStatement.setInt(1, id);
-                    insertStatement.setInt(2, fuerza);
-                    insertStatement.executeUpdate();
-                }
+            String deleteFuerzasQuery = "DELETE FROM CCDTyE_Fuerzas WHERE CCDTyE_id = ?";
+            PreparedStatement deleteStatement = conn.prepareStatement(deleteFuerzasQuery);
+            deleteStatement.setInt(1, ID);
+            deleteStatement.executeUpdate();
+
+            for (int fuerza : ccdTyE.getFuerzasAlMando()) {
+                String insertFuerzasQuery = "INSERT INTO CCDTyE_Fuerzas (CCDTyE_id, Fuerzas_id) VALUES (?, ?)";
+                PreparedStatement insertStatement = conn.prepareStatement(insertFuerzasQuery);
+                insertStatement.setInt(1, ID);
+                insertStatement.setInt(2, fuerza);
+                insertStatement.executeUpdate();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-    }
+    
+     catch (SQLException e) {
+            e.printStackTrace();
+   }
+}
 
     // ...
 
