@@ -13,7 +13,7 @@ public class Dao_Detenido_No_Identificado {
 
     private final String url = "jdbc:mysql://localhost:3306/CCDTyE";
     private final String usuario = "root";
-    private final String contrasenia = "admin";
+    private final String contrasenia = "root";
 
     
     
