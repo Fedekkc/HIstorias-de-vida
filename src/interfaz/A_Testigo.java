@@ -16,6 +16,7 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import dao_detenido_identificado.Dao_Detenido_No_Identificado;
 import dao_testigos.Dao_testigos;
 import entidades.DetenidoNoIdentificado;
 import entidades.Testigo;
@@ -96,6 +97,7 @@ public class A_Testigo extends JPanel {
         lblNewLabel.setForeground(new Color(255, 255, 255));
         lblNewLabel.setFont(new Font("M PLUS 1p", Font.PLAIN, 24));
         contentPanel.add(lblNewLabel);
+        Dao_Detenido_No_Identificado detenidoDao = new Dao_Detenido_No_Identificado();
         Dao_testigos testigosDao = new Dao_testigos(); 
         JButton botonAceptar = new JButton("Aceptar");
         botonAceptar.addActionListener(new ActionListener() {
@@ -105,6 +107,11 @@ public class A_Testigo extends JPanel {
         		String testimonio = txtpnTestimonio.getText();
         		Testigo testigo = new Testigo(name,dni,testimonio);
         		testigosDao.addTestigo(testigo);
+        		int id = testigosDao.getIDTestigo(dni);
+        		detenido.setIdTestigo(id);
+        		detenidoDao.addDetenidoNoIdentificado(detenido);
+        		
+        		
         		
         		
         	}

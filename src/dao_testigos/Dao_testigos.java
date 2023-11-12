@@ -52,6 +52,25 @@ public class Dao_testigos {
         }
         return testigo;
     }
+    
+    public int getIDTestigo(String DNI) {
+        int testigoID = -1; // Inicializar a un valor que indique que no se encontró ningún ID
+        try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
+            System.out.println("[+] Obteniendo ID del testigo por DNI");
+            String query = "SELECT ID_Testigo FROM  `Testigos` WHERE `DNI` = ?";
+            PreparedStatement pStmt = conn.prepareStatement(query);
+            pStmt.setString(1, DNI);
+            ResultSet rs = pStmt.executeQuery();
+            while (rs.next()) {
+                testigoID = rs.getInt("ID_Testigo");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return testigoID;
+    }
+
+    
 
     public void deleteTestigo(String DNI) {
         int filasAfectadas = 0;

@@ -4,6 +4,7 @@ public class DetenidoNoIdentificado {
    
     private String apodo;
     private String descripcionSignificativa;
+    private int id_testigo = 000;
 
     public DetenidoNoIdentificado(String apodo, String descripcionSignificativa) {
         
@@ -12,8 +13,15 @@ public class DetenidoNoIdentificado {
     }
 
 
+    public int getIdTestigo() {
+    	return this.id_testigo;
+    }
+    public void setIdTestigo(int id) {
+    	this.id_testigo = id;
+    }
+    
     public String getApodo() {
-        return apodo;
+        return this.apodo;
     }
 
     public void setApodo(String apodo) {
@@ -21,7 +29,7 @@ public class DetenidoNoIdentificado {
     }
 
     public String getDescripcionSignificativa() {
-        return descripcionSignificativa;
+        return this.descripcionSignificativa;
     }
 
     public void setDescripcionSignificativa(String descripcionSignificativa) {
