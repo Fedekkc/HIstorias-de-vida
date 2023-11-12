@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 
 import javax.swing.JScrollBar;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
@@ -13,6 +15,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Console;
+import java.io.File;
 import java.util.Date;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileSystemView;
 
 import dao_ccdtye.Dao_CCDTyE;
 import dao_fuerzas.Dao_Fuerzas;
@@ -29,9 +33,11 @@ import entidades.Fuerza;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
 import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import javax.swing.JFormattedTextField;
@@ -73,37 +79,37 @@ public class add_Detenido_Identificado extends JPanel {
 		txtNombre = new JTextField();
 		txtNombre.setText("Nombre");
 		txtNombre.setToolTipText("Nombre");
-		txtNombre.setBounds(10, 50, 188, 26);
+		txtNombre.setBounds(10, 25, 188, 26);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		txtDNI = new JTextField();
 		txtDNI.setText("DNI");
-		txtDNI.setBounds(10, 87, 188, 26);
+		txtDNI.setBounds(10, 62, 188, 26);
 		panel.add(txtDNI);
 		txtDNI.setColumns(10);
 		
 		JTextPane txtBiografiaPersonal = new JTextPane();
 		txtBiografiaPersonal.setMaximumSize(new Dimension(20, 20));
-		txtBiografiaPersonal.setBounds(208, 50, 261, 230);
+		txtBiografiaPersonal.setBounds(208, 25, 261, 185);
 		panel.add(txtBiografiaPersonal);
 		
 		JComboBox cbLugarDeSecuestro = new JComboBox();
-		cbLugarDeSecuestro.setBounds(10, 124, 188, 22);
+		cbLugarDeSecuestro.setBounds(10, 99, 188, 22);
 		panel.add(cbLugarDeSecuestro);
 		
 		txtTiempoEnCautiverio = new JTextField();
 		txtTiempoEnCautiverio.setText("Tiempo en cautiverio");
-		txtTiempoEnCautiverio.setBounds(10, 157, 188, 20);
+		txtTiempoEnCautiverio.setBounds(10, 132, 188, 20);
 		panel.add(txtTiempoEnCautiverio);
 		txtTiempoEnCautiverio.setColumns(10);
 		
 		JCheckBox chckbxSeEncuentraAparecido = new JCheckBox("Es aparecido");
-		chckbxSeEncuentraAparecido.setBounds(10, 188, 188, 23);
+		chckbxSeEncuentraAparecido.setBounds(10, 159, 188, 23);
 		panel.add(chckbxSeEncuentraAparecido);
 		
 		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(10, 218, 188, 20);
+		dateChooser.setBounds(10, 189, 188, 20);
 		panel.add(dateChooser);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -142,7 +148,38 @@ public class add_Detenido_Identificado extends JPanel {
 				marco.setContentPane(new ViewCCDTyE());
 				marco.validate();
 			
-			}});
+			}});	
+		JLabel iconLabel = new JLabel("");
+		iconLabel.setForeground(new Color(255, 255, 255));
+		iconLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 14));
+		iconLabel.setBounds(53, 221, 416, 25);
 		panel.add(btnGuardar);
+		JButton uploadButton = new JButton("...");
+	       uploadButton.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                JFileChooser fileChooser = new JFileChooser();
+	                // Configurar el diálogo para permitir solo la selección de archivos
+	                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+	                
+	                int result = fileChooser.showOpenDialog(panel);
+	                
+	                
+	                if (result == JFileChooser.APPROVE_OPTION) {
+	                    File selectedFile = fileChooser.getSelectedFile();
+	                    Icon fileIcon = FileSystemView.getFileSystemView().getSystemIcon(selectedFile);
+	                    iconLabel.setIcon(fileIcon);
+	                    iconLabel.setText(selectedFile.getName());	 
+	                    } else {
+	                    iconLabel.setText("No hay archivos seleccionados.");
+	                }
+	            }
+	        });
+
+		uploadButton.setBounds(10, 220, 34, 23);
+		panel.add(uploadButton);
+		
+
+		panel.add(iconLabel);
 	}
 }
