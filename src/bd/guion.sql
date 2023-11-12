@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`CCDTyE_Fuerzas`(
 );
 
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`Testigos`(
-	`ID_Testigo` INT NOT NULL,
+	`ID_Testigo` INT NOT NULL AUTO_INCREMENT,
     `Nombre` VARCHAR(45) NOT NULL,
     `DNI` VARCHAR(25) NOT NULL,
     `Testimonio` TEXT NOT NULL,
@@ -58,27 +58,28 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_Identificados`(
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_CCDTyE`(
     `ID_Detenido_Identificado` INT NOT NULL,
     `ID_CCDTyE` INT NOT NULL,
-    PRIMARY KEY (`ID_Detenido`, `CCDTyE_id`),
+    PRIMARY KEY (`ID_Detenido_Identificado`, `ID_CCDTyE`),
     FOREIGN KEY (`ID_Detenido_Identificado`) REFERENCES `Detenidos_Identificados`(`ID_Detenido_Identificado`),
     FOREIGN KEY (`ID_CCDTyE`) REFERENCES `CCDTyE`(`ID_CCDTyE`)
 );
-
-CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_No_Identificados_CCDTyE`(
-    `ID_Detenido_No_Identificado` INT NOT NULL,
-    `CCDTyE_id` INT NOT NULL,
-    PRIMARY KEY (`ID_Detenido_No_Identificado`, `CCDTyE_id`),
-    FOREIGN KEY (`ID_Detenido_No_Identificado`) REFERENCES `Detenidos_No_Identificados`(`ID_Detenido_No_Identificado`),
-    FOREIGN KEY (`ID_CCDTyE`) REFERENCES `CCDTyE`(`ID_CCDTyE`)
-);
-
 
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_No_Identificados`(
 	`ID_Detenido_No_Identificado` INT NOT NULL,
     `Apodo` VARCHAR(30),
     `Descripcion_significativa` TEXT,
-    PRIMARY KEY(`ID_Persona`),
-	FOREIGN KEY (`ID_Persona`) REFERENCES Personas(`ID_Persona`)
+    PRIMARY KEY(`ID_Detenido_No_Identificado`)
 );
+
+CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_No_Identificados_CCDTyE`(
+    `ID_Detenido_No_Identificado` INT NOT NULL,
+    `ID_CCDTyE` INT NOT NULL,
+    PRIMARY KEY (`ID_Detenido_No_Identificado`, `ID_CCDTyE`),
+    FOREIGN KEY (`ID_Detenido_No_Identificado`) REFERENCES `Detenidos_No_Identificados`(`ID_Detenido_No_Identificado`),
+    FOREIGN KEY (`ID_CCDTyE`) REFERENCES `CCDTyE`(`ID_CCDTyE`)
+);
+
+
+
 
 INSERT INTO `Lugares_de_secuestro`(`Nombre`) VALUES ('Casa'),('Calle'),('Trabajo'),('Escuela');
 

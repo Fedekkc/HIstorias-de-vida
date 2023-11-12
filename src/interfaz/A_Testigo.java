@@ -16,7 +16,9 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import dao_testigos.Dao_testigos;
 import entidades.DetenidoNoIdentificado;
+import entidades.Testigo;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -67,9 +69,8 @@ public class A_Testigo extends JPanel {
         panel.add(DNI);
         DNI.setColumns(10);
 
-        JButton botonAceptar = new JButton("Aceptar");
-        botonAceptar.setBounds(195, 195, 89, 23);
-        panel.add(botonAceptar);
+
+
 
         JButton botonCancelar = new JButton("Cancelar");
         botonCancelar.addActionListener(new ActionListener() {
@@ -95,5 +96,20 @@ public class A_Testigo extends JPanel {
         lblNewLabel.setForeground(new Color(255, 255, 255));
         lblNewLabel.setFont(new Font("M PLUS 1p", Font.PLAIN, 24));
         contentPanel.add(lblNewLabel);
+        Dao_testigos testigosDao = new Dao_testigos(); 
+        JButton botonAceptar = new JButton("Aceptar");
+        botonAceptar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		String name = Nombre.getText();
+        		String dni = DNI.getText();
+        		String testimonio = txtpnTestimonio.getText();
+        		Testigo testigo = new Testigo(name,dni,testimonio);
+        		testigosDao.addTestigo(testigo);
+        		
+        		
+        	}
+        });
+        botonAceptar.setBounds(195, 195, 89, 23);
+        panel.add(botonAceptar);
     }
 }
