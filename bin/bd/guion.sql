@@ -43,18 +43,21 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Personas`(
     PRIMARY KEY (`ID_Persona`)
 );
 
+CREATE TABLE IF NOT EXISTS `Lugares_de_secuestro`(`ID_Lugar`INT NOT NULL AUTO_INCREMENT PRIMARY KEY, `Nombre` VARCHAR(60));
+
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_Identificados`(
 	`ID_Persona` INT NOT NULL,
     `Nombre` VARCHAR(45) NOT NULL,
     `DNI` VARCHAR(25) NOT NULL,
-    `Lugar_de_secuestro` VARCHAR(45),
+    `ID_Lugar_de_secuestro` INT NOT NULL,
     `Ultima_vez_visto` DATETIME,
     `Biografia_personal` TEXT NOT NULL,
     `Ruta_material_audiovisual` VARCHAR(255),
     `Tiempo_en_cautiverio` INT,
     `Sobrevivio` BOOLEAN,   
     PRIMARY KEY (`ID_Persona`),
-    FOREIGN KEY (`ID_Persona`) REFERENCES Personas(`ID_Persona`)
+    FOREIGN KEY (`ID_Persona`) REFERENCES Personas(`ID_Persona`),
+    FOREIGN KEY (`ID_Lugar_de_secuestro`) REFERENCES Lugares_de_secuestro(`ID_Lugar`)
 );
 
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`CCDTyE_Personas`(
@@ -74,12 +77,7 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_No_Identificados`(
 	FOREIGN KEY (`ID_Persona`) REFERENCES Personas(`ID_Persona`)
 );
 
-
-
-CREATE TABLE IF NOT EXISTS `Lugares_de_secuestro`(`ID_Lugar`INT NOT NULL AUTO_INCREMENT PRIMARY KEY, `Nombre` VARCHAR(60));
-
 INSERT INTO `Lugares_de_secuestro`(`Nombre`) VALUES ('Casa'),('Calle'),('Trabajo'),('Escuela');
 
 INSERT INTO `Fuerzas`(`Nombre`) VALUES ('Policia'),('Ejercito'),('Gendarmeria');
 
-  

@@ -130,6 +130,15 @@ public class add_Detenido_No_Identificado extends JPanel {
 		btnAadirTestigo.setBounds(178, 251, 123, 23);
 		panel.add(btnAadirTestigo);
 		
+		btnAadirTestigo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	            A_Testigo dialog = new A_Testigo();
+	            dialog.setVisible(true);
+				
+			}
+			
+		});
+		
 		JLabel lblNewLabel = new JLabel("Descripción Significativa\r\n");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(new Color(255, 255, 255));
