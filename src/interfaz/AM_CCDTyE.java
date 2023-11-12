@@ -173,6 +173,9 @@ public class AM_CCDTyE extends JPanel {
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 16));
 		
+
+
+		
 		JButton refreshButton = new JButton("Actualizar");
 		refreshButton.setForeground(new Color(217, 217, 217));
 		refreshButton.setBackground(new Color(0, 0, 26));
@@ -241,6 +244,23 @@ public class AM_CCDTyE extends JPanel {
 		    }
 		});
 
+		JButton deleteButton = new JButton("Eliminar");
+		deleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selected[0] != null) {
+					int id = selected[0].getID();
+					dao.deleteCCDTyE(id);
+					
+				}
+				
+				
+			}
+		});
+		deleteButton.setForeground(new Color(217, 217, 217));
+		deleteButton.setBackground(new Color(0, 0, 26));
+		deleteButton.setBounds(254, 417, 98, 23);
+		panel.add(deleteButton);
+		
 		btnNewButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        if (selected[0] != null) {
