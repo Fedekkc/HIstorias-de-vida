@@ -101,10 +101,10 @@ public class add_Detenido_Identificado extends JPanel {
 		Dao_Lugares_de_secuestro dao = new Dao_Lugares_de_secuestro();
 		ArrayList<String> listaLugares = new ArrayList<>();
 		listaLugares = dao.getAllLugares_de_Secuestro();
-		for (int i = 1; i <= listaLugares.size() - 1; i++) {
+		for (int i = 0; i <= listaLugares.size() - 1; i++) {
 			cbLugarDeSecuestro.addItem(listaLugares.get(i));
 		}
-		cbLugarDeSecuestro.setSelectedIndex(0);
+		
 		panel.add(cbLugarDeSecuestro);
 		
 		txtTiempoEnCautiverio = new JTextField();
@@ -148,7 +148,8 @@ public class add_Detenido_Identificado extends JPanel {
 				ZoneId zone = ZoneId.systemDefault();
 				LocalDate localDate = instant.atZone(zone).toLocalDate();
 				detenido.setUltVezVisto(localDate);
-				detenido.setLugarSecuestro(cbLugarDeSecuestro.getSelectedIndex() + 1);;
+				detenido.setLugarSecuestro(cbLugarDeSecuestro.getSelectedIndex()+1);
+				System.out.println("HOLA COMOE STAS: " + String.valueOf(detenido.getLugarSecuestro()));
 				detenido.setTiempoEnCautiverio(i);
 				Dao.addDetenidoIdentificado(detenido);
 				

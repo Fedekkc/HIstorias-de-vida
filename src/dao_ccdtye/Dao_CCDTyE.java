@@ -53,7 +53,7 @@ public class Dao_CCDTyE {
             }
 
             for (int i = 0; i <= fuerzaAlMando.size() - 1; i++) {
-        		String query2 = "INSERT INTO CCDTyE_Fuerzas (CCDTyE_id, Fuerzas_id) VALUES (?, ?)";
+        		String query2 = "INSERT INTO CCDTyE_Fuerzas (ID_CCDTyE, Fuerzas_id) VALUES (?, ?)";
                 PreparedStatement preparedStatement2 = conn.prepareStatement(query2);
                 preparedStatement2.setInt(1, last_inserted_id);
                 preparedStatement2.setInt(2, fuerzaAlMando.get(i));
@@ -80,7 +80,7 @@ public class Dao_CCDTyE {
                 int ID = resultSet.getInt("ID_CCDTyE");
 
                 
-                String queryFuerzas = "SELECT Fuerzas_id FROM CCDTyE_Fuerzas WHERE CCDTyE_id = ?";
+                String queryFuerzas = "SELECT Fuerzas_id FROM CCDTyE_Fuerzas WHERE ID_CCDTyE = ?";
                 PreparedStatement preparedStatementFuerzas = conn.prepareStatement(queryFuerzas);
                 preparedStatementFuerzas.setInt(1, id);
                 ResultSet rsFuerzas = preparedStatementFuerzas.executeQuery();
@@ -116,13 +116,13 @@ public class Dao_CCDTyE {
             preparedStatement.executeUpdate();
 
 
-            String deleteFuerzasQuery = "DELETE FROM CCDTyE_Fuerzas WHERE CCDTyE_id = ?";
+            String deleteFuerzasQuery = "DELETE FROM CCDTyE_Fuerzas WHERE ID_CCDTyE = ?";
             PreparedStatement deleteStatement = conn.prepareStatement(deleteFuerzasQuery);
             deleteStatement.setInt(1, ID);
             deleteStatement.executeUpdate();
 
             for (int fuerza : ccdTyE.getFuerzasAlMando()) {
-                String insertFuerzasQuery = "INSERT INTO CCDTyE_Fuerzas (CCDTyE_id, Fuerzas_id) VALUES (?, ?)";
+                String insertFuerzasQuery = "INSERT INTO CCDTyE_Fuerzas (ID_CCDTyE, Fuerzas_id) VALUES (?, ?)";
                 PreparedStatement insertStatement = conn.prepareStatement(insertFuerzasQuery);
                 insertStatement.setInt(1, ID);
                 insertStatement.setInt(2, fuerza);
@@ -141,7 +141,7 @@ public class Dao_CCDTyE {
     public void deleteCCDTyE(int id) {
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
             // Eliminar las referencias en CCDTyE_Fuerzas
-            String deleteFuerzasQuery = "DELETE FROM CCDTyE_Fuerzas WHERE CCDTyE_id = ?";
+            String deleteFuerzasQuery = "DELETE FROM CCDTyE_Fuerzas WHERE ID_CCDTyE = ?";
             PreparedStatement deleteStatement = conn.prepareStatement(deleteFuerzasQuery);
             deleteStatement.setInt(1, id);
             deleteStatement.executeUpdate();
@@ -171,7 +171,7 @@ public class Dao_CCDTyE {
                 int ID = resultSet.getInt("ID_CCDTyE");
 
                 // Obteniendo las fuerzas al mando
-                String queryFuerzas = "SELECT Fuerzas_id FROM CCDTyE_Fuerzas WHERE CCDTyE_id = ?";
+                String queryFuerzas = "SELECT Fuerzas_id FROM CCDTyE_Fuerzas WHERE ID_CCDTyE = ?";
                 PreparedStatement preparedStatementFuerzas = conn.prepareStatement(queryFuerzas);
                 preparedStatementFuerzas.setInt(1, ID);
                 ResultSet rsFuerzas = preparedStatementFuerzas.executeQuery();

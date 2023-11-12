@@ -112,9 +112,9 @@ public class Menu_Personas extends JPanel {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                if (value instanceof DetenidoNoIdentificado) {
-                    DetenidoNoIdentificado detenidoNoIdentificado = (DetenidoNoIdentificado) value;
-                    setText(detenidoNoIdentificado.getApodo());
+                if (value instanceof DetenidoIdentificado) {
+                    DetenidoIdentificado detenidoIdentificado = (DetenidoIdentificado) value;
+                    setText(detenidoIdentificado.getNombre());
                 }
                 return this;
             }

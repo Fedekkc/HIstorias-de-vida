@@ -95,3 +95,8 @@ SELECT * FROM Detenidos_Identificados INNER JOIN Lugares_de_secuestro ON Detenid
 SELECT * FROM Lugares_de_secuestro;
 SELECT * FROM Detenidos_Identificados;
 
+SELECT * FROM Detenidos_Identificados INNER JOIN Lugares_de_secuestro ON Detenidos_Identificados.ID_Lugar_de_secuestro = Lugares_de_secuestro.ID_Lugar WHERE ID_Detenido_Identificado = ?
+
+
+
+

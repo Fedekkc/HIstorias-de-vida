@@ -221,7 +221,8 @@ public class AM_Identificados extends JPanel {
 	                		        	
 		            nombreLabel.setText("● Nombre: " + selected[0].getNombre());
 		            DNILabel.setText("● DNI: " + selected[0].getDNI());
-		            lugarSecuestroLabel.setText("● Lugar de secuestro: " + dao.getLugarDeSecuestro(selected[0]));
+		            int ID = dao.getIdDetenidoIdentificado(selected[0].getNombre());
+		            lugarSecuestroLabel.setText("● Lugar de secuestro: " + dao.getLugarDeSecuestro(ID));
 		            ultVezLabel.setText("● Ultima vez visto: " + selected[0].getUltVezVisto());
 		            biografiaLabel.setText("● Biografia: " + selected[0].getBiografiaPersonal());
 

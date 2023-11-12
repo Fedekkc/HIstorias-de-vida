@@ -69,7 +69,7 @@ public class Dao_Detenido_Identificado {
 
     public void deleteDetenidoIdentificado(int idPersona) {
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
-            String query = "DELETE FROM Detenidos_Identificados WHERE ID_Persona = ?";
+            String query = "DELETE FROM Detenidos_Identificados WHERE ID_Detenido_Identificado = ?";
             PreparedStatement pStmt = conn.prepareStatement(query);
             pStmt.setInt(1, idPersona);
             pStmt.executeUpdate();
@@ -100,7 +100,7 @@ public class Dao_Detenido_Identificado {
     public DetenidoIdentificado getDetenidoIdentificado(int idPersona) {
         DetenidoIdentificado detenido = null;
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
-            String query = "SELECT * FROM Detenidos_Identificados WHERE ID_Persona = ?";
+            String query = "SELECT * FROM Detenidos_Identificados WHERE ID_Detenido_Identificado = ?";
             PreparedStatement pStmt = conn.prepareStatement(query);
             pStmt.setInt(1, idPersona);
             ResultSet rs = pStmt.executeQuery();
@@ -130,12 +130,34 @@ public class Dao_Detenido_Identificado {
         return detenido;
     }
     
-    public String getLugarDeSecuestro(DetenidoIdentificado dt) {
+    
+    public int getIdDetenidoIdentificado(String nombreDetenido) {
+        int idDetenido = -1; // Valor predeterminado en caso de que no se encuentre el detenido
+
+        try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
+            String query = "SELECT ID_Detenido_Identificado FROM Detenidos_Identificados WHERE Nombre = ?";
+            PreparedStatement pStmt = conn.prepareStatement(query);
+            pStmt.setString(1, nombreDetenido);
+            ResultSet rs = pStmt.executeQuery();
+
+            if (rs.next()) {
+                idDetenido = rs.getInt("ID_Detenido_Identificado");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return idDetenido;
+    }
+
+    
+    public String getLugarDeSecuestro(int id) {
     	String lugar = "";
     	try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
             String query = "SELECT * FROM Detenidos_Identificados INNER JOIN Lugares_de_secuestro ON Detenidos_Identificados.ID_Lugar_de_secuestro = Lugares_de_secuestro.ID_Lugar WHERE ID_Detenido_Identificado = ?";
             PreparedStatement pStmt = conn.prepareStatement(query);
-            pStmt.setInt(1, dt.getLugarSecuestro());
+            pStmt.setInt(1, id);
             ResultSet rs = pStmt.executeQuery();
             if (rs.next()) {
             	lugar = rs.getString("Lugares_de_secuestro.Nombre");
