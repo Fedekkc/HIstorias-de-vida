@@ -53,6 +53,8 @@ import javax.swing.JTextPane;
 
 import dao_detenido_identificado.Dao_Detenido_Identificado;
 import entidades.DetenidoIdentificado;
+import dao_detenido_identificado.Dao_Lugares_de_secuestro;
+
 
 
 public class add_Detenido_Identificado extends JPanel {
@@ -96,6 +98,12 @@ public class add_Detenido_Identificado extends JPanel {
 		
 		JComboBox cbLugarDeSecuestro = new JComboBox();
 		cbLugarDeSecuestro.setBounds(10, 99, 188, 22);
+		Dao_Lugares_de_secuestro dao = new Dao_Lugares_de_secuestro();
+		ArrayList<String> listaLugares = new ArrayList<>();
+		listaLugares = dao.getAllLugares_de_Secuestro();
+		for (int i = 1; i <= listaLugares.size() - 1; i++) {
+			cbLugarDeSecuestro.addItem(listaLugares.get(i));
+		}
 		panel.add(cbLugarDeSecuestro);
 		
 		txtTiempoEnCautiverio = new JTextField();
