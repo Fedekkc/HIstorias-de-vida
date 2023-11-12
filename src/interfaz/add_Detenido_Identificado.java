@@ -147,8 +147,8 @@ public class add_Detenido_Identificado extends JPanel {
 				ZoneId zone = ZoneId.systemDefault();
 				LocalDate localDate = instant.atZone(zone).toLocalDate();
 				detenido.setUltVezVisto(localDate);
+				detenido.setLugarSecuestro(cbLugarDeSecuestro.getSelectedIndex());;
 				detenido.setTiempoEnCautiverio(i);
-				
 				Dao.addDetenidoIdentificado(detenido);
 				//Dao.addFuerzas(ccdtye);
 				

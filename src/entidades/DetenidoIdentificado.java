@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class DetenidoIdentificado{
     private String nombre;
     private String DNI;
-    private String lugarSecuestro;
+    private int lugarSecuestro;
     private LocalDate ultVezVisto;
     private String biografiaPersonal;
     private String rutaMaterialAudiovisual;
@@ -29,11 +29,11 @@ public class DetenidoIdentificado{
         this.DNI = DNI;
     }
 
-    public String getLugarSecuestro() {
+    public int getLugarSecuestro() {
         return lugarSecuestro;
     }
 
-    public void setLugarSecuestro(String lugarSecuestro) {
+    public void setLugarSecuestro(int lugarSecuestro) {
         this.lugarSecuestro = lugarSecuestro;
     }
 
