@@ -150,10 +150,9 @@ public class add_Detenido_Identificado extends JPanel {
 				detenido.setLugarSecuestro(cbLugarDeSecuestro.getSelectedIndex());;
 				detenido.setTiempoEnCautiverio(i);
 				Dao.addDetenidoIdentificado(detenido);
-				//Dao.addFuerzas(ccdtye);
 				
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new ViewCCDTyE());
+				marco.setContentPane(new AM_Identificados());
 				marco.validate();
 			
 			}});	

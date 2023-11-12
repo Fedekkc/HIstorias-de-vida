@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_Identificados`(
 	`ID_Detenido_Identificado` INT NOT NULL AUTO_INCREMENT,
     `Nombre` VARCHAR(45) NOT NULL,
     `DNI` VARCHAR(25) NOT NULL,
-    `ID_Lugar_de_secuestro` INT NOT NULL,
+    `ID_Lugar_de_secuestro` INT,
     `Ultima_vez_visto` DATETIME,
     `Biografia_personal` TEXT NOT NULL,
     `Ruta_material_audiovisual` VARCHAR(255),
@@ -91,3 +91,5 @@ SELECT * FROM Detenidos_No_Identificados;
 SELECT * FROM Testigos;
 
 SELECT * FROM Detenidos_No_Identificados INNER JOIN Testigos ON `Detenidos_No_Identificados`.`ID_Testigo` = `Testigos`.`ID_Testigo`;
+
+SELECT * FROM Detenidos_Identificados INNER JOIN Lugares_de_secuestro On Detenidos_Identificados.ID_Lugar_de_secuestro = Lugares_de_secuestro.ID_Lugar;
