@@ -98,6 +98,12 @@ public class AM_Identificados extends JPanel {
 		btnNewButton.setBackground(new Color(0, 0, 26));
 		btnNewButton.setForeground(new Color(217, 217, 217));
 		btnNewButton.setBounds(413, 417, 89, 23);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+            	
+			}
+		});
 		panel.add(btnNewButton);
 		
 
@@ -232,6 +238,10 @@ public class AM_Identificados extends JPanel {
 
 		btnNewButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
+		    	setVisible(false);
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new M_Detenido_Identificado(selected[0]));
+				marco.validate();
 
 		    }
 		});
