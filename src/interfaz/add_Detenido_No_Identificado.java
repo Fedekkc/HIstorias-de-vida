@@ -23,8 +23,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import dao_ccdtye.Dao_CCDTyE;
+import dao_detenido_identificado.Dao_Detenido_No_Identificado;
 import dao_fuerzas.Dao_Fuerzas;
 import entidades.CCDTyE;
+import entidades.DetenidoNoIdentificado;
 import entidades.Fuerza;
 
 import javax.swing.JButton;
@@ -105,6 +107,7 @@ public class add_Detenido_No_Identificado extends JPanel {
 		txtNombre.setColumns(10);
 		
 		JButton btnGuardar = new JButton("Guardar\r\n");
+
 		btnGuardar.setBounds(270, 300, 89, 23);
 
 		
@@ -150,6 +153,19 @@ public class add_Detenido_No_Identificado extends JPanel {
 		lblApodo.setForeground(Color.WHITE);
 		lblApodo.setBounds(147, 11, 185, 14);
 		panel.add(lblApodo);
+		Dao_Detenido_No_Identificado daoNoIdentif = new Dao_Detenido_No_Identificado();
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String apodo = txtNombre.getText();
+				String descripcionSignificativa = txtpnDescripcinSignificativa.getText();
+				DetenidoNoIdentificado detenido = new DetenidoNoIdentificado(apodo, descripcionSignificativa);
+				daoNoIdentif.addDetenidoNoIdentificado(detenido);
+				
+				
+				
+				
+			}
+		});
         
 		
 
