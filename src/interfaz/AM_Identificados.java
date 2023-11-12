@@ -6,12 +6,15 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListCellRenderer;
@@ -100,7 +103,6 @@ public class AM_Identificados extends JPanel {
 		btnNewButton.setBounds(413, 417, 89, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
             	
 			}
 		});
@@ -162,9 +164,7 @@ public class AM_Identificados extends JPanel {
 		biografiaLabel.setBounds(10, 118, 495, 77);
 		panel_1.add(biografiaLabel);
 		
-		JButton materialButton = new JButton("Material");
-		materialButton.setBounds(220, 206, 89, 23);
-		panel_1.add(materialButton);
+
 		
 		JLabel sobrevivioLabel = new JLabel("");
 		sobrevivioLabel.setBounds(10, 317, 259, 14);
@@ -235,6 +235,26 @@ public class AM_Identificados extends JPanel {
 	                }    
 		    }
 		});
+		
+		JButton materialButton = new JButton("Material");
+		materialButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(selected[0].getRutaMaterialAudiovisual() != null)
+				{
+					File fileToOpen = new File(selected[0].getRutaMaterialAudiovisual());
+		            try {
+		                Desktop.getDesktop().open(fileToOpen);
+		            } catch (IOException ex) {
+		                ex.printStackTrace();
+		            }
+				}
+				
+				
+				
+			}
+		});
+		materialButton.setBounds(220, 206, 89, 23);
+		panel_1.add(materialButton);
 
 		btnNewButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {

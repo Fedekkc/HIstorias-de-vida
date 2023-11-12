@@ -132,38 +132,12 @@ public class add_Detenido_Identificado extends JPanel {
 			}
 		});
 		panel.add(btnCancelar);
-
-		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.setBounds(10, 257, 89, 23);
-		btnGuardar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Dao_Detenido_Identificado Dao = new Dao_Detenido_Identificado();
-				DetenidoIdentificado detenido = new DetenidoIdentificado();
-				
-				int i = Integer.parseInt(txtTiempoEnCautiverio.getText());
-				detenido.setNombre(txtNombre.getText());
-				detenido.setDNI(txtDNI.getText());
-				detenido.setBiografiaPersonal(txtBiografiaPersonal.getText());
-				Date date = dateChooser.getDate();
-				Instant instant = date.toInstant();
-				ZoneId zone = ZoneId.systemDefault();
-				LocalDate localDate = instant.atZone(zone).toLocalDate();
-				detenido.setUltVezVisto(localDate);
-				detenido.setLugarSecuestro(cbLugarDeSecuestro.getSelectedIndex()+1);
-				System.out.println("HOLA COMOE STAS: " + String.valueOf(detenido.getLugarSecuestro()));
-				detenido.setTiempoEnCautiverio(i);
-				Dao.addDetenidoIdentificado(detenido);
-				
-				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new AM_Identificados());
-				marco.validate();
-			
-			}});	
 		JLabel iconLabel = new JLabel("");
 		iconLabel.setForeground(new Color(255, 255, 255));
 		iconLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 14));
 		iconLabel.setBounds(53, 221, 416, 25);
-		panel.add(btnGuardar);
+		
+		final String[] fileRoute = { null };
 		JButton uploadButton = new JButton("...");
 	       uploadButton.addActionListener(new ActionListener() {
 	            @Override
@@ -180,11 +154,50 @@ public class add_Detenido_Identificado extends JPanel {
 	                    Icon fileIcon = FileSystemView.getFileSystemView().getSystemIcon(selectedFile);
 	                    iconLabel.setIcon(fileIcon);
 	                    iconLabel.setText(selectedFile.getName());	 
+	                    fileRoute[0] = selectedFile.getAbsolutePath();
 	                    } else {
 	                    iconLabel.setText("No hay archivos seleccionados.");
 	                }
 	            }
 	        });
+		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setBounds(10, 257, 89, 23);
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Dao_Detenido_Identificado Dao = new Dao_Detenido_Identificado();
+				DetenidoIdentificado detenido = new DetenidoIdentificado();
+				
+				int i = Integer.parseInt(txtTiempoEnCautiverio.getText());
+				detenido.setNombre(txtNombre.getText());
+				detenido.setDNI(txtDNI.getText());
+				detenido.setBiografiaPersonal(txtBiografiaPersonal.getText());
+				Date date = dateChooser.getDate();
+				Instant instant = date.toInstant();
+				ZoneId zone = ZoneId.systemDefault();
+				if(fileRoute[0] != null)
+				{
+					detenido.setRutaMaterialAudiovisual(fileRoute[0]);
+				}
+				else
+				{
+					detenido.setRutaMaterialAudiovisual(null);
+				}
+				
+				LocalDate localDate = instant.atZone(zone).toLocalDate();
+				detenido.setUltVezVisto(localDate);
+				detenido.setLugarSecuestro(cbLugarDeSecuestro.getSelectedIndex()+1);
+				System.out.println("HOLA COMOE STAS: " + String.valueOf(detenido.getLugarSecuestro()));
+				detenido.setTiempoEnCautiverio(i);
+				Dao.addDetenidoIdentificado(detenido);
+				
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new AM_Identificados());
+				marco.validate();
+			
+			}});	
+
+		panel.add(btnGuardar);
+
 
 		uploadButton.setBounds(10, 220, 34, 23);
 		panel.add(uploadButton);
