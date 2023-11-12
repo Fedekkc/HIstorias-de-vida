@@ -102,29 +102,31 @@ public class Dao_testigos {
             pStmt.setString(1, DNI);
             filasAfectadas = pStmt.executeUpdate();
             if (filasAfectadas > 0) {
-                System.out.println("Testigo eliminado correctamente");
+                System.out.println("[+] Testigo eliminado correctamente");
             } else {
-                System.out.println("No se encontró ningún testigo con el DNI especificado.");
+                System.out.println("[-] No se encontró ningún testigo con el DNI especificado.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void updateTestigo(Testigo testigo) {
+    public void updateTestigo(int IDTestigo, Testigo testigo) {
         int filasAfectadas = 0;
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
             System.out.println("[+] Actualizando testigo en la base de datos");
-            String query = "UPDATE Testigos SET Nombre = ?, Testimonio = ? WHERE DNI = ?";
+            String query = "UPDATE Testigos SET Nombre = ?, Testimonio = ? DNI = ? WHERE ID_Testigo = ?";
             PreparedStatement pStmt = conn.prepareStatement(query);
             pStmt.setString(1, testigo.getNombre());
             pStmt.setString(2, testigo.getTestimonio());
             pStmt.setString(3, testigo.getDNI());
+            pStmt.setInt(4, IDTestigo);
             filasAfectadas = pStmt.executeUpdate();
             if (filasAfectadas > 0) {
-                System.out.println("Testigo actualizado correctamente");
+                System.out.println("[+] Testigo actualizado correctamente");
             } else {
-                System.out.println("No se encontró ningún testigo con el DNI especificado.");
+                System.out.println("[-] No se encontró ningún testigo con el DNI especificado.");
             }
         } catch (SQLException e) {
             e.printStackTrace();

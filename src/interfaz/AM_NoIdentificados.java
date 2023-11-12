@@ -2,6 +2,7 @@ package interfaz;
 
 import java.awt.Color;
 
+
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -35,6 +36,7 @@ import dao_testigos.Dao_testigos;
 import entidades.CCDTyE;
 import entidades.DetenidoNoIdentificado;
 import interfaz.M_CCDTyE;
+import interfaz.M_Detenido_No_Identificado;
 import java.awt.Dimension;
 import javax.swing.JTextField;
 
@@ -209,7 +211,9 @@ public class AM_NoIdentificados extends JPanel {
 		btnNewButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 
-		    	
+		    	JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new M_Detenido_No_Identificado(selected[0]));
+				marco.validate();
 		    	
 		    }
 		});

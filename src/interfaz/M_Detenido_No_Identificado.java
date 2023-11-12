@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 
 
+
 import javax.swing.JScrollBar;
 import javax.swing.JList;
 import java.awt.Color;
@@ -24,10 +25,12 @@ import javax.swing.SwingUtilities;
 
 import dao_ccdtye.Dao_CCDTyE;
 import dao_detenido_identificado.Dao_Detenido_No_Identificado;
+import dao_testigos.Dao_testigos;
 import dao_fuerzas.Dao_Fuerzas;
 import entidades.CCDTyE;
 import entidades.DetenidoNoIdentificado;
 import entidades.Fuerza;
+import entidades.Testigo;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -63,6 +66,9 @@ public class M_Detenido_No_Identificado extends JPanel {
 	 */
 	public M_Detenido_No_Identificado(DetenidoNoIdentificado detenido) {
 		this.detenido = detenido;
+		Dao_testigos daoTestigos = new Dao_testigos();
+		
+		Testigo testigo = daoTestigos.getTestigoByID(detenido.getIdTestigo());
 		
 		setMinimumSize(new Dimension(880, 560));
 		setBackground(new Color(138, 135, 169));
@@ -77,6 +83,7 @@ public class M_Detenido_No_Identificado extends JPanel {
 		txtNombre = new JTextField();
 		txtNombre.setToolTipText("Apodo");
 		txtNombre.setBounds(147, 35, 185, 26);
+		txtNombre.setText(detenido.getApodo());
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
 		
@@ -92,6 +99,7 @@ public class M_Detenido_No_Identificado extends JPanel {
 		panel.add(btnCancelar);
 		
 		JTextPane txtpnDescripcinSignificativa = new JTextPane();
+		txtpnDescripcinSignificativa.setText(detenido.getDescripcionSignificativa());
 		txtpnDescripcinSignificativa.setToolTipText("Descripción");
 		txtpnDescripcinSignificativa.setBounds(128, 97, 231, 123);
 		panel.add(txtpnDescripcinSignificativa);
@@ -102,17 +110,35 @@ public class M_Detenido_No_Identificado extends JPanel {
 		
 
 		
-		JLabel lblNewLabel = new JLabel(detenido.getDescripcionSignificativa());
+		JLabel lblNewLabel = new JLabel("Descripción: ");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setBounds(128, 72, 231, 14);
 		panel.add(lblNewLabel);
 		
-		JLabel lblApodo = new JLabel(detenido.getApodo());
+		JLabel lblApodo = new JLabel();
+		lblApodo.setText("Apodo:");
 		lblApodo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblApodo.setForeground(Color.WHITE);
 		lblApodo.setBounds(147, 11, 185, 14);
 		panel.add(lblApodo);
+		
+		JButton btnNewButton = new JButton("Eliminar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Dao_Detenido_No_Identificado detenidoDao = new Dao_Detenido_No_Identificado();
+				int id = detenidoDao.getIdDetenidoByIdTestigo(detenido.getIdTestigo());
+				
+				detenidoDao.deleteDetenidoNoIdentificado(id);
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new AM_NoIdentificados());
+				marco.validate();
+				
+				
+			}
+		});
+		btnNewButton.setBounds(195, 250, 89, 23);
+		panel.add(btnNewButton);
 		
 		btnAadirTestigo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -120,7 +146,7 @@ public class M_Detenido_No_Identificado extends JPanel {
 				String descripcionSignificativa = txtpnDescripcinSignificativa.getText();
 				DetenidoNoIdentificado detenido = new DetenidoNoIdentificado(apodo, descripcionSignificativa);			
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new A_Testigo(detenido));
+				marco.setContentPane(new M_Testigo(detenido, testigo));
 				marco.validate();			
 				
 			}
