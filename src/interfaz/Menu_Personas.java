@@ -147,6 +147,22 @@ public class Menu_Personas extends JPanel {
                 return this;
             }
         });
+        
+        JButton backButton = new JButton("Atrás");
+        backButton.setBounds(781, 11, 89, 23);
+        backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainWindow MW = new MainWindow();
+		        
+            	MW.setVisible(true);
+            	MW.validate();
+		        // Ocultar el JPanel actual
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(Menu_Personas.this);
+                currentFrame.dispose();
+		        setVisible(false);
+			}
+		});
+        add(backButton);
 
 		// Asegúrate de ajustar y personalizar la lógica según tus necesidades específicas.
 
