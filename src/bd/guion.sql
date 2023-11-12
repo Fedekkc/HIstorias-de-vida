@@ -22,10 +22,10 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Represores`(
 );  
 
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`CCDTyE_Fuerzas`(
-    `CCDTyE_id` INT,
+    `ID_CCDTyE` INT,
     `Fuerzas_id` INT,
-    PRIMARY KEY (`CCDTyE_id`, `Fuerzas_id`),
-    FOREIGN KEY (`CCDTyE_id`) REFERENCES `CCDTyE`(`ID_CCDTyE`),
+    PRIMARY KEY (`ID_CCDTyE`, `Fuerzas_id`),
+    FOREIGN KEY (`ID_CCDTyE`) REFERENCES `CCDTyE`(`ID_CCDTyE`),
     FOREIGN KEY (`Fuerzas_id`) REFERENCES `Fuerzas`(`ID_Fuerza`)
 );
 
@@ -55,12 +55,20 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_Identificados`(
     FOREIGN KEY (`ID_Lugar_de_secuestro`) REFERENCES Lugares_de_secuestro(`ID_Lugar`)
 );
 
-CREATE TABLE IF NOT EXISTS `CCDTyE`.`CCDTyE_Personas`(
+CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_CCDTyE`(
+    `ID_Detenido_Identificado` INT NOT NULL,
     `ID_CCDTyE` INT NOT NULL,
-    `ID_Persona` INT NOT NULL,
-    PRIMARY KEY (`ID_CCDTyE`, `ID_Persona`),
-    FOREIGN KEY(`ID_CCDTyE`) REFERENCES `CCDTyE`(`ID_CCDTyE`),
-    FOREIGN KEY(`ID_Persona`) REFERENCES `Personas`(`ID_Persona`)
+    PRIMARY KEY (`ID_Detenido`, `CCDTyE_id`),
+    FOREIGN KEY (`ID_Detenido_Identificado`) REFERENCES `Detenidos_Identificados`(`ID_Detenido_Identificado`),
+    FOREIGN KEY (`ID_CCDTyE`) REFERENCES `CCDTyE`(`ID_CCDTyE`)
+);
+
+CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_No_Identificados_CCDTyE`(
+    `ID_Detenido_No_Identificado` INT NOT NULL,
+    `CCDTyE_id` INT NOT NULL,
+    PRIMARY KEY (`ID_Detenido_No_Identificado`, `CCDTyE_id`),
+    FOREIGN KEY (`ID_Detenido_No_Identificado`) REFERENCES `Detenidos_No_Identificados`(`ID_Detenido_No_Identificado`),
+    FOREIGN KEY (`ID_CCDTyE`) REFERENCES `CCDTyE`(`ID_CCDTyE`)
 );
 
 
