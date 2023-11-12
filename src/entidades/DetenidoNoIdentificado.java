@@ -6,10 +6,18 @@ public class DetenidoNoIdentificado {
     private String descripcionSignificativa;
     private int id_testigo = 000;
 
+    public DetenidoNoIdentificado(String apodo, String descripcionSignificativa, int id_testigo) {
+        
+        this.apodo = apodo;
+        this.descripcionSignificativa = descripcionSignificativa;
+        this.id_testigo = id_testigo;
+    }
     public DetenidoNoIdentificado(String apodo, String descripcionSignificativa) {
         
         this.apodo = apodo;
         this.descripcionSignificativa = descripcionSignificativa;
+        this.id_testigo = 000;
+        
     }
 
 

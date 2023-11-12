@@ -28,7 +28,8 @@ public class Dao_Detenido_No_Identificado {
 
                 String apodo = rs.getString("Apodo");
                 String descripcion = rs.getString("Descripcion_significativa");
-                DetenidoNoIdentificado detenidoNoIdentificado = new DetenidoNoIdentificado(apodo, descripcion);
+                int id_testigo = rs.getInt("ID_Testigo");
+                DetenidoNoIdentificado detenidoNoIdentificado = new DetenidoNoIdentificado(apodo, descripcion,id_testigo);
                 detenidosNoIdentificados.add(detenidoNoIdentificado);
             }
         } catch (SQLException e) {
@@ -42,10 +43,11 @@ public class Dao_Detenido_No_Identificado {
         int filasAfectadas = 0;
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
             System.out.println("[+] Añadiendo detenido no identificado a la Base de Datos");
-            String query = "INSERT INTO `Detenidos_No_Identificados` (`Apodo`, `Descripcion_significativa`) VALUES (?,?)";
+            String query = "INSERT INTO `Detenidos_No_Identificados` (`Apodo`, `Descripcion_significativa`, `ID_Testigo`) VALUES (?,?,?)";
             PreparedStatement pStmt = conn.prepareStatement(query);
             pStmt.setString(1, detenidoNoIdentificado.getApodo());
             pStmt.setString(2, detenidoNoIdentificado.getDescripcionSignificativa());
+            pStmt.setInt(3, detenidoNoIdentificado.getIdTestigo());
             filasAfectadas = pStmt.executeUpdate();
             if (filasAfectadas == 1) {
                 System.out.println("Detenido no identificado añadido correctamente");
@@ -67,7 +69,8 @@ public class Dao_Detenido_No_Identificado {
             while (rs.next()) {
                 String apodo = rs.getString("Apodo");
                 String descripcion = rs.getString("Descripcion_significativa");
-                detenidoNoIdentificado = new DetenidoNoIdentificado(apodo, descripcion);
+                int id_testigo = rs.getInt("ID_Testigo");
+                detenidoNoIdentificado = new DetenidoNoIdentificado(apodo, descripcion,id_testigo);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,11 +100,12 @@ public class Dao_Detenido_No_Identificado {
         int filasAfectadas = 0;
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
             System.out.println("[+] Actualizando detenido no identificado en la base de datos");
-            String query = "UPDATE Detenidos_No_Identificados SET Apodo = ?, Descripcion_significativa = ? WHERE ID_Persona = ?";
+            String query = "UPDATE Detenidos_No_Identificados SET Apodo = ?, Descripcion_significativa = ?, ID_Testigo = ? WHERE ID_Persona = ?";
             PreparedStatement pStmt = conn.prepareStatement(query);
             pStmt.setString(1, detenidoNoIdentificado.getApodo());
             pStmt.setString(2, detenidoNoIdentificado.getDescripcionSignificativa());
-            pStmt.setInt(3,id);
+            pStmt.setInt(3, detenidoNoIdentificado.getIdTestigo());
+            pStmt.setInt(4,id);
             filasAfectadas = pStmt.executeUpdate();
             if (filasAfectadas > 0) {
                 System.out.println("Detenido no identificado actualizado correctamente");
