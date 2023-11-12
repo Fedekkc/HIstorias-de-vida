@@ -116,7 +116,7 @@ public class Dao_testigos {
         System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
             System.out.println("[+] Actualizando testigo en la base de datos");
-            String query = "UPDATE Testigos SET Nombre = ?, Testimonio = ? DNI = ? WHERE ID_Testigo = ?";
+            String query = "UPDATE Testigos SET Nombre = ?, Testimonio = ?, DNI = ? WHERE ID_Testigo = ?";
             PreparedStatement pStmt = conn.prepareStatement(query);
             pStmt.setString(1, testigo.getNombre());
             pStmt.setString(2, testigo.getTestimonio());
