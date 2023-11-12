@@ -104,7 +104,8 @@ public class add_Detenido_Identificado extends JPanel {
 		for (int i = 0; i <= listaLugares.size() - 1; i++) {
 			cbLugarDeSecuestro.addItem(listaLugares.get(i));
 		}
-		
+		cbLugarDeSecuestro.setSelectedIndex(2);
+
 		panel.add(cbLugarDeSecuestro);
 		
 		txtTiempoEnCautiverio = new JTextField();
