@@ -104,6 +104,7 @@ public class add_Detenido_Identificado extends JPanel {
 		for (int i = 1; i <= listaLugares.size() - 1; i++) {
 			cbLugarDeSecuestro.addItem(listaLugares.get(i));
 		}
+		cbLugarDeSecuestro.setSelectedIndex(0);
 		panel.add(cbLugarDeSecuestro);
 		
 		txtTiempoEnCautiverio = new JTextField();
@@ -147,7 +148,7 @@ public class add_Detenido_Identificado extends JPanel {
 				ZoneId zone = ZoneId.systemDefault();
 				LocalDate localDate = instant.atZone(zone).toLocalDate();
 				detenido.setUltVezVisto(localDate);
-				detenido.setLugarSecuestro(cbLugarDeSecuestro.getSelectedIndex());;
+				detenido.setLugarSecuestro(cbLugarDeSecuestro.getSelectedIndex() + 1);;
 				detenido.setTiempoEnCautiverio(i);
 				Dao.addDetenidoIdentificado(detenido);
 				

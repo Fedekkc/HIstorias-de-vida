@@ -51,16 +51,16 @@ public class Dao_Detenido_Identificado {
     }
     public void addDetenidoIdentificado(DetenidoIdentificado detenido) {
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
-            String query = "INSERT INTO Detenidos_Identificados (Nombre, DNI, Ultima_vez_visto, Biografia_personal, Ruta_material_audiovisual, Tiempo_en_cautiverio, Sobrevivio) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Detenidos_Identificados (Nombre, DNI, ID_Lugar_de_secuestro, Ultima_vez_visto, Biografia_personal, Ruta_material_audiovisual, Tiempo_en_cautiverio, Sobrevivio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pStmt = conn.prepareStatement(query);
             pStmt.setString(1, detenido.getNombre());
             pStmt.setString(2, detenido.getDNI());
-            //pStmt.setString(3, detenido.getLugarSecuestro());
-            pStmt.setDate(3, java.sql.Date.valueOf(detenido.getUltVezVisto()));
-            pStmt.setString(4, detenido.getBiografiaPersonal());
-            pStmt.setString(5, detenido.getRutaMaterialAudiovisual());
-            pStmt.setInt(6, detenido.getTiempoEnCautiverio());
-            pStmt.setBoolean(7, detenido.getSobrevivio());
+            pStmt.setInt(3, detenido.getLugarSecuestro());
+            pStmt.setDate(4, java.sql.Date.valueOf(detenido.getUltVezVisto()));
+            pStmt.setString(5, detenido.getBiografiaPersonal());
+            pStmt.setString(6, detenido.getRutaMaterialAudiovisual());
+            pStmt.setInt(7, detenido.getTiempoEnCautiverio());
+            pStmt.setBoolean(8, detenido.getSobrevivio());
             pStmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -128,5 +128,22 @@ public class Dao_Detenido_Identificado {
             e.printStackTrace();
         }
         return detenido;
+    }
+    
+    public String getLugarDeSecuestro(DetenidoIdentificado dt) {
+    	String lugar = "";
+    	try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
+            String query = "SELECT * FROM Detenidos_Identificados INNER JOIN Lugares_de_secuestro ON Detenidos_Identificados.ID_Lugar_de_secuestro = Lugares_de_secuestro.ID_Lugar WHERE ID_Detenido_Identificado = ?";
+            PreparedStatement pStmt = conn.prepareStatement(query);
+            pStmt.setInt(1, dt.getLugarSecuestro());
+            ResultSet rs = pStmt.executeQuery();
+            if (rs.next()) {
+            	lugar = rs.getString("Lugares_de_secuestro.Nombre");
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return lugar;
     }
 }

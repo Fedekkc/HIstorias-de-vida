@@ -210,7 +210,10 @@ public class AM_Identificados extends JPanel {
 
 		list.addListSelectionListener(new ListSelectionListener() {
 		    @Override
+		    
+		    
 		    public void valueChanged(ListSelectionEvent e) {
+		    	Dao_Detenido_Identificado dao = new Dao_Detenido_Identificado();
 		        selected[0] = list.getSelectedValue();
 	                
 	                if (selected[0] != null) {
@@ -218,7 +221,7 @@ public class AM_Identificados extends JPanel {
 	                		        	
 		            nombreLabel.setText("● Nombre: " + selected[0].getNombre());
 		            DNILabel.setText("● DNI: " + selected[0].getDNI());
-		            lugarSecuestroLabel.setText("● Lugar de secuestro: " + selected[0].getLugarSecuestro());
+		            lugarSecuestroLabel.setText("● Lugar de secuestro: " + dao.getLugarDeSecuestro(selected[0]));
 		            ultVezLabel.setText("● Ultima vez visto: " + selected[0].getUltVezVisto());
 		            biografiaLabel.setText("● Biografia: " + selected[0].getBiografiaPersonal());
 
