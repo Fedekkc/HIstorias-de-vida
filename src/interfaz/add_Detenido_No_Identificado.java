@@ -118,7 +118,7 @@ public class add_Detenido_No_Identificado extends JPanel {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new ViewCCDTyE());
+				marco.setContentPane(new Menu_Personas());
 				marco.validate();
 			}});
 		

@@ -11,10 +11,15 @@ import java.awt.Dimension;
 import java.awt.Panel;
 import java.awt.List;
 import java.awt.Color;
+import java.awt.Component;
+
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.JTextPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class A_Testigo extends JDialog {
 
@@ -76,6 +81,12 @@ public class A_Testigo extends JDialog {
 		panel.add(botonAceptar);
 		
 		JButton botonCancelar = new JButton("Cancelar");
+		botonCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor((Component) e.getSource());
+		        dialog.dispose();
+			}
+		});
 		botonCancelar.setBounds(78, 195, 89, 23);
 		panel.add(botonCancelar);
 		
