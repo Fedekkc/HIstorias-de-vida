@@ -37,12 +37,7 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Testigos`(
     PRIMARY KEY(`ID_Testigo`)
 );
 
-CREATE TABLE IF NOT EXISTS `CCDTyE`.`Personas`(
-	`ID_Persona` INT NOT NULL AUTO_INCREMENT,
-    `ID_Testigo` INT,
-    PRIMARY KEY (`ID_Persona`),
-    FOREIGN_KEY(`ID_Testigo`) REFERENCES `CCDTyE`.`Testigos`('ID_Testigo')
-);
+
 
 CREATE TABLE IF NOT EXISTS `Lugares_de_secuestro`(`ID_Lugar`INT NOT NULL AUTO_INCREMENT PRIMARY KEY, `Nombre` VARCHAR(60));
 

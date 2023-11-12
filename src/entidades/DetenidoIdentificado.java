@@ -2,7 +2,7 @@ package entidades;
 
 import java.time.LocalDate;
 
-public class DetenidoIdentificado extends Persona{
+public class DetenidoIdentificado{
     private String nombre;
     private String DNI;
     private String lugarSecuestro;
