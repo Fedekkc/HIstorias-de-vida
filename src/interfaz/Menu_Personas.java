@@ -58,6 +58,14 @@ public class Menu_Personas extends JPanel {
 		panel.add(lblNewLabel);
 		
 		JButton viewIdentificadoButton = new JButton("Ver");
+		viewIdentificadoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new AM_Identificados());
+				marco.validate();
+				
+			}
+		});
 		viewIdentificadoButton.setBounds(100, 395, 89, 23);
 		panel.add(viewIdentificadoButton);
 		
@@ -76,6 +84,13 @@ public class Menu_Personas extends JPanel {
 
 		
 		JButton viewNoIdentificadoButton = new JButton("Ver");
+		viewNoIdentificadoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new AM_NoIdentificados());
+				marco.validate();
+			}
+		});
 		viewNoIdentificadoButton.setBounds(114, 394, 89, 23);
 		panel_1.add(viewNoIdentificadoButton);
 		

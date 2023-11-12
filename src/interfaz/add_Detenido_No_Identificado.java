@@ -135,6 +135,7 @@ public class add_Detenido_No_Identificado extends JPanel {
 				marco.setContentPane(new A_Testigo(detenido));
 				marco.validate();
 				
+				
 			}
 			
 		});

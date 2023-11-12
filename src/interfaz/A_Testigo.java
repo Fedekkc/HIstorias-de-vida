@@ -110,6 +110,9 @@ public class A_Testigo extends JPanel {
         		int id = testigosDao.getIDTestigo(dni);
         		detenido.setIdTestigo(id);
         		detenidoDao.addDetenidoNoIdentificado(detenido);
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new AM_NoIdentificados());
+				marco.validate();
         		
         		
         		

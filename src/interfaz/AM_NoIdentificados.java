@@ -29,40 +29,40 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import dao_ccdtye.Dao_CCDTyE;
-import dao_detenido_identificado.Dao_Detenido_Identificado;
+import dao_detenido_identificado.Dao_Detenido_No_Identificado;
 import dao_fuerzas.Dao_Fuerzas;
 import entidades.CCDTyE;
-import entidades.DetenidoIdentificado;
+import entidades.DetenidoNoIdentificado;
 import interfaz.M_CCDTyE;
 import java.awt.Dimension;
 import javax.swing.JTextField;
 
-public class AM_Identificados extends JPanel {
+public class AM_NoIdentificados extends JPanel {
     private JTextField searchField;
-    private DefaultListModel<DetenidoIdentificado> listModel;
-    private Dao_Detenido_Identificado dao;
+    private DefaultListModel<DetenidoNoIdentificado> listModel;
+    private Dao_Detenido_No_Identificado dao;
 
-    public AM_Identificados() {
+    public AM_NoIdentificados() {
         setBackground(new Color(138, 135, 169));
         setMinimumSize(new Dimension(880, 560));
 
         listModel = new DefaultListModel<>(); // Inicializa listModel
-        dao = new Dao_Detenido_Identificado();
-        ArrayList<DetenidoIdentificado> detenidos = dao.getAllDetenidos_Identificados();
-        for (DetenidoIdentificado detenido : detenidos) {
+        dao = new Dao_Detenido_No_Identificado();
+        ArrayList<DetenidoNoIdentificado> detenidos = dao.getAllDetenidoNoIdentificado();
+        for (DetenidoNoIdentificado detenido : detenidos) {
             listModel.addElement(detenido);
         }
         
         setLayout(null);
-        JList<DetenidoIdentificado> list = new JList<>(listModel);
+        JList<DetenidoNoIdentificado> list = new JList<>(listModel);
         list.setFont(new Font("M PLUS 1p", Font.BOLD, 12));
         list.setCellRenderer(new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                if (value instanceof DetenidoIdentificado) {
-                    DetenidoIdentificado detenidoIdentificado = (DetenidoIdentificado) value;
-                    setText(detenidoIdentificado.getNombre());
+                if (value instanceof DetenidoNoIdentificado) {
+                    DetenidoNoIdentificado DetenidoNoIdentificado = (DetenidoNoIdentificado) value;
+                    setText(DetenidoNoIdentificado.getApodo());
                 }
                 return this;
             }
@@ -125,44 +125,25 @@ public class AM_Identificados extends JPanel {
 		
 
 		
-		JLabel nombreLabel = new JLabel("● Nombre: ");
+		JLabel nombreLabel = new JLabel("● Apodo: ");
 		nombreLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
 		nombreLabel.setForeground(new Color(217, 217, 217));
 		nombreLabel.setBounds(10, 11, 495, 14);
 		panel_1.add(nombreLabel);
 		
-		JLabel DNILabel = new JLabel("● DNI: ");
-		DNILabel.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
-		DNILabel.setForeground(new Color(217, 217, 217));
-		DNILabel.setBounds(10, 36, 495, 14);
-		panel_1.add(DNILabel);
-		
-		JLabel lugarSecuestroLabel = new JLabel("● Lugar de secuestro:");
-		lugarSecuestroLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
-		lugarSecuestroLabel.setForeground(new Color(217, 217, 217));
-		lugarSecuestroLabel.setBounds(10, 61, 495, 14);
-		panel_1.add(lugarSecuestroLabel);
-		
-		JLabel ultVezLabel = new JLabel("● Ultima vez visto: ");
-		ultVezLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
-		ultVezLabel.setForeground(new Color(217, 217, 217));
-		ultVezLabel.setBounds(10, 86, 495, 14);
-		panel_1.add(ultVezLabel);
-		
-		JLabel biografiaLabel = new JLabel("● Biografia:");
+		JLabel biografiaLabel = new JLabel("● Descripcion:");
 		biografiaLabel.setVerticalAlignment(SwingConstants.TOP);
 		biografiaLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
 		biografiaLabel.setForeground(new Color(217, 217, 217));
-		biografiaLabel.setBounds(10, 118, 495, 77);
+		biografiaLabel.setBounds(10, 76, 495, 77);
 		panel_1.add(biografiaLabel);
 		
-		JButton materialButton = new JButton("Material");
-		materialButton.setBounds(220, 206, 89, 23);
-		panel_1.add(materialButton);
-		
-		JLabel sobrevivioLabel = new JLabel("");
-		sobrevivioLabel.setBounds(10, 317, 259, 14);
-		panel_1.add(sobrevivioLabel);
+		JLabel lblTestigo = new JLabel("● Testigo:");
+		lblTestigo.setVerticalAlignment(SwingConstants.TOP);
+		lblTestigo.setForeground(new Color(217, 217, 217));
+		lblTestigo.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
+		lblTestigo.setBounds(10, 164, 495, 20);
+		panel_1.add(lblTestigo);
 		
 		Panel panel_2 = new Panel();
 		panel_2.setBackground(new Color(0, 0, 26));
@@ -205,7 +186,7 @@ public class AM_Identificados extends JPanel {
 
 		
 		
-		final DetenidoIdentificado[] selected = {null}; 
+		final DetenidoNoIdentificado[] selected = {null}; 
 		
 
 		list.addListSelectionListener(new ListSelectionListener() {
@@ -214,13 +195,10 @@ public class AM_Identificados extends JPanel {
 		        selected[0] = list.getSelectedValue();
 	                
 	                if (selected[0] != null) {
-	                    lblNewLabel.setText(selected[0].getNombre());
+	                    lblNewLabel.setText(selected[0].getApodo());
 	                		        	
-		            nombreLabel.setText("● Nombre: " + selected[0].getNombre());
-		            DNILabel.setText("● DNI: " + selected[0].getDNI());
-		            lugarSecuestroLabel.setText("● Lugar de secuestro: " + selected[0].getLugarSecuestro());
-		            ultVezLabel.setText("● Ultima vez visto: " + selected[0].getUltVezVisto());
-		            biografiaLabel.setText("● Biografia: " + selected[0].getBiografiaPersonal());
+		            nombreLabel.setText("● Nombre: " + selected[0].getApodo());
+		            biografiaLabel.setText("● Descripcion: " + selected[0].getDescripcionSignificativa());
 
 	                }    
 		    }
@@ -235,8 +213,8 @@ public class AM_Identificados extends JPanel {
 		    public void actionPerformed(ActionEvent e) {
 		        int selectedIndex = list.getSelectedIndex(); // Obtener el índice seleccionado antes de la actualización
 		        listModel.clear(); // Limpiar el modelo de lista existente
-		        ArrayList<DetenidoIdentificado> updatedDetenidos = dao.getAllDetenidos_Identificados(); // Obtener los datos actualizados
-		        for (DetenidoIdentificado stopped : updatedDetenidos) {
+		        ArrayList<DetenidoNoIdentificado> updatedDetenidos = dao.getAllDetenidoNoIdentificado(); // Obtener los datos actualizados
+		        for (DetenidoNoIdentificado stopped : updatedDetenidos) {
 		        	
 		            listModel.addElement(stopped); 
 		        }
@@ -270,7 +248,7 @@ public class AM_Identificados extends JPanel {
 			public void actionPerformed(ActionEvent e)
 			{
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new add_Detenido_Identificado());
+				marco.setContentPane(new add_Detenido_No_Identificado());
 				marco.validate();
 			}
 			
@@ -286,11 +264,11 @@ public class AM_Identificados extends JPanel {
     private void filterList() {
         String searchTerm = searchField.getText().toLowerCase(); // Obtener el término de búsqueda en minúsculas
         listModel.clear(); // Limpiar el modelo de lista existente
-        ArrayList<DetenidoIdentificado> updatedDetenidos = dao.getAllDetenidos_Identificados(); // Obtener los datos actualizados
+        ArrayList<DetenidoNoIdentificado> updatedDetenidos = dao.getAllDetenidoNoIdentificado(); // Obtener los datos actualizados
 
         // Filtrar los elementos basados en el término de búsqueda
-        for (DetenidoIdentificado stopped : updatedDetenidos) {
-            if (stopped.getNombre().toLowerCase().contains(searchTerm)) {
+        for (DetenidoNoIdentificado stopped : updatedDetenidos) {
+            if (stopped.getApodo().toLowerCase().contains(searchTerm)) {
                 listModel.addElement(stopped); // Agregar los elementos coincidentes al modelo de lista
             }
         }
