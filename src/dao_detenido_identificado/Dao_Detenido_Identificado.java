@@ -67,20 +67,40 @@ public class Dao_Detenido_Identificado {
         }
     }
 
-    public void deleteDetenidoIdentificado(int idPersona) {
+    public void deleteDetenidoIdentificado(DetenidoIdentificado dt) {
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
             String query = "DELETE FROM Detenidos_Identificados WHERE ID_Detenido_Identificado = ?";
             PreparedStatement pStmt = conn.prepareStatement(query);
-            pStmt.setInt(1, idPersona);
+            pStmt.setInt(1, getIdDetenidoIdentificado(dt.getNombre()));
             pStmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
+    public int getIdDetenidoIdentificado(String nombreDetenido) {
+        int idDetenido = -1; // Valor predeterminado en caso de que no se encuentre el detenido
 
+        try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
+            String query = "SELECT ID_Detenido_Identificado FROM Detenidos_Identificados WHERE Nombre = ?";
+            PreparedStatement pStmt = conn.prepareStatement(query);
+            pStmt.setString(1, nombreDetenido);
+            ResultSet rs = pStmt.executeQuery();
+
+            if (rs.next()) {
+                idDetenido = rs.getInt("ID_Detenido_Identificado");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return idDetenido;
+    }
+    
     public void updateDetenidoIdentificado(DetenidoIdentificado detenido) {
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
-            String query = "UPDATE Detenidos_Identificados SET Nombre = ?, DNI = ?, ID_Lugar_de_secuestro = ?, Ultima_vez_visto = ?, Biografia_personal = ?, Ruta_material_audiovisual = ?, Tiempo_en_cautiverio = ?, Sobrevivio = ? WHERE DNI = ?";
+            String query = "UPDATE Detenidos_Identificados SET Nombre = ?, DNI = ?, ID_Lugar_de_secuestro = ?, Ultima_vez_visto = ?, Biografia_personal = ?, Ruta_material_audiovisual = ?, Tiempo_en_cautiverio = ?, Sobrevivio = ? WHERE ID_Detenido_Identificado = ?";
             PreparedStatement pStmt = conn.prepareStatement(query);
             pStmt.setString(1, detenido.getNombre());
             pStmt.setString(2, detenido.getDNI());
@@ -90,7 +110,7 @@ public class Dao_Detenido_Identificado {
             pStmt.setString(6, detenido.getRutaMaterialAudiovisual());
             pStmt.setInt(7, detenido.getTiempoEnCautiverio());
             pStmt.setBoolean(8, detenido.getSobrevivio());
-            pStmt.setString(9, detenido.getDNI()); // O cualquier otro campo que sea único en tu base de datos
+            pStmt.setInt(9, getIdDetenidoIdentificado(detenido.getNombre())); // O cualquier otro campo que sea único en tu base de datos
             pStmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -131,25 +151,9 @@ public class Dao_Detenido_Identificado {
     }
     
     
-    public int getIdDetenidoIdentificado(String nombreDetenido) {
-        int idDetenido = -1; // Valor predeterminado en caso de que no se encuentre el detenido
-
-        try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
-            String query = "SELECT ID_Detenido_Identificado FROM Detenidos_Identificados WHERE Nombre = ?";
-            PreparedStatement pStmt = conn.prepareStatement(query);
-            pStmt.setString(1, nombreDetenido);
-            ResultSet rs = pStmt.executeQuery();
-
-            if (rs.next()) {
-                idDetenido = rs.getInt("ID_Detenido_Identificado");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return idDetenido;
-    }
+    
+    
+    
 
     
     public String getLugarDeSecuestro(int id) {

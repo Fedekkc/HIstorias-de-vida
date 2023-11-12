@@ -123,23 +123,6 @@ public class M_Detenido_No_Identificado extends JPanel {
 		lblApodo.setBounds(147, 11, 185, 14);
 		panel.add(lblApodo);
 		
-		JButton btnNewButton = new JButton("Eliminar");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Dao_Detenido_No_Identificado detenidoDao = new Dao_Detenido_No_Identificado();
-				int id = detenidoDao.getIdDetenidoByIdTestigo(detenido.getIdTestigo());
-				
-				detenidoDao.deleteDetenidoNoIdentificado(id);
-				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new AM_NoIdentificados());
-				marco.validate();
-				
-				
-			}
-		});
-		btnNewButton.setBounds(195, 250, 89, 23);
-		panel.add(btnNewButton);
-		
 		btnAadirTestigo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String apodo = txtNombre.getText();
