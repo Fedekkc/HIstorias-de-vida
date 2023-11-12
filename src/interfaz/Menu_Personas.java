@@ -57,23 +57,8 @@ public class Menu_Personas extends JPanel {
 		lblNewLabel.setBounds(10, 11, 280, 36);
 		panel.add(lblNewLabel);
 		
-
-		
-		JButton addIdentificadoButton = new JButton("Añadir");
-		addIdentificadoButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new add_Detenido_Identificado());
-				marco.validate();
-				
-			}
-		});
-		addIdentificadoButton.setBounds(40, 397, 89, 23);
-		panel.add(addIdentificadoButton);
-		
 		JButton viewIdentificadoButton = new JButton("Ver");
-		viewIdentificadoButton.setBounds(175, 397, 89, 23);
+		viewIdentificadoButton.setBounds(100, 395, 89, 23);
 		panel.add(viewIdentificadoButton);
 		
 		Panel panel_1 = new Panel();
@@ -88,24 +73,10 @@ public class Menu_Personas extends JPanel {
 		lblNoIdentificados.setFont(new Font("M PLUS 1p", Font.BOLD, 24));
 		lblNoIdentificados.setBounds(10, 11, 280, 36);
 		panel_1.add(lblNoIdentificados);
-		
-		JButton addNoIdentificadoButton = new JButton("Añadir");
-		addNoIdentificadoButton.setBounds(39, 392, 89, 23);
-		panel_1.add(addNoIdentificadoButton);
-		
-		
-		addNoIdentificadoButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new add_Detenido_No_Identificado());
-				marco.validate();
-			}
-			
-		});
 
 		
 		JButton viewNoIdentificadoButton = new JButton("Ver");
-		viewNoIdentificadoButton.setBounds(184, 392, 89, 23);
+		viewNoIdentificadoButton.setBounds(114, 394, 89, 23);
 		panel_1.add(viewNoIdentificadoButton);
 		
 		

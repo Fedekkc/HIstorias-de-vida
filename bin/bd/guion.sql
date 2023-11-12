@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_No_Identificados`(
     `Apodo` VARCHAR(30),
     `Descripcion_significativa` TEXT,
     PRIMARY KEY(`ID_Detenido_No_Identificado`),
-    foreign key(`ID_Testigo`) REFERENCES `Testigos`(`ID_Testigo`);
+    foreign key(`ID_Testigo`) REFERENCES `CCDTyE`.`Testigos`(`ID_Testigo`)
 );
 
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_No_Identificados_CCDTyE`(
