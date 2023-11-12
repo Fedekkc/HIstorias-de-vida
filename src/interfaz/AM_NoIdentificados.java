@@ -31,6 +31,7 @@ import javax.swing.event.ListSelectionListener;
 import dao_ccdtye.Dao_CCDTyE;
 import dao_detenido_identificado.Dao_Detenido_No_Identificado;
 import dao_fuerzas.Dao_Fuerzas;
+import dao_testigos.Dao_testigos;
 import entidades.CCDTyE;
 import entidades.DetenidoNoIdentificado;
 import interfaz.M_CCDTyE;
@@ -188,7 +189,7 @@ public class AM_NoIdentificados extends JPanel {
 		
 		final DetenidoNoIdentificado[] selected = {null}; 
 		
-
+		Dao_testigos daoTestigo = new Dao_testigos();
 		list.addListSelectionListener(new ListSelectionListener() {
 		    @Override
 		    public void valueChanged(ListSelectionEvent e) {
@@ -196,9 +197,10 @@ public class AM_NoIdentificados extends JPanel {
 	                
 	                if (selected[0] != null) {
 	                    lblNewLabel.setText(selected[0].getApodo());
-	                		        	
-		            nombreLabel.setText("● Nombre: " + selected[0].getApodo());
-		            biografiaLabel.setText("● Descripcion: " + selected[0].getDescripcionSignificativa());
+	                    String nombreTestigo = daoTestigo.getTestigoByID(selected[0].getIdTestigo()).getNombre();
+			            nombreLabel.setText("● Nombre: " + selected[0].getApodo());
+			            biografiaLabel.setText("● Descripcion: " + selected[0].getDescripcionSignificativa());
+			            lblTestigo.setText("● Testigo: " + nombreTestigo);
 
 	                }    
 		    }
@@ -207,6 +209,8 @@ public class AM_NoIdentificados extends JPanel {
 		btnNewButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 
+		    	
+		    	
 		    }
 		});
 		refreshButton.addActionListener(new ActionListener() {

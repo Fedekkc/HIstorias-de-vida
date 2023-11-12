@@ -69,6 +69,27 @@ public class Dao_testigos {
         }
         return testigoID;
     }
+    
+    public Testigo getTestigoByID(int testigoID) {
+        Testigo testigo = null;
+        try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
+            System.out.println("[+] Obteniendo testigo de la Base de datos por ID");
+            String query = "SELECT * FROM  `Testigos` WHERE `ID_Testigo` = ?";
+            PreparedStatement pStmt = conn.prepareStatement(query);
+            pStmt.setInt(1, testigoID);
+            ResultSet rs = pStmt.executeQuery();
+            while (rs.next()) {
+                String nombreTestigo = rs.getString("Nombre");
+                String dni = rs.getString("DNI");
+                String testimonio = rs.getString("Testimonio");
+                testigo = new Testigo(nombreTestigo, dni, testimonio);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return testigo;
+    }
+
 
     
 

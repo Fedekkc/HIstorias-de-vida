@@ -52,21 +52,22 @@ import javax.swing.SwingConstants;
 
 
 
-public class add_Detenido_No_Identificado extends JPanel {
+public class M_Detenido_No_Identificado extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField txtNombre;
+	private DetenidoNoIdentificado detenido;
 
 	/**
 	 * Create the panel.
 	 */
-	public add_Detenido_No_Identificado() {
+	public M_Detenido_No_Identificado(DetenidoNoIdentificado detenido) {
+		this.detenido = detenido;
+		
 		setMinimumSize(new Dimension(880, 560));
 		setBackground(new Color(138, 135, 169));
 		setLayout(null);
-		
 
-		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(50, 49, 78));
 		panel.setBounds(222, 105, 479, 349);
@@ -99,6 +100,20 @@ public class add_Detenido_No_Identificado extends JPanel {
 		btnAadirTestigo.setBounds(265, 300, 89, 23);
 		panel.add(btnAadirTestigo);
 		
+
+		
+		JLabel lblNewLabel = new JLabel(detenido.getDescripcionSignificativa());
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setBounds(128, 72, 231, 14);
+		panel.add(lblNewLabel);
+		
+		JLabel lblApodo = new JLabel(detenido.getApodo());
+		lblApodo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblApodo.setForeground(Color.WHITE);
+		lblApodo.setBounds(147, 11, 185, 14);
+		panel.add(lblApodo);
+		
 		btnAadirTestigo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String apodo = txtNombre.getText();
@@ -106,24 +121,11 @@ public class add_Detenido_No_Identificado extends JPanel {
 				DetenidoNoIdentificado detenido = new DetenidoNoIdentificado(apodo, descripcionSignificativa);			
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
 				marco.setContentPane(new A_Testigo(detenido));
-				marco.validate();
-				
+				marco.validate();			
 				
 			}
 			
 		});
-		
-		JLabel lblNewLabel = new JLabel("Descripción Significativa\r\n");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(128, 72, 231, 14);
-		panel.add(lblNewLabel);
-		
-		JLabel lblApodo = new JLabel("Apodo");
-		lblApodo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblApodo.setForeground(Color.WHITE);
-		lblApodo.setBounds(147, 11, 185, 14);
-		panel.add(lblApodo);
         
 		
 
