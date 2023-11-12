@@ -246,6 +246,7 @@ public class AM_Identificados extends JPanel {
 		JButton materialButton = new JButton("Material");
 		materialButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(selected[0] != null) {
 				if(selected[0].getRutaMaterialAudiovisual() != null)
 				{
 					File fileToOpen = new File(selected[0].getRutaMaterialAudiovisual());
@@ -256,12 +257,17 @@ public class AM_Identificados extends JPanel {
 		            }
 				}
 				
-				
-				
+				}
 			}
 		});
 		materialButton.setBounds(220, 206, 89, 23);
 		panel_1.add(materialButton);
+		
+		JButton borrarButton = new JButton("Eliminar");
+		borrarButton.setForeground(new Color(217, 217, 217));
+		borrarButton.setBackground(new Color(0, 0, 26));
+		borrarButton.setBounds(255, 417, 98, 23);
+		panel.add(borrarButton);
 
 		btnNewButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -272,6 +278,14 @@ public class AM_Identificados extends JPanel {
 				marco.validate();
 		    	}
 		    }
+		});
+		
+		borrarButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selected[0] != null) {
+					dao.deleteDetenidoIdentificado(selected[0]);
+				}
+			}
 		});
 		
 		refreshButton.addActionListener(new ActionListener() {

@@ -97,13 +97,13 @@ public class Dao_Detenido_No_Identificado {
         return detenidoNoIdentificado;
     }
 
-    public void deleteDetenidoNoIdentificado(int idPersona) {
+    public void deleteDetenidoNoIdentificado(DetenidoNoIdentificado dt) {
         int filasAfectadas = 0;
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
             System.out.println("[+] Eliminando detenido no identificado de la base de datos");
             String query = "DELETE FROM Detenidos_No_Identificados WHERE ID_Detenido_No_Identificado = ?";
             PreparedStatement pStmt = conn.prepareStatement(query);
-            pStmt.setInt(1, idPersona);
+            pStmt.setInt(1, getIdDetenidoNoIdentificado(dt.getApodo()));
             filasAfectadas = pStmt.executeUpdate();
             if (filasAfectadas > 0) {
                 System.out.println("Detenido no identificado eliminado correctamente");
@@ -134,5 +134,25 @@ public class Dao_Detenido_No_Identificado {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public int getIdDetenidoNoIdentificado(String nombreDetenido) {
+        int idDetenido = -1; // Valor predeterminado en caso de que no se encuentre el detenido
+
+        try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
+            String query = "SELECT ID_Detenido_No_Identificado FROM Detenidos_No_Identificados WHERE Apodo = ?";
+            PreparedStatement pStmt = conn.prepareStatement(query);
+            pStmt.setString(1, nombreDetenido);
+            ResultSet rs = pStmt.executeQuery();
+
+            if (rs.next()) {
+                idDetenido = rs.getInt("ID_Detenido_No_Identificado");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return idDetenido;
     }
 }

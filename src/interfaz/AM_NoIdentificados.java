@@ -161,6 +161,12 @@ public class AM_NoIdentificados extends JPanel {
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 16));
 		
+		JButton deleteButton = new JButton("Eliminar");
+		deleteButton.setForeground(new Color(217, 217, 217));
+		deleteButton.setBackground(new Color(0, 0, 26));
+		deleteButton.setBounds(256, 417, 98, 23);
+		panel.add(deleteButton);
+		
 		JButton refreshButton = new JButton("Actualizar");
 		refreshButton.setForeground(new Color(217, 217, 217));
 		refreshButton.setBackground(new Color(0, 0, 26));
@@ -217,6 +223,13 @@ public class AM_NoIdentificados extends JPanel {
 		    	
 		    }
 		});
+		
+		deleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dao.deleteDetenidoNoIdentificado(selected[0]);
+			}
+		});
+		
 		refreshButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        int selectedIndex = list.getSelectedIndex(); // Obtener el índice seleccionado antes de la actualización
