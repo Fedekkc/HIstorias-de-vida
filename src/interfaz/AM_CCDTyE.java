@@ -104,10 +104,18 @@ public class AM_CCDTyE extends JPanel {
 		btnNewButton_1.setBackground(new Color(0, 0, 26));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+		        
+		        
+
+				
 				MainWindow MW = new MainWindow();
+		        
             	MW.setVisible(true);
             	MW.validate();
+		        // Ocultar el JPanel actual
+                JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(AM_CCDTyE.this);
+                currentFrame.dispose();
+		        setVisible(false);
             	
 			}
 		});
