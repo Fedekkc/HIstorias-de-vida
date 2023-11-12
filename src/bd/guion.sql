@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Testigos`(
 CREATE TABLE IF NOT EXISTS `Lugares_de_secuestro`(`ID_Lugar`INT NOT NULL AUTO_INCREMENT PRIMARY KEY, `Nombre` VARCHAR(60));
 
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_Identificados`(
-	`ID_Persona` INT NOT NULL,
+	`ID_Detenido_Identificado` INT NOT NULL,
     `Nombre` VARCHAR(45) NOT NULL,
     `DNI` VARCHAR(25) NOT NULL,
     `ID_Lugar_de_secuestro` INT NOT NULL,
@@ -51,8 +51,7 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_Identificados`(
     `Ruta_material_audiovisual` VARCHAR(255),
     `Tiempo_en_cautiverio` INT,
     `Sobrevivio` BOOLEAN,   
-    PRIMARY KEY (`ID_Persona`),
-    FOREIGN KEY (`ID_Persona`) REFERENCES Personas(`ID_Persona`),
+    PRIMARY KEY (`ID_Detenido_Identificado`),
     FOREIGN KEY (`ID_Lugar_de_secuestro`) REFERENCES Lugares_de_secuestro(`ID_Lugar`)
 );
 
@@ -66,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `CCDTyE`.`CCDTyE_Personas`(
 
 
 CREATE TABLE IF NOT EXISTS `CCDTyE`.`Detenidos_No_Identificados`(
-	`ID_Persona` INT NOT NULL,
+	`ID_Detenido_No_Identificado` INT NOT NULL,
     `Apodo` VARCHAR(30),
     `Descripcion_significativa` TEXT,
     PRIMARY KEY(`ID_Persona`),

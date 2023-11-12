@@ -128,8 +128,11 @@ public class add_Detenido_No_Identificado extends JPanel {
 		
 		btnAadirTestigo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String apodo = txtNombre.getText();
+				String descripcionSignificativa = txtpnDescripcinSignificativa.getText();
+				DetenidoNoIdentificado detenido = new DetenidoNoIdentificado(apodo, descripcionSignificativa);			
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new A_Testigo());
+				marco.setContentPane(new A_Testigo(detenido));
 				marco.validate();
 				
 			}
@@ -147,7 +150,6 @@ public class add_Detenido_No_Identificado extends JPanel {
 		lblApodo.setForeground(Color.WHITE);
 		lblApodo.setBounds(147, 11, 185, 14);
 		panel.add(lblApodo);
-		Dao_Detenido_No_Identificado daoNoIdentif = new Dao_Detenido_No_Identificado();
         
 		
 

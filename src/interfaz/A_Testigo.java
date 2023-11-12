@@ -15,6 +15,9 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+
+import entidades.DetenidoNoIdentificado;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 
@@ -23,11 +26,15 @@ public class A_Testigo extends JPanel {
     private static final long serialVersionUID = 1L;
     private JTextField Nombre;
     private JTextField DNI;
+    private DetenidoNoIdentificado detenido; // Nuevo atributo
 
+    
     /**
      * Create the panel.
      */
-    public A_Testigo() {
+    public A_Testigo(DetenidoNoIdentificado  detenido) {
+        this.detenido = detenido;
+
         setBackground(new Color(138, 135, 169));
         setMinimumSize(new Dimension(400, 400));
         setLayout(new BorderLayout());
