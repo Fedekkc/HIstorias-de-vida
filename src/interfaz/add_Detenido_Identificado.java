@@ -124,11 +124,16 @@ public class add_Detenido_Identificado extends JPanel {
 				Dao_Detenido_Identificado Dao = new Dao_Detenido_Identificado();
 				DetenidoIdentificado detenido = new DetenidoIdentificado();
 				
-				
+				int i = Integer.parseInt(txtTiempoEnCautiverio.getText());
 				detenido.setNombre(txtNombre.getText());
 				detenido.setDNI(txtDNI.getText());
 				detenido.setBiografiaPersonal(txtBiografiaPersonal.getText());
-				detenido.setTiempoEnCautiverio(ABORT);
+				Date date = dateChooser.getDate();
+				Instant instant = date.toInstant();
+				ZoneId zone = ZoneId.systemDefault();
+				LocalDate localDate = instant.atZone(zone).toLocalDate();
+				detenido.setUltVezVisto(localDate);
+				detenido.setTiempoEnCautiverio(i);
 				
 				Dao.addDetenidoIdentificado(detenido);
 				//Dao.addFuerzas(ccdtye);
