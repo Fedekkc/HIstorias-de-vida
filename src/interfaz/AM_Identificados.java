@@ -161,7 +161,7 @@ public class AM_Identificados extends JPanel {
 		biografiaLabel.setVerticalAlignment(SwingConstants.TOP);
 		biografiaLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 13));
 		biografiaLabel.setForeground(new Color(217, 217, 217));
-		biografiaLabel.setBounds(10, 118, 495, 77);
+		biografiaLabel.setBounds(10, 136, 495, 77);
 		panel_1.add(biografiaLabel);
 		
 
@@ -169,6 +169,12 @@ public class AM_Identificados extends JPanel {
 		JLabel sobrevivioLabel = new JLabel("");
 		sobrevivioLabel.setBounds(10, 317, 259, 14);
 		panel_1.add(sobrevivioLabel);
+		
+		JLabel diasCautivosLabel = new JLabel("● Días cautivo:");
+		diasCautivosLabel.setForeground(new Color(217, 217, 217));
+		diasCautivosLabel.setFont(new Font("Dialog", Font.BOLD, 13));
+		diasCautivosLabel.setBounds(10, 111, 357, 14);
+		panel_1.add(diasCautivosLabel);
 		
 		Panel panel_2 = new Panel();
 		panel_2.setBackground(new Color(0, 0, 26));
@@ -231,6 +237,7 @@ public class AM_Identificados extends JPanel {
 		            lugarSecuestroLabel.setText("● Lugar de secuestro: " + dao.getLugarDeSecuestro(ID));
 		            ultVezLabel.setText("● Ultima vez visto: " + selected[0].getUltVezVisto());
 		            biografiaLabel.setText("● Biografia: " + selected[0].getBiografiaPersonal());
+		            diasCautivosLabel.setText("● Días cautivo: " + selected[0].getTiempoEnCautiverio());
 
 	                }    
 		    }
@@ -258,13 +265,15 @@ public class AM_Identificados extends JPanel {
 
 		btnNewButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
+		    	if (selected[0] != null) {
 		    	setVisible(false);
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
 				marco.setContentPane(new M_Detenido_Identificado(selected[0]));
 				marco.validate();
-
+		    	}
 		    }
 		});
+		
 		refreshButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        int selectedIndex = list.getSelectedIndex(); // Obtener el índice seleccionado antes de la actualización

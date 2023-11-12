@@ -105,10 +105,10 @@ public class M_Detenido_Identificado extends JPanel {
 		Dao_Lugares_de_secuestro dao = new Dao_Lugares_de_secuestro();
 		ArrayList<String> listaLugares = new ArrayList<>();
 		listaLugares = dao.getAllLugares_de_Secuestro();
-		for (int i = 1; i <= listaLugares.size() - 1; i++) {
+		for (int i = 0; i <= listaLugares.size() - 1; i++) {
 			cbLugarDeSecuestro.addItem(listaLugares.get(i));
 		}
-		cbLugarDeSecuestro.setSelectedIndex(detenido.getLugarSecuestro());
+		cbLugarDeSecuestro.setSelectedIndex(detenido.getLugarSecuestro() - 1);
 		panel.add(cbLugarDeSecuestro);
 		
 		txtTiempoEnCautiverio = new JTextField();
