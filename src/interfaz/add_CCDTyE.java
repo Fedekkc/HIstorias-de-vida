@@ -45,9 +45,6 @@ import javax.swing.JFrame;
 import javax.swing.JCheckBox;
 
 
-
-
-
 public class add_CCDTyE extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -122,7 +119,7 @@ public class add_CCDTyE extends JPanel {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new ViewCCDTyE());
+				marco.setContentPane(new AM_CCDTyE());
 				marco.validate();
 			}});
 		

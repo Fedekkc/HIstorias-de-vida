@@ -49,7 +49,7 @@ public class AM_CCDTyE extends JPanel {
         for (CCDTyE ccdTyE : centros) {
             listModel.addElement(ccdTyE);
         }
-
+        
         setLayout(null);
         JList<CCDTyE> list = new JList<>(listModel);
         list.setFont(new Font("M PLUS 1p", Font.BOLD, 12));
@@ -104,9 +104,11 @@ public class AM_CCDTyE extends JPanel {
 		btnNewButton_1.setBackground(new Color(0, 0, 26));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
-				marco.setContentPane(new ViewCCDTyE());
-				marco.validate();
+				setVisible(false);
+				MainWindow MW = new MainWindow();
+            	MW.setVisible(true);
+            	MW.validate();
+            	
 			}
 		});
 		btnNewButton_1.setBounds(111, 417, 98, 23);

@@ -128,7 +128,7 @@ public class add_Detenido_Identificado extends JPanel {
 				detenido.setNombre(txtNombre.getText());
 				detenido.setDNI(txtDNI.getText());
 				detenido.setBiografiaPersonal(txtBiografiaPersonal.getText());
-				//detenido.set
+				detenido.setTiempoEnCautiverio(ABORT);
 				
 				Dao.addDetenidoIdentificado(detenido);
 				//Dao.addFuerzas(ccdtye);
