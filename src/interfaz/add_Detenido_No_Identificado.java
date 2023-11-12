@@ -106,13 +106,6 @@ public class add_Detenido_No_Identificado extends JPanel {
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
 		
-		JButton btnGuardar = new JButton("Guardar\r\n");
-
-		btnGuardar.setBounds(270, 300, 89, 23);
-
-		
-		panel.add(btnGuardar);
-		
 		JButton btnCancelar = new JButton("Cancelar\r\n");
 		btnCancelar.setBounds(128, 300, 89, 23);
 		btnCancelar.addActionListener(new ActionListener() {
@@ -129,14 +122,15 @@ public class add_Detenido_No_Identificado extends JPanel {
 		txtpnDescripcinSignificativa.setBounds(128, 97, 231, 123);
 		panel.add(txtpnDescripcinSignificativa);
 		
-		JButton btnAadirTestigo = new JButton("Añadir Testigo");
-		btnAadirTestigo.setBounds(178, 251, 123, 23);
+		JButton btnAadirTestigo = new JButton("Siguiente");
+		btnAadirTestigo.setBounds(265, 300, 89, 23);
 		panel.add(btnAadirTestigo);
 		
 		btnAadirTestigo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-	            A_Testigo dialog = new A_Testigo();
-	            dialog.setVisible(true);
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
+				marco.setContentPane(new A_Testigo());
+				marco.validate();
 				
 			}
 			
@@ -154,18 +148,6 @@ public class add_Detenido_No_Identificado extends JPanel {
 		lblApodo.setBounds(147, 11, 185, 14);
 		panel.add(lblApodo);
 		Dao_Detenido_No_Identificado daoNoIdentif = new Dao_Detenido_No_Identificado();
-		btnGuardar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String apodo = txtNombre.getText();
-				String descripcionSignificativa = txtpnDescripcinSignificativa.getText();
-				DetenidoNoIdentificado detenido = new DetenidoNoIdentificado(apodo, descripcionSignificativa);
-				daoNoIdentif.addDetenidoNoIdentificado(detenido);
-				
-				
-				
-				
-			}
-		});
         
 		
 
