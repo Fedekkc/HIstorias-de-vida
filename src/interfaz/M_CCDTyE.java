@@ -208,12 +208,6 @@ public class M_CCDTyE extends JDialog {
 		lblFuerzasAlMando.setForeground(Color.WHITE);
 		lblFuerzasAlMando.setBounds(192, 198, 146, 14);
 		panel.add(lblFuerzasAlMando);
-		
-		JButton deleteButton = new JButton("Eliminar");
-		deleteButton.setForeground(new Color(255, 255, 255));
-		deleteButton.setBackground(new Color(50, 49, 78));
-		deleteButton.setBounds(376, 453, 111, 37);
-		getContentPane().add(deleteButton);
 		Dao_CCDTyE Dao = new Dao_CCDTyE();
 		int id = Dao.getCCDTyEID(ccdtye.getNombre());
 		btnGuardar.addActionListener(new ActionListener() {
@@ -266,24 +260,9 @@ public class M_CCDTyE extends JDialog {
 				
 				
 				Dao.updateCCDTyE(id,ccdtye);
-				System.out.println(id);
-				System.out.println("HOLAAAAA");
+		        JDialog dialog = (JDialog) SwingUtilities.getWindowAncestor((Component) e.getSource());
+		        dialog.dispose();
 			
 			}});
-
-		
-		deleteButton.addActionListener( new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int id = Dao.getCCDTyEID(ccdtye.getNombre());
-				
-				Dao.deleteCCDTyE(id);				
-				M_CCDTyE.this.dispose(); // Oculta el diálogo actual				
-				
-				
-			}
-			
-			
-			
-		});
 	}
 }

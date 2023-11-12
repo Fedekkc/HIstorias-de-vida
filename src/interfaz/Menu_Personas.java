@@ -148,8 +148,8 @@ public class Menu_Personas extends JPanel {
             }
         });
         
-        JButton backButton = new JButton("Atrás");
-        backButton.setBounds(781, 11, 89, 23);
+        JButton backButton = new JButton("Volver");
+        backButton.setBounds(50, 525, 89, 23);
         backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainWindow MW = new MainWindow();

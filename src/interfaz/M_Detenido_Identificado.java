@@ -138,6 +138,33 @@ public class M_Detenido_Identificado extends JPanel {
 		});
 		panel.add(btnCancelar);
 
+		JLabel iconLabel = new JLabel("");
+		iconLabel.setForeground(new Color(255, 255, 255));
+		iconLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 14));
+		iconLabel.setBounds(53, 221, 416, 25);
+		final String[] fileRoute = { null };
+		JButton uploadButton = new JButton("...");
+	       uploadButton.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                JFileChooser fileChooser = new JFileChooser();
+	                // Configurar el diálogo para permitir solo la selección de archivos
+	                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+	                
+	                int result = fileChooser.showOpenDialog(panel);
+	                
+	                
+	                if (result == JFileChooser.APPROVE_OPTION) {
+	                    File selectedFile = fileChooser.getSelectedFile();
+	                    Icon fileIcon = FileSystemView.getFileSystemView().getSystemIcon(selectedFile);
+	                    fileRoute[0] = selectedFile.getAbsolutePath();
+	                    iconLabel.setIcon(fileIcon);
+	                    iconLabel.setText(selectedFile.getName());	 
+	                    } else {
+	                    iconLabel.setText("No hay archivos seleccionados.");
+	                }
+	            }
+	        });
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.setBounds(10, 257, 89, 23);
 		btnGuardar.addActionListener(new ActionListener() {
@@ -156,6 +183,7 @@ public class M_Detenido_Identificado extends JPanel {
 				detenido.setUltVezVisto(localDate);
 				detenido.setLugarSecuestro(cbLugarDeSecuestro.getSelectedIndex() + 1);;
 				detenido.setTiempoEnCautiverio(i);
+				detenido.setRutaMaterialAudiovisual(fileRoute[0]);
 				Dao.updateDetenidoIdentificado(detenido);
 				
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
@@ -163,32 +191,9 @@ public class M_Detenido_Identificado extends JPanel {
 				marco.validate();
 			
 			}});	
-		JLabel iconLabel = new JLabel("");
-		iconLabel.setForeground(new Color(255, 255, 255));
-		iconLabel.setFont(new Font("M PLUS 1p", Font.BOLD, 14));
-		iconLabel.setBounds(53, 221, 416, 25);
+
 		panel.add(btnGuardar);
-		JButton uploadButton = new JButton("...");
-	       uploadButton.addActionListener(new ActionListener() {
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	                JFileChooser fileChooser = new JFileChooser();
-	                // Configurar el diálogo para permitir solo la selección de archivos
-	                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-	                
-	                int result = fileChooser.showOpenDialog(panel);
-	                
-	                
-	                if (result == JFileChooser.APPROVE_OPTION) {
-	                    File selectedFile = fileChooser.getSelectedFile();
-	                    Icon fileIcon = FileSystemView.getFileSystemView().getSystemIcon(selectedFile);
-	                    iconLabel.setIcon(fileIcon);
-	                    iconLabel.setText(selectedFile.getName());	 
-	                    } else {
-	                    iconLabel.setText("No hay archivos seleccionados.");
-	                }
-	            }
-	        });
+
 
 		uploadButton.setBounds(10, 220, 34, 23);
 		panel.add(uploadButton);
