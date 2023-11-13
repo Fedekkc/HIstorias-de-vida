@@ -248,8 +248,8 @@ public class AM_CCDTyE extends JPanel {
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (selected[0] != null) {
-					int id = selected[0].getID();
-					dao.deleteCCDTyE(id);
+					String nombre = selected[0].getNombre();
+					dao.deleteCCDTyE(nombre);
 					
 				}
 				

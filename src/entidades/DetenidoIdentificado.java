@@ -9,8 +9,6 @@ public class DetenidoIdentificado{
     private LocalDate ultVezVisto;
     private String biografiaPersonal;
     private String rutaMaterialAudiovisual;
-    private int tiempoEnCautiverio;
-    private boolean sobrevivio;
 
 
     public String getNombre() {
@@ -61,19 +59,19 @@ public class DetenidoIdentificado{
         this.rutaMaterialAudiovisual = rutaMaterialAudiovisual;
     }
 
-    public int getTiempoEnCautiverio() {
-        return tiempoEnCautiverio;
-    }
+	public int getTiempoEnCautiverio() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-    public void setTiempoEnCautiverio(int tiempoEnCautiverio) {
-        this.tiempoEnCautiverio = tiempoEnCautiverio;
-    }
+	public boolean getSobrevivio() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
-    public boolean getSobrevivio() {
-        return sobrevivio;
-    }
+	public void setTiempoEnCautiverio(int i) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    public void setSobrevivio(boolean sobrevivio) {
-        this.sobrevivio = sobrevivio;
-    }
-}
+ }

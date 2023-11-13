@@ -5,23 +5,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CCDTyE {
-	private int ID;
+
 	private String nombre;
 	private String ubicacion;
 	private LocalDate fechaPuestaEnMarcha = null;
 	private LocalDate fechaCierre = null;
 	private ArrayList<Integer> fuerzasAlMando = new ArrayList<Integer>();
-	
-
-    
-    public int getID() {
-    	return ID; 
-    }
-    
-    public void setID(int ID) {
-    	this.ID = ID;
-    }
-    
+   
     public String getNombre() {
         return nombre;
     }

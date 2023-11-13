@@ -15,7 +15,7 @@ import entidades.Fuerza;
 public class Dao_CCDTyE {
     private final String url = "jdbc:mysql://localhost:3306/CCDTyE";
     private final String usuario = "root";
-    private final String contrasenia = "root";
+    private final String contrasenia = "admin";
 
     public int getCCDTyEID(String nombre) {
         int id = -1;
@@ -94,7 +94,7 @@ public class Dao_CCDTyE {
                 ccdTyE.setFechaPuestaEnMarcha(fechaPuestaEnMarcha);
                 ccdTyE.setFechaCierre(fechaCierre);
                 ccdTyE.setFuerzasAlMando(fuerzas);
-                ccdTyE.setID(ID);
+               
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -138,18 +138,18 @@ public class Dao_CCDTyE {
     // ...
 
 
-    public void deleteCCDTyE(int id) {
+    public void deleteCCDTyE(String nombre) {
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
             // Eliminar las referencias en CCDTyE_Fuerzas
             String deleteFuerzasQuery = "DELETE FROM CCDTyE_Fuerzas WHERE ID_CCDTyE = ?";
             PreparedStatement deleteStatement = conn.prepareStatement(deleteFuerzasQuery);
-            deleteStatement.setInt(1, id);
+            deleteStatement.setInt(1, getCCDTyEID(nombre));
             deleteStatement.executeUpdate();
 
             // Eliminar la entrada correspondiente en CCDTyE
-            String query = "DELETE FROM CCDTyE WHERE ID_CCDTyE = ?";
+            String query = "DELETE FROM CCDTyE WHERE nombre = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setString(1, nombre);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -185,7 +185,7 @@ public class Dao_CCDTyE {
                 ccdTyE.setFechaPuestaEnMarcha(fechaPuestaEnMarcha);
                 ccdTyE.setFechaCierre(fechaCierre);
                 ccdTyE.setFuerzasAlMando(fuerzas);
-                ccdTyE.setID(ID);
+             
 
                 listaCCDTyE.add(ccdTyE);
             }
