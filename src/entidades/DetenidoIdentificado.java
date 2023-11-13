@@ -74,4 +74,9 @@ public class DetenidoIdentificado{
 		
 	}
 
+	public void setSobrevivio(boolean sobrevivio) {
+		// TODO Auto-generated method stub
+		
+	}
+
  }
