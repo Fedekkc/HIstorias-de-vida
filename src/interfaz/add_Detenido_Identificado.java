@@ -188,7 +188,9 @@ public class add_Detenido_Identificado extends JPanel {
 				detenido.setLugarSecuestro(cbLugarDeSecuestro.getSelectedIndex()+1);
 				System.out.println("HOLA COMOE STAS: " + String.valueOf(detenido.getLugarSecuestro()));
 				detenido.setTiempoEnCautiverio(i);
+				detenido.setCentros(ccdtyeArray);
 				Dao.addDetenidoIdentificado(detenido);
+				
 				
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource());
 				marco.setContentPane(new AM_Identificados());

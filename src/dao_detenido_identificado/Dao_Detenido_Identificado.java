@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -53,7 +54,7 @@ public class Dao_Detenido_Identificado {
     public void addDetenidoIdentificado(DetenidoIdentificado detenido) {
         try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
             String query = "INSERT INTO Detenidos_Identificados (Nombre, DNI, ID_Lugar_de_secuestro, Ultima_vez_visto, Biografia_personal, Ruta_material_audiovisual, Tiempo_en_cautiverio, Sobrevivio) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement pStmt = conn.prepareStatement(query);
+            PreparedStatement pStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pStmt.setString(1, detenido.getNombre());
             pStmt.setString(2, detenido.getDNI());
             pStmt.setInt(3, detenido.getLugarSecuestro());
@@ -68,16 +69,20 @@ public class Dao_Detenido_Identificado {
                 int lastId = rs.getInt(1);
                 for (CCDTyE centro : detenido.getCentros()) {
                 	String name = centro.getNombre();
-                	query = "SELECT ID_CCDTyE FROM CCDTyE WHERE Nombre = '?' ";
-                	pStmt = conn.prepareStatement(query);
-                	pStmt.setString(1,name);
+                	query = "SELECT ID_CCDTyE FROM CCDTyE WHERE Nombre = ? ";
+                	pStmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+                	pStmt.setString(1, name);
                 	rs = pStmt.executeQuery();
+                	System.out.println("select");
                 	if(rs.next())
                 	{
                 		int centroID = rs.getInt("ID_CCDTyE");
+                		System.out.println("if");
                         query = "INSERT INTO `Detenidos_CCDTyE` (`ID_Detenido_Identificado`, `ID_CCDTyE`) VALUES (?, ?)";
                         pStmt = conn.prepareStatement(query);
-                        pStmt.setInt(lastId, centroID);
+                        pStmt.setInt(1, lastId);
+                        pStmt.setInt(2, centroID);
+                        pStmt.executeUpdate();
                 		
                 	}
     				
@@ -148,6 +153,7 @@ public class Dao_Detenido_Identificado {
             PreparedStatement pStmt = conn.prepareStatement(query);
             pStmt.setInt(1, idPersona);
             ResultSet rs = pStmt.executeQuery();
+            
             if (rs.next()) {
                 String nombre = rs.getString("Nombre");
                 String DNI = rs.getString("DNI");
@@ -175,9 +181,30 @@ public class Dao_Detenido_Identificado {
     }
     
     
-    
-    
-    
+    public ArrayList<CCDTyE> getCCDTyEByDetenido(int idDetenido) {
+        ArrayList<CCDTyE> listaCCDTyE = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(url, usuario, contrasenia)) {
+            String query = "SELECT * FROM CCDTyE INNER JOIN Detenidos_CCDTyE ON CCDTyE.ID_CCDTyE = Detenidos_CCDTyE.ID_CCDTyE WHERE Detenidos_CCDTyE.ID_Detenido_Identificado = ?";
+            PreparedStatement pStmt = conn.prepareStatement(query);
+            pStmt.setInt(1, idDetenido);
+            ResultSet rs = pStmt.executeQuery();
+
+            while (rs.next()) {
+                String nombreCCDTyE = rs.getString("Nombre");
+
+                CCDTyE centro = new CCDTyE();
+                centro.setNombre(nombreCCDTyE);
+
+                listaCCDTyE.add(centro);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listaCCDTyE;
+    }
+
 
     
     public String getLugarDeSecuestro(int id) {

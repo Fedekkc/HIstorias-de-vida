@@ -214,6 +214,12 @@ public class AM_Identificados extends JPanel {
 		panel_3.add(lblNewLabel_1);
 		
 
+		JLabel centrosLabel = new JLabel("● Centros: ");
+		centrosLabel.setForeground(new Color(217, 217, 217));
+		centrosLabel.setFont(new Font("Dialog", Font.BOLD, 13));
+		centrosLabel.setBounds(10, 225, 357, 14);
+		panel_1.add(centrosLabel);
+
 
 		
 		
@@ -238,6 +244,21 @@ public class AM_Identificados extends JPanel {
 		            ultVezLabel.setText("● Ultima vez visto: " + selected[0].getUltVezVisto());
 		            biografiaLabel.setText("● Biografia: " + selected[0].getBiografiaPersonal());
 		            diasCautivosLabel.setText("● Días cautivo: " + selected[0].getTiempoEnCautiverio());
+		            centrosLabel.setText("● Centros: " + selected[0].getTiempoEnCautiverio());
+		            
+		            ArrayList<CCDTyE> centros = dao.getCCDTyEByDetenido(dao.getIdDetenidoIdentificado(selected[0].getNombre()));
+		            StringBuilder centrosNombres = new StringBuilder();
+		            Dao_Detenido_Identificado daoDetenido = new Dao_Detenido_Identificado();
+		            
+		            for (CCDTyE centro: centros) {
+		                String nombreCentro = centro.getNombre();
+		                centrosNombres.append(nombreCentro).append(", ");
+		            }
+
+		            if (centrosNombres.length() > 0) {
+		                // Eliminar la coma y el espacio adicionales al final
+		                centrosNombres.setLength(centrosNombres.length() - 2);
+		            }
 
 	                }    
 		    }
@@ -260,8 +281,9 @@ public class AM_Identificados extends JPanel {
 				}
 			}
 		});
-		materialButton.setBounds(220, 206, 89, 23);
+		materialButton.setBounds(220, 250, 89, 23);
 		panel_1.add(materialButton);
+		
 		
 		JButton borrarButton = new JButton("Eliminar");
 		borrarButton.setForeground(new Color(217, 217, 217));
