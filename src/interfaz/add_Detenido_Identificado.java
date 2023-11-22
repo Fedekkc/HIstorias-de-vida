@@ -63,7 +63,6 @@ public class add_Detenido_Identificado extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtNombre;
 	private JTextField txtDNI;
-	private JTextField txtTiempoEnCautiverio;
 	private JTextField textField;
     private DefaultListModel<CCDTyE> listModel;
     private Dao_CCDTyE Dao;
@@ -100,7 +99,7 @@ public class add_Detenido_Identificado extends JPanel {
 		
 		JTextPane txtBiografiaPersonal = new JTextPane();
 		txtBiografiaPersonal.setMaximumSize(new Dimension(20, 20));
-		txtBiografiaPersonal.setBounds(208, 62, 261, 148);
+		txtBiografiaPersonal.setBounds(208, 25, 261, 148);
 		panel.add(txtBiografiaPersonal);
 		
 		JComboBox cbLugarDeSecuestro = new JComboBox();
@@ -115,18 +114,12 @@ public class add_Detenido_Identificado extends JPanel {
 
 		panel.add(cbLugarDeSecuestro);
 		
-		txtTiempoEnCautiverio = new JTextField();
-		txtTiempoEnCautiverio.setText("Tiempo en cautiverio");
-		txtTiempoEnCautiverio.setBounds(10, 132, 188, 20);
-		panel.add(txtTiempoEnCautiverio);
-		txtTiempoEnCautiverio.setColumns(10);
-		
 		JCheckBox chckbxSeEncuentraAparecido = new JCheckBox("Es aparecido");
-		chckbxSeEncuentraAparecido.setBounds(10, 159, 188, 23);
+		chckbxSeEncuentraAparecido.setBounds(10, 128, 188, 23);
 		panel.add(chckbxSeEncuentraAparecido);
 		
 		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(10, 189, 188, 20);
+		dateChooser.setBounds(10, 158, 188, 20);
 		panel.add(dateChooser);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -215,7 +208,7 @@ public class add_Detenido_Identificado extends JPanel {
 		JLabel centrosLabel = new JLabel("-");
 		centrosLabel.setForeground(new Color(255, 255, 255));
 		centrosLabel.setBackground(new Color(255, 255, 255));
-		centrosLabel.setBounds(208, 31, 261, 20);
+		centrosLabel.setBounds(10, 189, 459, 20);
 		panel.add(centrosLabel);
 		
 		Panel panel_3 = new Panel();
