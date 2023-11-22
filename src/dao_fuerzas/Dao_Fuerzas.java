@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Dao_Fuerzas {
     private final String url = "jdbc:mysql://localhost:3306/CCDTyE";
     private final String usuario = "root";
-    private final String contrasenia = "root";
+    private final String contrasenia = "admin";
 	
 	
     public ArrayList<String> getAllFuerzas() {

@@ -15,7 +15,7 @@ import entidades.Fuerza;
 public class Dao_CCDTyE {
     private final String url = "jdbc:mysql://localhost:3306/CCDTyE";
     private final String usuario = "root";
-    private final String contrasenia = "root";
+    private final String contrasenia = "admin";
 
     public int getCCDTyEID(String nombre) {
         int id = -1;

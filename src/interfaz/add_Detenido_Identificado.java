@@ -8,6 +8,8 @@ import javax.swing.JScrollBar;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
@@ -29,7 +31,7 @@ import javax.swing.filechooser.FileSystemView;
 import dao_ccdtye.Dao_CCDTyE;
 import dao_fuerzas.Dao_Fuerzas;
 import entidades.CCDTyE;
-import entidades.Fuerza;
+
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -76,7 +78,7 @@ public class add_Detenido_Identificado extends JPanel {
 		setMinimumSize(new Dimension(880, 560));
 		setBackground(new Color(138, 135, 169));
 		setLayout(null);
-		ccdtyeArray = new ArrayList<>();
+		
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(50, 49, 78));
@@ -167,7 +169,7 @@ public class add_Detenido_Identificado extends JPanel {
 				Dao_Detenido_Identificado Dao = new Dao_Detenido_Identificado();
 				DetenidoIdentificado detenido = new DetenidoIdentificado();
 				
-				int i = Integer.parseInt(txtTiempoEnCautiverio.getText());
+				//int i = Integer.parseInt(txtTiempoEnCautiverio.getText());
 				detenido.setNombre(txtNombre.getText());
 				detenido.setDNI(txtDNI.getText());
 				detenido.setBiografiaPersonal(txtBiografiaPersonal.getText());
@@ -187,7 +189,11 @@ public class add_Detenido_Identificado extends JPanel {
 				detenido.setUltVezVisto(localDate);
 				detenido.setLugarSecuestro(cbLugarDeSecuestro.getSelectedIndex()+1);
 				System.out.println("HOLA COMOE STAS: " + String.valueOf(detenido.getLugarSecuestro()));
-				detenido.setTiempoEnCautiverio(i);
+				
+				CCDTyE ccdtye = new CCDTyE();
+				ccdtye = ccdtyeArray.get(ccdtyeArray.size() - 1);
+				long dias = DAYS.between(ccdtye.getFechaCierre(), localDate);
+				detenido.setTiempoEnCautiverio(0);
 				detenido.setCentros(ccdtyeArray);
 				Dao.addDetenidoIdentificado(detenido);
 				

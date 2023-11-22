@@ -15,7 +15,7 @@ import entidades.DetenidoIdentificado;
 public class Dao_Detenido_Identificado {
 	private final String url = "jdbc:mysql://localhost:3306/CCDTyE";
     private final String usuario = "root";
-    private final String contrasenia = "root";
+    private final String contrasenia = "admin";
     
     public ArrayList<DetenidoIdentificado> getAllDetenidos_Identificados() {
         ArrayList<DetenidoIdentificado> listaDetenidoIdentificado = new ArrayList<>();
