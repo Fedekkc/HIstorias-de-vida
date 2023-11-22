@@ -8,12 +8,13 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import entidades.CCDTyE;
 import entidades.DetenidoIdentificado;
 
 public class Dao_Detenido_Identificado {
 	private final String url = "jdbc:mysql://localhost:3306/CCDTyE";
     private final String usuario = "root";
-    private final String contrasenia = "admin";
+    private final String contrasenia = "root";
     
     public ArrayList<DetenidoIdentificado> getAllDetenidos_Identificados() {
         ArrayList<DetenidoIdentificado> listaDetenidoIdentificado = new ArrayList<>();
@@ -62,6 +63,29 @@ public class Dao_Detenido_Identificado {
             pStmt.setInt(7, detenido.getTiempoEnCautiverio());
             pStmt.setBoolean(8, detenido.getSobrevivio());
             pStmt.executeUpdate();
+            ResultSet rs = pStmt.getGeneratedKeys();
+            if (rs.next()) {
+                int lastId = rs.getInt(1);
+                for (CCDTyE centro : detenido.getCentros()) {
+                	String name = centro.getNombre();
+                	query = "SELECT ID_CCDTyE FROM CCDTyE WHERE Nombre = '?' ";
+                	pStmt = conn.prepareStatement(query);
+                	pStmt.setString(1,name);
+                	rs = pStmt.executeQuery();
+                	if(rs.next())
+                	{
+                		int centroID = rs.getInt("ID_CCDTyE");
+                        query = "INSERT INTO `Detenidos_CCDTyE` (`ID_Detenido_Identificado`, `ID_CCDTyE`) VALUES (?, ?)";
+                        pStmt = conn.prepareStatement(query);
+                        pStmt.setInt(lastId, centroID);
+                		
+                	}
+    				
+    			}
+                
+            }
+            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

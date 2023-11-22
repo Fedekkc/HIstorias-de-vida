@@ -13,7 +13,7 @@ public class Dao_testigos {
 
     private final String url = "jdbc:mysql://localhost:3306/CCDTyE";
     private final String usuario = "root";
-    private final String contrasenia = "admin";
+    private final String contrasenia = "root";
 
     public void addTestigo(Testigo testigo) {
         int filasAfectadas = 0;

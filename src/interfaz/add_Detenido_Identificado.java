@@ -54,6 +54,7 @@ import javax.swing.JTextPane;
 import dao_detenido_identificado.Dao_Detenido_Identificado;
 import entidades.DetenidoIdentificado;
 import dao_detenido_identificado.Dao_Lugares_de_secuestro;
+import java.awt.Panel;
 
 
 
@@ -63,6 +64,11 @@ public class add_Detenido_Identificado extends JPanel {
 	private JTextField txtNombre;
 	private JTextField txtDNI;
 	private JTextField txtTiempoEnCautiverio;
+	private JTextField textField;
+    private DefaultListModel<CCDTyE> listModel;
+    private Dao_CCDTyE Dao;
+    private JLabel centrosLabel;
+    private ArrayList<CCDTyE> ccdtyeArray;
 
 	/**
 	 * Create the panel.
@@ -71,10 +77,11 @@ public class add_Detenido_Identificado extends JPanel {
 		setMinimumSize(new Dimension(880, 560));
 		setBackground(new Color(138, 135, 169));
 		setLayout(null);
-		
+		ccdtyeArray = new ArrayList<>();
+
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(50, 49, 78));
-		panel.setBounds(222, 96, 479, 349);
+		panel.setBounds(298, 74, 479, 349);
 		add(panel);
 		panel.setLayout(null);
 		
@@ -93,7 +100,7 @@ public class add_Detenido_Identificado extends JPanel {
 		
 		JTextPane txtBiografiaPersonal = new JTextPane();
 		txtBiografiaPersonal.setMaximumSize(new Dimension(20, 20));
-		txtBiografiaPersonal.setBounds(208, 25, 261, 185);
+		txtBiografiaPersonal.setBounds(208, 62, 261, 148);
 		panel.add(txtBiografiaPersonal);
 		
 		JComboBox cbLugarDeSecuestro = new JComboBox();
@@ -204,5 +211,108 @@ public class add_Detenido_Identificado extends JPanel {
 		
 
 		panel.add(iconLabel);
+		
+		JLabel centrosLabel = new JLabel("-");
+		centrosLabel.setForeground(new Color(255, 255, 255));
+		centrosLabel.setBackground(new Color(255, 255, 255));
+		centrosLabel.setBounds(208, 31, 261, 20);
+		panel.add(centrosLabel);
+		
+		Panel panel_3 = new Panel();
+		panel_3.setBackground(new Color(50, 49, 78));
+		panel_3.setBounds(27, 23, 238, 451);
+		add(panel_3);
+		panel_3.setLayout(null);
+		
+
+		
+        listModel = new DefaultListModel<>(); // Inicializa listModel
+        Dao = new Dao_CCDTyE();
+        ArrayList<CCDTyE> centros = Dao.getAllCCDTyE();
+        for (CCDTyE ccdTyE : centros) {
+            listModel.addElement(ccdTyE);
+        }
+        
+        setLayout(null);
+        JList<CCDTyE> list = new JList<>(listModel);
+        list.setBackground(new Color(0, 0, 26));
+        list.setFont(new Font("M PLUS 1p", Font.BOLD, 12));
+        list.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (value instanceof CCDTyE) {
+                    CCDTyE ccdTyE = (CCDTyE) value;
+                    setText(ccdTyE.getNombre());
+                }
+                return this;
+            }
+        });
+		
+		JScrollPane scrollPane = new JScrollPane(list);
+		scrollPane.setBounds(10, 67, 218, 339);
+		panel_3.add(scrollPane);
+		textField = new JTextField();
+		textField.setBounds(10, 24, 218, 32);
+		textField.setForeground(new Color(217, 217, 217));
+		textField.setColumns(10);
+		textField.setBackground(new Color(0, 0, 26));
+		panel_3.add(textField);
+		
+		JButton addButton = new JButton("Añadir");
+		addButton.setBounds(10, 417, 80, 23);
+		addButton.setForeground(new Color(217, 217, 217));
+		addButton.setBackground(new Color(0, 0, 26));
+		panel_3.add(addButton);
+		
+		JLabel lblNewLabel_1 = new JLabel("Buscar");
+		lblNewLabel_1.setBounds(10, 11, 46, 14);
+		lblNewLabel_1.setForeground(new Color(217, 217, 217));
+		panel_3.add(lblNewLabel_1);
+		
+		JButton deleteButton = new JButton("Eliminar");
+		deleteButton.setForeground(new Color(217, 217, 217));
+		deleteButton.setBackground(new Color(0, 0, 26));
+		deleteButton.setBounds(148, 417, 80, 23);
+		panel_3.add(deleteButton);
+		
+	      addButton.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                CCDTyE selectedCCD = list.getSelectedValue();
+	                if (selectedCCD != null) {
+	                    // Añadir el nombre al label
+	                    String currentText = centrosLabel.getText();
+	                    if (currentText.equals("-")) {
+	                        centrosLabel.setText(selectedCCD.getNombre());
+	                    } else {
+	                        centrosLabel.setText(currentText + ", " + selectedCCD.getNombre());
+	                    }
+
+	                    // Añadir el CCDTyE al ArrayList ccdtyeArray
+	                    ccdtyeArray.add(selectedCCD);
+	                }
+	            }
+	        });
+	      
+	      deleteButton.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                if (!ccdtyeArray.isEmpty()) {
+	                    // Eliminar el último CCDTyE del ArrayList ccdtyeArray
+	                    ccdtyeArray.remove(ccdtyeArray.size() - 1);
+
+	                    // Actualizar el label con los CCDTyE restantes
+	                    if (!ccdtyeArray.isEmpty()) {
+	                        StringBuilder newText = new StringBuilder();
+	                        for (CCDTyE ccdTyE : ccdtyeArray) {
+	                            newText.append(ccdTyE.getNombre()).append(", ");
+	                        }
+	                        newText.delete(newText.length() - 2, newText.length());  // Eliminar la última coma
+	                        centrosLabel.setText(newText.toString());
+	                    } else {
+	                        centrosLabel.setText("-");
+	                    }
+	                }
+	            }
+	        });
 	}
 }

@@ -90,6 +90,7 @@ INSERT INTO `Fuerzas`(`Nombre`) VALUES ('Policia'),('Ejercito'),('Gendarmeria');
 SELECT * FROM Detenidos_No_Identificados;
 SELECT * FROM Testigos;
 
+
 SELECT * FROM Detenidos_No_Identificados INNER JOIN Testigos ON `Detenidos_No_Identificados`.`ID_Testigo` = `Testigos`.`ID_Testigo`;
 SELECT * FROM Detenidos_Identificados INNER JOIN Lugares_de_secuestro ON Detenidos_Identificados.ID_Lugar_de_secuestro = Lugares_de_secuestro.ID_Lugar WHERE ID_Detenido_Identificado = 6;
 SELECT * FROM Lugares_de_secuestro;

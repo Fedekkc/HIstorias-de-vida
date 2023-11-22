@@ -1,6 +1,7 @@
 package entidades;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class DetenidoIdentificado{
     private String nombre;
@@ -9,8 +10,16 @@ public class DetenidoIdentificado{
     private LocalDate ultVezVisto;
     private String biografiaPersonal;
     private String rutaMaterialAudiovisual;
+    private ArrayList<CCDTyE> centros;
 
-
+    
+    public ArrayList<CCDTyE> getCentros(){
+    	return centros;
+    }
+    public void setCentros(ArrayList<CCDTyE> centros) {
+    	this.centros = centros;
+    }
+    
     public String getNombre() {
         return nombre;
     }
